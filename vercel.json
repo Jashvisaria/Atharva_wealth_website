@@ -1,8 +1,11 @@
+
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "installCommand": "npm install",
-  "framework": "vite",
-  "cleanUrls": false,
-  "trailingSlash": false
+
+  "buildCommand": null,
+
+  "outputDirectory": ".",
+
+  "installCommand": null
+
 }
+
