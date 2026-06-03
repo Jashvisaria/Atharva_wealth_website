@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="luxury">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights | Atharva Wealth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0D0D0D',
+                        gold: { 50: '#FBF8F3', 100: '#F5EFE3', 200: '#EBD9BE', 300: '#DFBF94', 400: '#D4A56B', 500: '#C5A059', 600: '#A88545', 700: '#8B6B38', 800: '#6F542D', 900: '#524024' }
+                    },
+                    fontFamily: { 'serif': ['Playfair Display', 'serif'], 'sans': ['Montserrat', 'sans-serif'], 'mono': ['JetBrains Mono', 'monospace'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #0D0D0D; color: #E5E5E5; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        
+        .grid-pattern {
+            background-image: 
+                linear-gradient(rgba(197, 160, 89, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(197, 160, 89, 0.02) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        
+        .glass-panel {
+            background: linear-gradient(145deg, rgba(45, 45, 45, 0.5) 0%, rgba(20, 20, 20, 0.7) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+        }
+        
+        .glass-card { 
+            background: linear-gradient(145deg, rgba(45, 45, 45, 0.4) 0%, rgba(20, 20, 20, 0.6) 100%); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(197, 160, 89, 0.15); 
+            transition: all 0.4s; 
+        }
+        .glass-card:hover { 
+            border-color: rgba(197, 160, 89, 0.5); 
+            box-shadow: 0 0 40px rgba(197, 160, 89, 0.15), 0 20px 60px rgba(0, 0, 0, 0.4); 
+        }
+        
+        .gold-line { background: linear-gradient(90deg, transparent, #C5A059, transparent); height: 1px; }
+        .btn-gold { background: linear-gradient(135deg, #C5A059 0%, #D4A56B 50%, #C5A059 100%); border: none; color: #0D0D0D; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s ease; }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(197, 160, 89, 0.4); }
+        .btn-ghost-gold { background: transparent; border: 1px solid rgba(197, 160, 89, 0.5); color: #C5A059; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s ease; }
+        .btn-ghost-gold:hover { background: rgba(197, 160, 89, 0.1); border-color: #C5A059; color: #EBD9BE; transform: translateY(-2px); }
+        
+        .animate-fade-in { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .section-padding { padding: 100px 0; }
+
+        .terminal-window {
+            background: linear-gradient(180deg, rgba(10, 10, 12, 0.95) 0%, rgba(20, 20, 25, 0.98) 100%);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 8px;
+        }
+        .terminal-header {
+            background: rgba(197, 160, 89, 0.1);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+        }
+        .yield-bar { height: 8px; border-radius: 4px; transition: width 1s ease-out; }
+        
+        .blink { animation: blink 1.5s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        
+        .ticker-wrap {
+            overflow: hidden;
+            background: linear-gradient(90deg, rgba(197, 160, 89, 0.1), rgba(197, 160, 89, 0.05), rgba(197, 160, 89, 0.1));
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+        }
+        .ticker {
+            display: flex;
+            animation: ticker 30s linear infinite;
+            white-space: nowrap;
+        }
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 40px;
+            color: #C5A059;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+        .ticker-item::before {
+            content: '●';
+            margin-right: 20px;
+            color: #C5A059;
+            font-size: 0.5rem;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .news-card {
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .news-card:hover {
+            border-left-color: #C5A059;
+            background: rgba(197, 160, 89, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-obsidian grid-pattern">
+    <!-- Live Ticker -->
+    <div class="ticker-wrap fixed top-0 left-0 right-0 z-40 pt-14">
+        <div class="ticker">
+            <div class="ticker-item">FIIs net buyers today - Strong inflow across markets</div>
+            <div class="ticker-item">US Fed signals rate pause in March meeting</div>
+            <div class="ticker-item">Gold hits new resistance at ₹85,000/10g</div>
+            <div class="ticker-item">Nifty 50 closes at all-time high - 23,500</div>
+            <div class="ticker-item">RBI MPC meeting scheduled for April 2026</div>
+            <div class="ticker-item">FIIs net buyers today - Strong inflow across markets</div>
+            <div class="ticker-item">US Fed signals rate pause in March meeting</div>
+            <div class="ticker-item">Gold hits new resistance at ₹85,000/10g</div>
+            <div class="ticker-item">Nifty 50 closes at all-time high - 23,500</div>
+            <div class="ticker-item">RBI MPC meeting scheduled for April 2026</div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(13, 13, 13, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(197, 160, 89, 0.1);">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center flex-shrink-0">
+                      <span class="text-obsidian font-bold text-lg">A</span>
+                    </div>
+                    <span class="text-xl font-bold tracking-wider text-white">ATHARVA <span class="text-gold-500">WEALTH</span></span>
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html#home" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Home</a>
+                    <a href="services.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Services</a>
+                    <a href="about.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">About Us</a>
+                    <a href="insights.html" class="text-gold-400 text-sm font-medium tracking-wide">Insights</a>
+                    <a href="tools.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Tools</a>
+                    <a href="contact.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Contact</a>
+                </div>
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="contact.html" class="btn btn-gold px-6 py-2 text-xs">Book Consultation</a>
+                </div>
+                <button class="md:hidden text-white p-2" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-obsidian border-t border-gold-500/10">
+            <div class="container mx-auto px-6 py-4 flex flex-col gap-4">
+                <a href="index.html#home" class="text-gray-300 hover:text-gold-400 py-2">Home</a>
+                <a href="services.html" class="text-gray-300 hover:text-gold-400 py-2">Services</a>
+                <a href="about.html" class="text-gray-300 hover:text-gold-400 py-2">About Us</a>
+                <a href="insights.html" class="text-gold-400 py-2">Insights</a>
+                <a href="contact.html" class="text-gray-300 hover:text-gold-400 py-2">Contact</a>
+                <a href="contact.html" class="btn btn-gold w-full py-2 text-xs mt-2">Book Consultation</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="pt-40 pb-16" style="background: radial-gradient(ellipse at 50% 0%, rgba(197, 160, 89, 0.08) 0%, transparent 60%);">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center animate-fade-in">
+                <div class="flex items-center justify-center gap-2 mb-4">
+                    <span class="w-2 h-2 rounded-full bg-green-500 blink"></span>
+                    <p class="text-green-400 text-xs tracking-[0.3em] uppercase font-mono">Live Data</p>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-black tracking-tighter text-white mb-4">Market <span class="text-gold-500">Insights</span></h1>
+                <p class="text-gray-300 text-lg leading-relaxed max-w-2xl">Institutional-grade intelligence for your wealth decisions. Real-time market perspectives, yield analysis, and strategic opportunities.</p>
+            </div>
+        </div>
+        <div class="gold-line mt-12"></div>
+    </section>
+
+    <!-- SECTION 1: THE YIELD COMPARISON - ALPHA ADVANTAGE -->
+    <section class="section-padding bg-obsidian pt-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <p class="text-gold-500 text-sm tracking-[0.3em] uppercase mb-4 font-medium">Yield Comparison</p>
+                <h2 class="text-4xl font-black tracking-tight text-white">The <span class="text-gold-500">Alpha Advantage</span></h2>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Compare yields across asset classes. Is your wealth working at its full potential?</p>
+            </div>
+            
+            <div class="max-w-5xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Main Chart -->
+                    <div class="lg:col-span-2 terminal-window overflow-hidden">
+                        <div class="terminal-header px-6 py-3 flex items-center justify-between">
+                            <span class="text-gray-400 text-xs font-mono">alpha_advantage_2026.exe</span>
+                            <span class="text-gold-500 text-xs font-mono">ANNUAL RETURNS</span>
+                        </div>
+                        <div class="p-8 space-y-6">
+                            <!-- Savings -->
+                            <div class="flex items-center gap-4">
+                                <div class="w-36 text-right">
+                                    <p class="text-gray-400 text-sm font-medium">Savings Account</p>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="h-10 bg-gray-800 rounded-lg flex items-center overflow-hidden">
+                                        <div class="yield-bar bg-gray-500 flex items-center justify-end pr-3" style="width: 27%;">
+                                            <span class="text-white font-mono text-xs font-bold">3%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- FD -->
+                            <div class="flex items-center gap-4">
+                                <div class="w-36 text-right">
+                                    <p class="text-gray-400 text-sm font-medium">Fixed Deposit</p>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="h-10 bg-gray-800 rounded-lg flex items-center overflow-hidden">
+                                        <div class="yield-bar bg-blue-500 flex items-center justify-end pr-3" style="width: 64%;">
+                                            <span class="text-white font-mono text-xs font-bold">7%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Arbitrage -->
+                            <div class="flex items-center gap-4">
+                                <div class="w-36 text-right">
+                                    <p class="text-gray-400 text-sm font-medium">Arbitrage Funds</p>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="h-10 bg-gray-800 rounded-lg flex items-center overflow-hidden">
+                                        <div class="yield-bar bg-purple-500 flex items-center justify-end pr-3" style="width: 73%;">
+                                            <span class="text-white font-mono text-xs font-bold">8%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- NCDs -->
+                            <div class="flex items-center gap-4">
+                                <div class="w-36 text-right">
+                                    <p class="text-gold-400 text-sm font-bold">Secured NCDs</p>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="h-10 bg-gray-800 rounded-lg flex items-center overflow-hidden">
+                                        <div class="yield-bar bg-gradient-to-r from-gold-600 to-gold-400 flex items-center justify-end pr-3" style="width: 100%;">
+                                            <span class="text-obsidian font-mono text-xs font-bold">11%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Side Stats -->
+                    <div class="space-y-4">
+                        <div class="glass-card p-6 rounded-xl">
+                            <p class="text-gold-500 text-xs tracking-[0.2em] uppercase mb-2">Alpha Spread</p>
+                            <p class="text-4xl font-black text-white">+8%</p>
+                            <p class="text-gray-500 text-sm mt-1">NCDs vs Savings</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-xl">
+                            <p class="text-gold-500 text-xs tracking-[0.2em] uppercase mb-2">Tax Efficiency</p>
+                            <p class="text-4xl font-black text-white">57%</p>
+                            <p class="text-gray-500 text-sm mt-1">Less tax vs FD income</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-xl border-gold-500/30">
+                            <p class="text-gold-500 text-xs tracking-[0.2em] uppercase mb-2">Recommendation</p>
+                            <p class="text-white font-semibold">Curated NCDs</p>
+                            <p class="text-gray-500 text-xs mt-1">For 2-3 year horizons</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: TOP BROKER CONSENSUS -->
+    <section class="section-padding bg-obsidian" style="background: linear-gradient(180deg, #0D0D0D 0%, #111111 100%);">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <p class="text-gold-500 text-sm tracking-[0.3em] uppercase mb-4 font-medium">Broker Consensus</p>
+                <h2 class="text-4xl font-black tracking-tight text-white">Top Broker <span class="text-gold-500">Outlook</span></h2>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">March 2026 institutional views aggregated for strategic positioning.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
+                <!-- Angel One -->
+                <a href="https://www.angelone.in/knowledge-center/market-updates" target="_blank" class="block glass-card p-5 rounded-xl hover:scale-105 hover:border-gold-500 transition-all duration-300 cursor-pointer">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center">
+                            <span class="text-orange-400 font-bold text-xs">A1</span>
+                        </div>
+                        <div>
+                            <p class="text-white font-semibold text-sm">Angel One</p>
+                            <p class="text-gray-500 text-xs">Retail Focus</p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs font-medium rounded">Bullish</span>
+                    </div>
+                    <p class="text-gray-400 text-xs">Top Pick: PSU Banks & Railway Stocks</p>
+                </a>
+                
+                <!-- Zerodha -->
+                <a href="https://pulse.zerodha.com/" target="_blank" class="block glass-card p-5 rounded-xl hover:scale-105 hover:border-gold-500 transition-all duration-300 cursor-pointer">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                            <span class="text-blue-400 font-bold text-xs">Z</span>
+                        </div>
+                        <div>
+                            <p class="text-white font-semibold text-sm">Zerodha</p>
+                            <p class="text-gray-500 text-xs">Retail Platform</p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 text-xs font-medium rounded">Neutral</span>
+                    </div>
+                    <p class="text-gray-400 text-xs">Top Pick: IT Services & Pharma</p>
+                </a>
+                
+                <!-- Morgan Stanley -->
+                <a href="https://www.morganstanley.com/insights/topics/india" target="_blank" class="block glass-card p-5 rounded-xl hover:scale-105 hover:border-gold-500 transition-all duration-300 cursor-pointer">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">
+                            <span class="text-green-400 font-bold text-xs">MS</span>
+                        </div>
+                        <div>
+                            <p class="text-white font-semibold text-sm">Morgan Stanley</p>
+                            <p class="text-gray-500 text-xs">Global Research</p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs font-medium rounded">Overweight</span>
+                    </div>
+                    <p class="text-gray-400 text-xs">Top Pick: Financials & Industrials</p>
+                </a>
+                
+                <!-- Goldman Sachs -->
+                <a href="https://www.goldmansachs.com/insights" target="_blank" class="block glass-card p-5 rounded-xl hover:scale-105 hover:border-gold-500 transition-all duration-300 cursor-pointer">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                            <span class="text-emerald-400 font-bold text-xs">GS</span>
+                        </div>
+                        <div>
+                            <p class="text-white font-semibold text-sm">Goldman Sachs</p>
+                            <p class="text-gray-500 text-xs">IB & Markets</p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs font-medium rounded">Bullish</span>
+                    </div>
+                    <p class="text-gray-400 text-xs">Top Pick: Consumption & Luxury</p>
+                </a>
+                
+                <!-- Kotak -->
+                <a href="https://www.kotakneo.com/investing-guide/" target="_blank" class="block glass-card p-5 rounded-xl hover:scale-105 hover:border-gold-500 transition-all duration-300 cursor-pointer">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center">
+                            <span class="text-red-400 font-bold text-xs">KC</span>
+                        </div>
+                        <div>
+                            <p class="text-white font-semibold text-sm">Kotak</p>
+                            <p class="text-gray-500 text-xs">Institutional</p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 text-xs font-medium rounded">Cautious</span>
+                    </div>
+                    <p class="text-gray-400 text-xs">Top Pick: Private Banks & NBFCs</p>
+                </a>
+            </div>
+            
+            <p class="text-gray-600 text-xs mt-8 text-center font-mono italic">
+                Clicking these links will take you to third-party institutional research for informational purposes only.
+            </p>
+        </div>
+    </section>
+
+    <!-- SECTION 3: COMMODITY OUTLOOK -->
+    <section class="section-padding bg-obsidian">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-10">
+                    <p class="text-gold-500 text-sm tracking-[0.3em] uppercase mb-4 font-medium">Metal Intelligence</p>
+                    <h2 class="text-4xl font-black tracking-tight text-white">Gold & <span class="text-gold-500">Silver</span> Outlook</h2>
+                    <p class="text-gray-400 mt-4">Institutional sentiment on precious metals for March 2026.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Gold -->
+                    <a href="https://www.mcxindia.com/" target="_blank" class="block glass-panel p-8 rounded-2xl hover:scale-[1.02] hover:border-gold-500 transition-all duration-300">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl bg-yellow-500/20 border border-yellow-500/30 flex items-center justify-center">
+                                    <i data-lucide="gem" class="w-6 h-6 text-yellow-400"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-white">Gold</h3>
+                                    <p class="text-gray-500 text-xs">Safe Haven Asset</p>
+                                </div>
+                            </div>
+                            <span class="px-3 py-1 bg-yellow-500/20 text-yellow-400 text-xs font-medium rounded-full">Bullish</span>
+                        </div>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-400">Current Level</span>
+                                <span class="text-white font-mono">₹84,500/10g</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-400">Target Q2 2026</span>
+                                <span class="text-green-400 font-mono">₹88,000/10g</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-400">Support</span>
+                                <span class="text-white font-mono">₹82,000</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-xs leading-relaxed">Global uncertainty, FII inflows, and currency depreciation continue to support gold as a strategic portfolio hedge.</p>
+                    </a>
+                    
+                    <!-- Silver -->
+                    <a href="https://www.moneycontrol.com/commodities/" target="_blank" class="block glass-panel p-8 rounded-2xl hover:scale-[1.02] hover:border-gold-500 transition-all duration-300">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl bg-gray-400/20 border border-gray-400/30 flex items-center justify-center">
+                                    <i data-lucide="circle-dot" class="w-6 h-6 text-gray-300"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-white">Silver</h3>
+                                    <p class="text-gray-500 text-xs">Industrial + Precious</p>
+                                </div>
+                            </div>
+                            <span class="px-3 py-1 bg-green-500/20 text-green-400 text-xs font-medium rounded-full">Bullish</span>
+                        </div>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-400">Current Level</span>
+                                <span class="text-white font-mono">₹98,500/kg</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-400">Target Q2 2026</span>
+                                <span class="text-green-400 font-mono">₹1,05,000/kg</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-400">Support</span>
+                                <span class="text-white font-mono">₹95,000</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-xs leading-relaxed">Industrial demand from EV and solar sectors combined with precious metal rally positions silver for outperformance.</p>
+                    </a>
+                </div>
+                
+                <p class="text-gray-600 text-xs mt-6 text-center font-mono italic">
+                    Live metal prices are subject to market conditions. Click above for real-time rates on MCX.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: MARKET NEWS FEED -->
+    <section class="section-padding bg-obsidian" style="background: linear-gradient(180deg, #111111 0%, #0D0D0D 100%);">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left: Product Deep Dives -->
+                <div class="lg:col-span-2" style="overflow: visible; padding-left: 0;">
+                    <div class="text-center mb-8">
+                        <p class="text-gold-500 text-sm tracking-[0.3em] uppercase mb-4 font-medium">Product Education</p>
+                        <h2 class="text-3xl font-black tracking-tight text-white">Investment <span class="text-gold-500">Deep Dives</span></h2>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" style="padding-left: 0; padding-right: 1rem; overflow: visible;">
+                        <div class="glass-card rounded-xl overflow-hidden">
+                            <div class="h-1 bg-gradient-to-r from-purple-500 to-purple-400"></div>
+                            <div class="p-6">
+                                <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center mb-4">
+                                    <i data-lucide="git-branch" class="w-5 h-5 text-purple-400"></i>
+                                </div>
+                                <h3 class="text-lg font-bold text-white mb-2">Arbitrage Funds</h3>
+                                <p class="text-gray-400 text-sm leading-relaxed">Tax-efficient returns using cash-futures arbitrage. Ideal for short-term surplus with equity taxation benefits.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-card rounded-xl overflow-hidden">
+                            <div class="h-1 bg-gradient-to-r from-blue-500 to-blue-400"></div>
+                            <div class="p-6">
+                                <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center mb-4">
+                                    <i data-lucide="shield-check" class="w-5 h-5 text-blue-400"></i>
+                                </div>
+                                <h3 class="text-lg font-bold text-white mb-2">Senior Secured NCDs</h3>
+                                <p class="text-gray-400 text-sm leading-relaxed">First-charge on assets with AA+ rated issuers. Superior yields with principal protection.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right: Live News Feed -->
+                <div>
+                    <div class="flex items-center gap-2 mb-6">
+                        <span class="w-2 h-2 rounded-full bg-green-500 blink"></span>
+                        <p class="text-gold-500 text-sm tracking-[0.2em] uppercase font-medium">Market News</p>
+                    </div>
+                    
+                    <div class="glass-panel rounded-xl p-4 max-h-[400px] overflow-y-auto" id="news-feed">
+                        <div class="space-y-3" id="news-container">
+                            <div class="news-card p-4 rounded-lg text-center">
+                                <p class="text-gray-300 text-sm mb-4">Live market updates powered by Economic Times</p>
+                                <a href="https://economictimes.indiatimes.com/markets" target="_blank" rel="noopener noreferrer" class="inline-block px-6 py-2 rounded-lg text-sm font-semibold uppercase tracking-wider transition-all" style="background: linear-gradient(135deg, #C5A059 0%, #D4A56B 50%, #C5A059 100%); color: #000000;">View Live Markets →</a>
+                            </div>
+                            <a href="https://www.nseindia.com" target="_blank" rel="noopener noreferrer" class="news-card p-3 rounded-lg block hover:bg-gold-500/10 transition-colors no-underline">
+                                <p class="text-white text-sm font-semibold mb-1">NSE India — Live Index Data</p>
+                                <p class="text-gray-400 text-sm">Real-time Nifty, Sensex & sectoral indices</p>
+                            </a>
+                            <a href="https://www.rbi.org.in" target="_blank" rel="noopener noreferrer" class="news-card p-3 rounded-lg block hover:bg-gold-500/10 transition-colors no-underline">
+                                <p class="text-white text-sm font-semibold mb-1">RBI Monetary Policy Updates</p>
+                                <p class="text-gray-400 text-sm">Repo rate, inflation & policy statements</p>
+                            </a>
+                            <a href="https://www.amfiindia.com" target="_blank" rel="noopener noreferrer" class="news-card p-3 rounded-lg block hover:bg-gold-500/10 transition-colors no-underline">
+                                <p class="text-white text-sm font-semibold mb-1">AMFI — Fund NAV & Data</p>
+                                <p class="text-gray-400 text-sm">Latest mutual fund NAVs and category data</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simple CTA Section -->
+    <section class="py-16" style="background: linear-gradient(180deg, #0D0D0D 0%, #111111 100%);">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-serif font-bold text-white mb-4">Ready to start your journey?</h2>
+                <p class="text-gray-400 mb-8">Book a consultation with our wealth advisors to discuss your financial goals.</p>
+                <a href="contact.html" class="btn btn-gold px-10 py-4 text-base uppercase tracking-wider font-semibold">
+                    Book Consultation
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12" style="background: #000000 !important; position: relative; z-index: 50;">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center">
+                            <span class="text-obsidian font-bold text-sm">A</span>
+                        </div>
+                        <span class="text-lg font-bold tracking-wider text-white">ATHARVA <span class="text-gold-500">WEALTH</span></span>
+                    </div>
+                    <p class="text-gray-600 text-sm">AMFI-Registered Mutual Fund Distributor. We provide access to third-party investment products.</p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#home" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Home</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Services</a></li>
+                        <li><a href="about.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">About Us</a></li>
+                        <li><a href="insights.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Insights</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Our Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Mutual Funds</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Insurance</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Bonds & NCDs</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Direct Equity</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">All Services</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Client Utilities -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Client Utilities</h4>
+                    <ul class="space-y-2">
+                        <li><a href="dsc.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Digital Signature (DSC)</a></li>
+                        <li><a href="founder.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Our Founder</a></li>
+                        <li><a href="tools.html" class="text-gold-400 text-sm transition-colors">Financial Tools</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gold-500/10">
+                <p class="text-gray-600 text-sm text-center">© 2026 Atharva Wealth. All rights reserved. AMFI-Registered Mutual Fund Distributor.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        lucide.createIcons();
+        
+        (function cacheMarketNews() {
+            const CACHE_KEY = 'atharvaMarketNews';
+            const TIMESTAMP_KEY = 'atharvaMarketNewsTimestamp';
+            const CACHE_DURATION = 24 * 60 * 60 * 1000;
+            const container = document.getElementById('news-container');
+            if (!container) return;
+            
+            const now = Date.now();
+            const lastFetch = parseInt(localStorage.getItem(TIMESTAMP_KEY) || '0', 10);
+            const cached = localStorage.getItem(CACHE_KEY);
+            
+            if (cached && (now - lastFetch) < CACHE_DURATION) {
+                return;
+            }
+            
+            const rssUrl = encodeURIComponent('https://economictimes.indiatimes.com/markets/rss.cms');
+            const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`;
+            
+            fetch(apiUrl)
+                .then(r => r.json())
+                .then(data => {
+                    if (data.status === 'ok' && data.items && data.items.length > 0) {
+                        const top5 = data.items.slice(0, 5).map(item => ({
+                            title: item.title,
+                            desc: (item.description || '').replace(/<[^>]*>/g, '').trim().substring(0, 100),
+                            link: item.link
+                        }));
+                        localStorage.setItem(CACHE_KEY, JSON.stringify(top5));
+                        localStorage.setItem(TIMESTAMP_KEY, String(now));
+                    }
+                })
+                .catch(err => console.log('Market news cache update failed:', err));
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="luxury">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Signature Certificates | Atharva Wealth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0D0D0D',
+                        gold: { 50: '#FBF8F3', 100: '#F5EFE3', 200: '#EBD9BE', 300: '#DFBF94', 400: '#D4A56B', 500: '#C5A059', 600: '#A88545', 700: '#8B6B38', 800: '#6F542D', 900: '#524024' }
+                    },
+                    fontFamily: { 'serif': ['Playfair Display', 'serif'], 'sans': ['Montserrat', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #0a0a0a; color: #E5E5E5; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        
+        .grid-pattern {
+            background-image: 
+                linear-gradient(rgba(197, 160, 89, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(197, 160, 89, 0.02) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        
+        .glass-panel {
+            background: linear-gradient(145deg, rgba(45, 45, 45, 0.5) 0%, rgba(20, 20, 20, 0.7) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+        }
+        
+        .glass-card { 
+            background: linear-gradient(145deg, rgba(45, 45, 45, 0.4) 0%, rgba(20, 20, 20, 0.6) 100%); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(197, 160, 89, 0.15); 
+            transition: all 0.4s; 
+        }
+        .glass-card:hover { 
+            border-color: rgba(197, 160, 89, 0.5); 
+            box-shadow: 0 0 40px rgba(197, 160, 89, 0.15), 0 20px 60px rgba(0, 0, 0, 0.4); 
+        }
+        
+        .gold-line { background: linear-gradient(90deg, transparent, #C5A059, transparent); height: 1px; }
+        .btn-gold { background: linear-gradient(135deg, #C5A059 0%, #D4A56B 50%, #C5A059 100%); border: none; color: #0D0D0D; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s ease; }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(197, 160, 89, 0.4); }
+        .btn-ghost-gold { background: transparent; border: 1px solid rgba(197, 160, 89, 0.5); color: #C5A059; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s ease; }
+        .btn-ghost-gold:hover { background: rgba(197, 160, 89, 0.1); border-color: #C5A059; color: #EBD9BE; transform: translateY(-2px); }
+        
+        .animate-fade-in { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .section-padding { padding: 100px 0; }
+        
+        .popular-tag {
+            background: linear-gradient(135deg, #C5A059 0%, #D4A56B 100%);
+            color: #0D0D0D;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="bg-obsidian grid-pattern">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(13, 13, 13, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(197, 160, 89, 0.1);">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center flex-shrink-0">
+                      <span class="text-obsidian font-bold text-lg">A</span>
+                    </div>
+                    <span class="text-xl font-bold tracking-wider text-white">ATHARVA <span class="text-gold-500">WEALTH</span></span>
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html#home" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Home</a>
+                    <a href="services.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Services</a>
+                    <a href="about.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">About Us</a>
+                    <a href="insights.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Insights</a>
+                    <a href="tools.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Tools</a>
+                    <a href="dsc.html" class="text-gold-400 text-sm font-medium tracking-wide">DSC</a>
+                    <a href="contact.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Contact</a>
+                </div>
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="contact.html" class="btn btn-gold px-6 py-2 text-xs">Book Consultation</a>
+                </div>
+                <button class="md:hidden text-white p-2" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-obsidian border-t border-gold-500/10">
+            <div class="container mx-auto px-6 py-4 flex flex-col gap-4">
+                <a href="index.html#home" class="text-gray-300 hover:text-gold-400 py-2">Home</a>
+                <a href="services.html" class="text-gray-300 hover:text-gold-400 py-2">Services</a>
+                <a href="about.html" class="text-gray-300 hover:text-gold-400 py-2">About Us</a>
+                <a href="insights.html" class="text-gray-300 hover:text-gold-400 py-2">Insights</a>
+                <a href="contact.html" class="text-gray-300 hover:text-gold-400 py-2">Contact</a>
+                <a href="contact.html" class="btn btn-gold w-full py-2 text-xs mt-2">Book Consultation</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="pt-32 pb-16" style="background: radial-gradient(ellipse at 50% 0%, rgba(197, 160, 89, 0.08) 0%, transparent 60%);">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center animate-fade-in">
+                <p class="text-gold-500 text-sm tracking-[0.3em] uppercase mb-4 font-medium">Administrative Services</p>
+                <h1 class="text-5xl md:text-6xl font-black tracking-tighter text-white mb-4">Digital Signature <span class="text-gold-500">Certificates</span></h1>
+                <p class="text-gray-300 text-lg leading-relaxed max-w-2xl">Secure your digital transactions with legally recognized Digital Signature Certificates. Quick processing, paperless approval, and dedicated support for HNI clients.</p>
+            </div>
+        </div>
+        <div class="gold-line mt-12"></div>
+    </section>
+
+    <!-- DSC PRODUCT CARDS -->
+    <section class="section-padding bg-obsidian">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-black tracking-tight text-white">Choose Your <span class="text-gold-500">DSC Package</span></h2>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Select from our range of Digital Signature Certificates tailored for individuals and businesses.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <!-- Card 1: Class 3 Signing -->
+                <div class="glass-card rounded-2xl overflow-hidden relative">
+                    <div class="p-8">
+                        <div class="w-14 h-14 rounded-xl bg-gold-500/20 border border-gold-500/30 flex items-center justify-center mb-6">
+                            <i data-lucide="file-signature" class="w-7 h-7 text-gold-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Class 3 Signing</h3>
+                        <p class="text-gray-400 text-sm mb-4">For ITR, GST, MCA filings and digital signing</p>
+                        <div class="mb-4">
+                            <span class="text-3xl font-black text-gold-400">₹1,400</span>
+                            <span class="text-gray-500 text-sm ml-1">onwards</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-800 rounded text-xs text-gray-400">1 Year</span>
+                            <span class="px-2 py-1 bg-gray-800 rounded text-xs text-gray-400">2 Year</span>
+                            <span class="px-2 py-1 bg-gray-800 rounded text-xs text-gray-400">3 Year</span>
+                        </div>
+                        <p class="text-gray-600 text-xs mb-6">Processing: 1-2 Hours</p>
+                        <a href="https://getdigitalsign.com/" target="_blank" class="btn btn-gold w-full py-3 text-sm">Apply Now</a>
+                    </div>
+                </div>
+                
+                <!-- Card 2: Class 3 Org Signing -->
+                <div class="glass-card rounded-2xl overflow-hidden relative">
+                    <div class="p-8">
+                        <div class="w-14 h-14 rounded-xl bg-gold-500/20 border border-gold-500/30 flex items-center justify-center mb-6">
+                            <i data-lucide="building-2" class="w-7 h-7 text-gold-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Class 3 Org Signing</h3>
+                        <p class="text-gray-400 text-sm mb-4">For ICEGATE, Customs & Director Identification</p>
+                        <div class="mb-4">
+                            <span class="text-3xl font-black text-gold-400">₹2,900</span>
+                            <span class="text-gray-500 text-sm ml-1">onwards</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-800 rounded text-xs text-gray-400">Organization</span>
+                            <span class="px-2 py-1 bg-gray-800 rounded text-xs text-gray-400">ICEGATE</span>
+                        </div>
+                        <p class="text-gray-600 text-xs mb-6">Processing: 1-2 Hours</p>
+                        <a href="https://getdigitalsign.com/" target="_blank" class="btn btn-gold w-full py-3 text-sm">Apply Now</a>
+                    </div>
+                </div>
+                
+                <!-- Card 3: Class 3 Combo (MOST POPULAR) -->
+                <div class="glass-card rounded-2xl overflow-hidden relative border-gold-500/50">
+                    <div class="absolute top-0 left-0 right-0 popular-tag text-xs py-2 text-center uppercase tracking-wider">
+                        Most Popular
+                    </div>
+                    <div class="pt-12 p-8">
+                        <div class="w-14 h-14 rounded-xl bg-gold-500/20 border border-gold-500/30 flex items-center justify-center mb-6">
+                            <i data-lucide="briefcase" class="w-7 h-7 text-gold-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Class 3 Combo</h3>
+                        <p class="text-gray-400 text-sm mb-4">For Tenders, etenders & government work</p>
+                        <div class="mb-4">
+                            <span class="text-3xl font-black text-gold-400">₹3,100</span>
+                            <span class="text-gray-500 text-sm ml-1">onwards</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-800 rounded text-xs text-gray-400">Tenders</span>
+                            <span class="px-2 py-1 bg-gray-800 rounded text-xs text-gray-400">e-Procurement</span>
+                        </div>
+                        <p class="text-gray-600 text-xs mb-6">Processing: 1-2 Hours</p>
+                        <a href="https://getdigitalsign.com/" target="_blank" class="btn btn-gold w-full py-3 text-sm">Apply Now</a>
+                    </div>
+                </div>
+                
+                <!-- Card 4: DGFT -->
+                <div class="glass-card rounded-2xl overflow-hidden relative">
+                    <div class="p-8">
+                        <div class="w-14 h-14 rounded-xl bg-gold-500/20 border border-gold-500/30 flex items-center justify-center mb-6">
+                            <i data-lucide="globe" class="w-7 h-7 text-gold-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">DGFT License</h3>
+                        <p class="text-gray-400 text-sm mb-4">For Import/Export and DGFT filings</p>
+                        <div class="mb-4">
+                            <span class="text-3xl font-black text-gold-400">₹3,100</span>
+                            <span class="text-gray-500 text-sm ml-1">onwards</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-800 rounded text-xs text-gray-400">Import/Export</span>
+                            <span class="px-2 py-1 bg-gray-800 rounded text-xs text-gray-400">DGFT</span>
+                        </div>
+                        <p class="text-gray-600 text-xs mb-6">Processing: 1-2 Hours</p>
+                        <a href="https://getdigitalsign.com/" target="_blank" class="btn btn-gold w-full py-3 text-sm">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="section-padding bg-obsidian" style="background: linear-gradient(180deg, #0a0a0a 0%, #111111 100%);">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-black tracking-tight text-white mb-8">Why Choose <span class="text-gold-500">Atharva Wealth</span></h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-panel p-6 rounded-xl">
+                        <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-gold-500/20 border border-gold-500/30 flex items-center justify-center">
+                            <i data-lucide="file-check" class="w-6 h-6 text-gold-400"></i>
+                        </div>
+                        <h3 class="text-white font-semibold mb-2">Paperless Approval</h3>
+                        <p class="text-gray-500 text-sm">Complete documentation online. No physical paperwork required.</p>
+                    </div>
+                    
+                    <div class="glass-panel p-6 rounded-xl">
+                        <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-gold-500/20 border border-gold-500/30 flex items-center justify-center">
+                            <i data-lucide="clock" class="w-6 h-6 text-gold-400"></i>
+                        </div>
+                        <h3 class="text-white font-semibold mb-2">2-Hour Turnaround</h3>
+                        <p class="text-gray-500 text-sm">Fastest processing in the industry. Get your DSC within hours.</p>
+                    </div>
+                    
+                    <div class="glass-panel p-6 rounded-xl">
+                        <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-gold-500/20 border border-gold-500/30 flex items-center justify-center">
+                            <i data-lucide="headphones" class="w-6 h-6 text-gold-400"></i>
+                        </div>
+                        <h3 class="text-white font-semibold mb-2">HNI Support</h3>
+                        <p class="text-gray-500 text-sm">Dedicated relationship manager for high-net-worth clients.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-10 pt-8 border-t border-gold-500/20">
+                    <p class="text-gold-400 text-lg font-medium">Paperless Approval | 2-Hour Turnaround | Dedicated Support for HNI Clients</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOCUMENTS REQUIRED -->
+    <section class="section-padding bg-obsidian">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-black tracking-tight text-white">Documents <span class="text-gold-500">Required</span></h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass-card p-6 rounded-xl">
+                        <h3 class="text-white font-semibold mb-4 flex items-center gap-2">
+                            <i data-lucide="user" class="w-5 h-5 text-gold-400"></i>
+                            For Individuals
+                        </h3>
+                        <ul class="space-y-2 text-gray-400 text-sm">
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-400 mt-0.5"></i> Aadhaar Card (mandatory)</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-400 mt-0.5"></i> PAN Card</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-400 mt-0.5"></i> Passport Size Photo</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-400 mt-0.5"></i> Email ID & Phone Number</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="glass-card p-6 rounded-xl">
+                        <h3 class="text-white font-semibold mb-4 flex items-center gap-2">
+                            <i data-lucide="building" class="w-5 h-5 text-gold-400"></i>
+                            For Organizations
+                        </h3>
+                        <ul class="space-y-2 text-gray-400 text-sm">
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-400 mt-0.5"></i> Company PAN Card</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-400 mt-0.5"></i> Incorporation Certificate</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-400 mt-0.5"></i> Authorized Signatory List</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-400 mt-0.5"></i> Address Proof</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20" style="background: linear-gradient(180deg, #111111 0%, #0a0a0a 100%);">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-black tracking-tight text-white mb-4">Need Assistance?</h2>
+                <p class="text-gray-400 mb-8">Our team is available to help you choose the right DSC and guide you through the process.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="https://wa.me/919029005170?text=Hi, I need assistance with Digital Signature Certificates. Please help me choose the right DSC." target="_blank" class="btn btn-gold px-8 py-3 text-sm">WhatsApp Us</a>
+                    <button class="btn btn-ghost-gold px-8 py-3 text-sm">Call +91 90290 05170</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12" style="background: #000000 !important; position: relative; z-index: 50;">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center">
+                            <span class="text-obsidian font-bold text-sm">A</span>
+                        </div>
+                        <span class="text-lg font-bold tracking-wider text-white">ATHARVA <span class="text-gold-500">WEALTH</span></span>
+                    </div>
+                    <p class="text-gray-600 text-sm">AMFI-Registered Mutual Fund Distributor. We provide access to third-party investment products.</p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#home" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Home</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Services</a></li>
+                        <li><a href="about.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">About Us</a></li>
+                        <li><a href="insights.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Insights</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Our Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Mutual Funds</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Insurance</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Bonds & NCDs</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Direct Equity</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">All Services</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Client Utilities -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Client Utilities</h4>
+                    <ul class="space-y-2">
+                        <li><a href="dsc.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Digital Signature (DSC)</a></li>
+                        <li><a href="founder.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Our Founder</a></li>
+                        <li><a href="tools.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Financial Tools</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gold-500/10">
+                <p class="text-gray-600 text-sm text-center">© 2026 Atharva Wealth. All rights reserved. AMFI-Registered Mutual Fund Distributor (ARN: Pending).</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

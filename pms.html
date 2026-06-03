@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="luxury">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Management Services | Atharva Wealth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0D0D0D',
+                        gold: {
+                            50: '#FBF8F3',
+                            100: '#F5EFE3',
+                            200: '#EBD9BE',
+                            300: '#DFBF94',
+                            400: '#D4A56B',
+                            500: '#C5A059',
+                            600: '#A88545',
+                            700: '#8B6B38',
+                            800: '#6F542D',
+                            900: '#524024',
+                        }
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0D0D0D;
+            color: #E5E5E5;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(45, 45, 45, 0.4) 0%, rgba(20, 20, 20, 0.6) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(197, 160, 89, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(197, 160, 89, 0.5);
+            box-shadow: 0 0 40px rgba(197, 160, 89, 0.1), 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .gold-glow {
+            text-shadow: 0 0 40px rgba(197, 160, 89, 0.3);
+        }
+
+        .gold-line {
+            background: linear-gradient(90deg, transparent, #C5A059, transparent);
+            height: 1px;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #C5A059 0%, #D4A56B 50%, #C5A059 100%);
+            border: none;
+            color: #0D0D0D;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(197, 160, 89, 0.4);
+        }
+
+        .btn-ghost-gold {
+            background: transparent;
+            border: 1px solid rgba(197, 160, 89, 0.5);
+            color: #C5A059;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .btn-ghost-gold:hover {
+            background: rgba(197, 160, 89, 0.1);
+            border-color: #C5A059;
+            color: #EBD9BE;
+            transform: translateY(-2px);
+        }
+
+        .sidebar-glow {
+            background: radial-gradient(ellipse at top right, rgba(197, 160, 89, 0.1) 0%, transparent 50%);
+        }
+
+        .breadcrumb-link {
+            color: #C5A059;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb-link:hover {
+            color: #EBD9BE;
+        }
+
+        .content-section {
+            border-left: 2px solid rgba(197, 160, 89, 0.2);
+            padding-left: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(30, 30, 30, 0.5);
+            border: 1px solid rgba(197, 160, 89, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(197, 160, 89, 0.4);
+            background: rgba(30, 30, 30, 0.8);
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .hero-gradient {
+            background: radial-gradient(ellipse at 50% 100%, rgba(197, 160, 89, 0.15) 0%, transparent 60%);
+        }
+    </style>
+</head>
+<body class="bg-obsidian">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(13, 13, 13, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(197, 160, 89, 0.1);">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center flex-shrink-0">
+                      <span class="text-obsidian font-bold text-lg">A</span>
+                    </div>
+                    <span class="text-xl font-bold tracking-wider text-white">
+                        ATHARVA <span class="text-gold-500">WEALTH</span>
+                    </span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html#home" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Home</a>
+                    <a href="services.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Services</a>
+                    <a href="about.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">About Us</a>
+                    <a href="insights.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Insights</a>
+                    <a href="tools.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Tools</a>
+                    <a href="dsc.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">DSC</a>
+                    <a href="contact.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Contact</a>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="contact.html" class="btn btn-gold px-6 py-2 text-xs">Book Consultation</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-white p-2" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-obsidian border-t border-gold-500/10">
+            <div class="container mx-auto px-6 py-4 flex flex-col gap-4">
+                <a href="index.html#home" class="text-gray-300 hover:text-gold-400 py-2">Home</a>
+                <a href="services.html" class="text-gray-300 hover:text-gold-400 py-2">Services</a>
+                <a href="about.html" class="text-gray-300 hover:text-gold-400 py-2">About Us</a>
+                <a href="index.html#insights" class="text-gray-300 hover:text-gold-400 py-2">Insights</a>
+                <a href="contact.html" class="text-gray-300 hover:text-gold-400 py-2">Contact</a>
+                <a href="contact.html" class="btn btn-gold w-full py-2 text-xs mt-2">Book Consultation</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section id="home" class="pt-32 pb-20 hero-gradient">
+        <div class="container mx-auto px-6">
+            <!-- Breadcrumb -->
+            <nav class="mb-8 animate-fade-in">
+                <ol class="flex items-center gap-2 text-sm">
+                    <li><a href="index.html" class="breadcrumb-link">Home</a></li>
+                    <li class="text-gray-600">/</li>
+                    <li><a href="services.html" class="breadcrumb-link">Services</a></li>
+                    <li class="text-gray-600">/</li>
+                    <li class="text-gold-500">Portfolio Management Services</li>
+                </ol>
+            </nav>
+
+            <!-- Hero Content -->
+            <div class="max-w-3xl animate-fade-in delay-100">
+                <p class="text-gold-500 text-sm tracking-[0.3em] uppercase mb-4 font-medium">Discretionary Wealth Management</p>
+                <h1 class="text-5xl md:text-6xl font-serif font-bold tracking-tight text-white mb-6">
+                    Portfolio Management <span class="text-gold-500">Services</span>
+                </h1>
+                <p class="text-gray-300 text-lg leading-relaxed max-w-2xl">
+                    Professional, discretionary portfolio management with active risk oversight. Our seasoned managers construct diversified portfolios aligned with your risk appetite and financial objectives.
+                </p>
+            </div>
+        </div>
+        <div class="gold-line mt-12"></div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="section-padding bg-obsidian">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <!-- Left Content Area -->
+                <div class="lg:col-span-2">
+                    <!-- Overview -->
+                    <div class="mb-12 animate-fade-in delay-100">
+                        <h2 class="text-3xl font-serif font-bold text-white mb-6">
+                            Overview
+                        </h2>
+                        <div class="content-section">
+                            <p class="text-gray-300 leading-relaxed mb-6">
+                                Our Portfolio Management Services (PMS) represent the pinnacle of personalized wealth management. Designed for high-net-worth individuals and families, our PMS offering provides dedicated portfolio management with active risk oversight, ensuring your investments are positioned to capture market opportunities while protecting downside.
+                            </p>
+                            <p class="text-gray-300 leading-relaxed mb-6">
+                                With a team of seasoned investment professionals and a research-driven approach, we construct diversified portfolios tailored to your unique risk profile, investment horizon, and financial goals. Our discretionary mandate allows us to act swiftly on market developments, implementing strategic changes without delay.
+                            </p>
+                            <p class="text-gray-300 leading-relaxed">
+                                Every portfolio undergoes rigorous stress testing and is continuously monitored to ensure alignment with your evolving financial landscape. We believe in transparent reporting and maintain the highest standards of fiduciary responsibility.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Key Features -->
+                    <div class="mb-12 animate-fade-in delay-200">
+                        <h2 class="text-3xl font-serif font-bold text-white mb-6">
+                            Key Features
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="feature-card">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-lg bg-gold-500/10 flex items-center justify-center flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-semibold mb-1">Active Risk Management</h4>
+                                        <p class="text-gray-500 text-sm">Real-time monitoring and dynamic portfolio adjustments</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-lg bg-gold-500/10 flex items-center justify-center flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-semibold mb-1">Customized Construction</h4>
+                                        <p class="text-gray-500 text-sm">Tailored asset allocation based on your goals</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-lg bg-gold-500/10 flex items-center justify-center flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-semibold mb-1">Quarterly Reviews</h4>
+                                        <p class="text-gray-500 text-sm">Comprehensive performance and strategy reports</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-lg bg-gold-500/10 flex items-center justify-center flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-semibold mb-1">Transparent Pricing</h4>
+                                        <p class="text-gray-500 text-sm">Clear fee structure with no hidden charges</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Who Should Invest -->
+                    <div class="mb-12 animate-fade-in delay-300">
+                        <h2 class="text-3xl font-serif font-bold text-white mb-6">
+                            Who Should Invest
+                        </h2>
+                        <div class="glass-card p-8 rounded-xl">
+                            <ul class="space-y-4">
+                                <li class="flex items-start gap-4">
+                                    <span class="w-2 h-2 rounded-full bg-gold-500 mt-2 flex-shrink-0"></span>
+                                    <span class="text-gray-300">High-net-worth individuals seeking professional portfolio management</span>
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <span class="w-2 h-2 rounded-full bg-gold-500 mt-2 flex-shrink-0"></span>
+                                    <span class="text-gray-300">Investors with a minimum investment horizon of 3-5 years</span>
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <span class="w-2 h-2 rounded-full bg-gold-500 mt-2 flex-shrink-0"></span>
+                                    <span class="text-gray-300">Those seeking active risk management and strategic asset allocation</span>
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <span class="w-2 h-2 rounded-full bg-gold-500 mt-2 flex-shrink-0"></span>
+                                    <span class="text-gray-300">Families looking to preserve and grow wealth across generations</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Minimum Investment -->
+                    <div class="animate-fade-in">
+                        <h2 class="text-3xl font-serif font-bold text-white mb-6">
+                            Minimum Investment
+                        </h2>
+                        <div class="glass-card p-8 rounded-xl text-center">
+                            <p class="text-gold-500 text-4xl font-serif font-bold mb-2">₹50 Lakhs</p>
+                            <p class="text-gray-400 text-sm">Minimum investment amount for PMS Portfolio</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar -->
+                <div class="lg:col-span-1">
+                    <div class="sticky top-24">
+                        <!-- Get Started Box -->
+                        <div class="glass-card rounded-2xl p-8 sidebar-glow mb-8">
+                            <h3 class="text-xl font-serif font-bold text-white mb-2">
+                                Get Started
+                            </h3>
+                            <p class="text-gray-400 text-sm mb-6">
+                                Schedule a consultation with our PMS specialists
+                            </p>
+                            
+                            <form class="space-y-4">
+                                <div>
+                                    <input type="text" placeholder="Your Name" class="w-full px-4 py-3 bg-obsidian/50 border border-gold-500/20 rounded-lg text-white placeholder-gray-500 focus:border-gold-500 focus:outline-none transition-colors">
+                                </div>
+                                <div>
+                                    <input type="email" placeholder="Email Address" class="w-full px-4 py-3 bg-obsidian/50 border border-gold-500/20 rounded-lg text-white placeholder-gray-500 focus:border-gold-500 focus:outline-none transition-colors">
+                                </div>
+                                <div>
+                                    <input type="tel" placeholder="Phone Number" class="w-full px-4 py-3 bg-obsidian/50 border border-gold-500/20 rounded-lg text-white placeholder-gray-500 focus:border-gold-500 focus:outline-none transition-colors">
+                                </div>
+                                <div>
+                                    <select class="w-full px-4 py-3 bg-obsidian/50 border border-gold-500/20 rounded-lg text-gray-400 focus:border-gold-500 focus:outline-none transition-colors">
+                                        <option value="" disabled selected>Investment Amount</option>
+                                        <option value="50L-1Cr" class="text-white">₹50 Lakhs - ₹1 Crore</option>
+                                        <option value="1Cr-5Cr" class="text-white">₹1 Crore - ₹5 Crores</option>
+                                        <option value="5Cr+" class="text-white">₹5 Crores+</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-gold w-full py-3 text-sm">
+                                    Request Callback
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Download Brochure -->
+                        <div class="glass-card rounded-xl p-6">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 rounded-lg bg-gold-500/10 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-semibold">PMS Brochure</h4>
+                                    <p class="text-gray-500 text-xs">Download detailed information</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-ghost-gold w-full py-2 text-xs">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Download PDF
+                            </button>
+                        </div>
+
+                        <!-- Other Services -->
+                        <div class="mt-8">
+                            <h4 class="text-white font-semibold mb-4 tracking-wide text-sm">Other Services</h4>
+                            <div class="space-y-2">
+                                <a href="services.html" class="block p-3 rounded-lg bg-obsidian/30 border border-gold-500/10 hover:border-gold-500/30 transition-colors">
+                                    <p class="text-gold-400 text-sm font-medium">All Services</p>
+                                    <p class="text-gray-500 text-xs">View complete range</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16" style="background: linear-gradient(180deg, #111111 0%, #0D0D0D 100%);">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-serif font-bold text-white mb-4">
+                    Ready to Start Your PMS Journey?
+                </h2>
+                <p class="text-gray-400 mb-8">
+                    Connect with our wealth advisors to discuss your investment goals
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="btn btn-gold px-8 py-3 text-sm">
+                        Schedule Consultation
+                    </button>
+                    <button class="btn btn-ghost-gold px-8 py-3 text-sm">
+                        Call +91 90290 05170
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12" style="background: #000000 !important; position: relative; z-index: 50;">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center">
+                            <span class="text-obsidian font-bold text-sm">A</span>
+                        </div>
+                        <span class="text-lg font-bold tracking-wider text-white">ATHARVA <span class="text-gold-500">WEALTH</span></span>
+                    </div>
+                    <p class="text-gray-600 text-sm">AMFI-Registered Mutual Fund Distributor. We provide access to third-party investment products.</p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#home" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Home</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Services</a></li>
+                        <li><a href="about.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">About Us</a></li>
+                        <li><a href="insights.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Insights</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Our Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Mutual Funds</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Insurance</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Bonds & NCDs</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Direct Equity</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">All Services</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Client Utilities -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Client Utilities</h4>
+                    <ul class="space-y-2">
+                        <li><a href="dsc.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Digital Signature (DSC)</a></li>
+                        <li><a href="founder.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Our Founder</a></li>
+                        <li><a href="tools.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Financial Tools</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gold-500/10">
+                <p class="text-gray-600 text-sm text-center">© 2026 Atharva Wealth. All rights reserved. SEBI Registered Investment Advisor.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

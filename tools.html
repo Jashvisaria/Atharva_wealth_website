@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="luxury">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Tools | Atharva Wealth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0D0D0D',
+                        gold: {
+                            50: '#FBF8F3',
+                            100: '#F5EFE3',
+                            200: '#EBD9BE',
+                            300: '#DFBF94',
+                            400: '#D4A56B',
+                            500: '#C5A059',
+                            600: '#A88545',
+                            700: '#8B6B38',
+                            800: '#6F542D',
+                            900: '#524024',
+                        }
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Montserrat', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #0D0D0D; color: #E5E5E5; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        
+        .glass-panel {
+            background: linear-gradient(145deg, rgba(45, 45, 45, 0.5) 0%, rgba(20, 20, 20, 0.7) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+        }
+        
+        .glass-card { 
+            background: linear-gradient(145deg, rgba(45, 45, 45, 0.4) 0%, rgba(20, 20, 20, 0.6) 100%); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(197, 160, 89, 0.15); 
+            transition: all 0.4s; 
+        }
+        .glass-card:hover { 
+            border-color: rgba(197, 160, 89, 0.5); 
+            box-shadow: 0 0 40px rgba(197, 160, 89, 0.15), 0 20px 60px rgba(0, 0, 0, 0.4);
+            transform: translateY(-4px);
+        }
+
+        .gold-glow { text-shadow: 0 0 40px rgba(197, 160, 89, 0.3); }
+        .gold-line { background: linear-gradient(90deg, transparent, #C5A059, transparent); height: 1px; }
+        
+        .btn-gold {
+            background: linear-gradient(135deg, #C5A059 0%, #D4A56B 50%, #C5A059 100%);
+            border: none;
+            color: #0D0D0D;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(197, 160, 89, 0.4);
+        }
+
+        .btn-ghost-gold {
+            background: transparent;
+            border: 1px solid rgba(197, 160, 89, 0.5);
+            color: #C5A059;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .btn-ghost-gold:hover {
+            background: rgba(197, 160, 89, 0.1);
+            border-color: #C5A059;
+            color: #EBD9BE;
+            transform: translateY(-2px);
+        }
+
+        .form-input {
+            background: rgba(30, 30, 30, 0.6);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            color: #E5E5E5;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #C5A059;
+            outline: none;
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.2);
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        
+        input[type="range"]::-webkit-slider-track {
+            background: rgba(197, 160, 89, 0.2);
+            height: 6px;
+            border-radius: 3px;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #C5A059 0%, #D4A56B 100%);
+            border-radius: 50%;
+            margin-top: -7px;
+            box-shadow: 0 0 10px rgba(197, 160, 89, 0.5);
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chart-bar {
+            transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .pulse-gold {
+            animation: pulseGold 2s infinite;
+        }
+
+        @keyframes pulseGold {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(197, 160, 89, 0); }
+        }
+    </style>
+</head>
+<body class="bg-obsidian">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(13, 13, 13, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(197, 160, 89, 0.1);">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center flex-shrink-0">
+                      <span class="text-obsidian font-bold text-lg">A</span>
+                    </div>
+                    <span class="text-xl font-bold tracking-wider text-white">ATHARVA <span class="text-gold-500">WEALTH</span></span>
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html#home" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Home</a>
+                    <a href="services.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Services</a>
+                    <a href="about.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">About Us</a>
+                    <a href="insights.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Insights</a>
+                    <a href="tools.html" class="text-gold-400 text-sm font-medium tracking-wide">Tools</a>
+                    <a href="contact.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Contact</a>
+                </div>
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="contact.html" class="btn btn-gold px-6 py-2 text-xs">Book Consultation</a>
+                </div>
+                <button class="md:hidden text-white p-2" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-obsidian border-t border-gold-500/10">
+            <div class="container mx-auto px-6 py-4 flex flex-col gap-4">
+                <a href="index.html#home" class="text-gray-300 hover:text-gold-400 py-2">Home</a>
+                <a href="services.html" class="text-gray-300 hover:text-gold-400 py-2">Services</a>
+                <a href="about.html" class="text-gray-300 hover:text-gold-400 py-2">About Us</a>
+                <a href="insights.html" class="text-gray-300 hover:text-gold-400 py-2">Insights</a>
+                <a href="tools.html" class="text-gold-400 py-2">Tools</a>
+                <a href="contact.html" class="text-gray-300 hover:text-gold-400 py-2">Contact</a>
+                <a href="contact.html" class="btn btn-gold w-full py-2 text-xs mt-2">Book Consultation</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-40 pb-16" style="background: radial-gradient(ellipse at 50% 0%, rgba(197, 160, 89, 0.1) 0%, transparent 60%);">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center animate-fade-in">
+                <p class="text-gold-500 text-sm tracking-[0.3em] uppercase mb-4 font-medium">Wealth-Tech Suite</p>
+                <h1 class="text-5xl md:text-6xl font-black tracking-tighter text-white mb-6">Financial <span class="text-gold-500">Calculators</span></h1>
+                <p class="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">Power your decisions with data-driven insights. Calculate your wealth potential and discover tax-efficient strategies.</p>
+            </div>
+        </div>
+        <div class="gold-line mt-12"></div>
+    </section>
+
+    <!-- Calculator 1: Elite SIP Calculator -->
+    <section class="py-20 bg-obsidian" style="background: linear-gradient(180deg, #111111 0%, #0D0D0D 100%);">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold-500/10 border border-gold-500/20 mb-4">
+                    <i data-lucide="crown" class="w-4 h-4 text-gold-400"></i>
+                    <span class="text-gold-400 text-sm font-medium">Elite SIP Calculator</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black text-white mb-4">Institutional-Grade Wealth Planning</h2>
+                <p class="text-gray-400 max-w-xl mx-auto">Advanced compounding with step-up logic, inflation adjustment, and cost of delay analysis.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Inputs -->
+                <div class="glass-panel p-8 rounded-2xl animate-fade-in" style="background: linear-gradient(145deg, rgba(45, 45, 45, 0.6) 0%, rgba(20, 20, 20, 0.8) 100%); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(197, 160, 89, 0.25);">
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                        <i data-lucide="sliders" class="w-5 h-5 text-gold-400"></i>
+                        Investment Parameters
+                    </h3>
+                    
+                    <!-- Market Presets -->
+                    <div class="mb-6">
+                        <label class="block text-gray-400 text-sm mb-3">Market Preset</label>
+                        <div class="flex flex-wrap gap-3">
+                            <button onclick="setMarketPreset(12)" class="sip-preset flex-1 py-2 px-4 rounded-lg border border-gray-700 hover:border-gold-500 transition-all text-sm text-gray-300 hover:text-white bg-gray-800/50">
+                                Nifty 50 (12%)
+                            </button>
+                            <button onclick="setMarketPreset(15)" class="sip-preset flex-1 py-2 px-4 rounded-lg border border-gray-700 hover:border-gold-500 transition-all text-sm text-gray-300 hover:text-white bg-gray-800/50">
+                                Mid Cap (15%)
+                            </button>
+                            <button onclick="setMarketPreset(18)" class="sip-preset flex-1 py-2 px-4 rounded-lg border border-gray-700 hover:border-gold-500 transition-all text-sm text-gray-300 hover:text-white bg-gray-800/50">
+                                Small Cap (18%)
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Inflation Adjusted Toggle -->
+                    <div class="mb-6 flex items-center justify-between p-3 rounded-lg bg-gray-800/30 border border-gray-700">
+                        <div>
+                            <p class="text-white text-sm font-medium">Inflation Adjusted</p>
+                            <p class="text-gray-500 text-xs">Show today's purchasing power (subtract 6%)</p>
+                        </div>
+                        <button onclick="toggleInflation()" id="inflation-toggle" class="w-12 h-6 rounded-full bg-gray-700 relative transition-colors">
+                            <span class="absolute top-1 left-1 w-4 h-4 rounded-full bg-gray-500 transition-all"></span>
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-5">
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">Monthly Investment (₹)</label>
+                            <input type="range" id="sip-monthly" min="1000" max="500000" step="1000" value="25000" class="w-full accent-gold-500" oninput="calculateSIP()">
+                            <div class="flex justify-between text-sm mt-2">
+                                <span class="text-gray-500">₹1,000</span>
+                                <span class="text-gold-400 font-mono font-semibold" id="sip-monthly-val">₹25,000</span>
+                                <span class="text-gray-500">₹5,00,000</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">Expected Return Rate (% p.a.)</label>
+                            <input type="range" id="sip-rate" min="5" max="25" step="0.5" value="12" class="w-full accent-gold-500" oninput="calculateSIP()">
+                            <div class="flex justify-between text-sm mt-2">
+                                <span class="text-gray-500">5%</span>
+                                <span class="text-gold-400 font-mono font-semibold" id="sip-rate-val">12%</span>
+                                <span class="text-gray-500">25%</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-1">Annual Step-Up (%)</label>
+                            <p class="text-gray-500 text-xs mb-2">Increase your monthly investment every year to beat inflation.</p>
+                            <input type="range" id="sip-stepup" min="0" max="25" step="1" value="10" class="w-full accent-gold-500" oninput="calculateSIP()">
+                            <div class="flex justify-between text-sm mt-2">
+                                <span class="text-gray-500">0%</span>
+                                <span class="text-gold-400 font-mono font-semibold" id="sip-stepup-val">10%</span>
+                                <span class="text-gray-500">25%</span>
+                            </div>
+                            <p id="sip-final-contribution" class="text-gold-400 text-xs mt-1"></p>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">Time Period (Years)</label>
+                            <input type="range" id="sip-years" min="1" max="40" step="1" value="15" class="w-full accent-gold-500" oninput="calculateSIP()">
+                            <div class="flex justify-between text-sm mt-2">
+                                <span class="text-gray-500">1 Year</span>
+                                <span class="text-gold-400 font-mono font-semibold" id="sip-years-val">15 Years</span>
+                                <span class="text-gray-500">40 Years</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div class="space-y-6">
+                    <div class="glass-panel p-8 rounded-2xl" style="background: linear-gradient(145deg, rgba(45, 45, 45, 0.6) 0%, rgba(20, 20, 20, 0.8) 100%); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(197, 160, 89, 0.25);">
+                        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                            <i data-lucide="pie-chart" class="w-5 h-5 text-gold-400"></i>
+                            Projected Returns
+                        </h3>
+                        
+                        <!-- Dynamic Summary -->
+                        <div class="mb-5 p-4 rounded-xl bg-gradient-to-r from-gold-500/10 to-transparent border border-gold-500/20">
+                            <p class="text-white text-lg font-medium">
+                                In <span id="sip-summary-years" class="text-gold-400 font-bold">15</span> years, your total wealth will grow to <span id="sip-summary-total" class="text-gold-400 font-bold">₹1.57 Cr</span>.
+                            </p>
+                        </div>
+
+                        <!-- Cost of Delay Alert (Prominent) -->
+                        <div id="cost-of-delay" class="hidden mb-5 p-4 rounded-xl bg-red-500/20 border-2 border-red-500">
+                            <div class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-red-400 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                                <div>
+                                    <p class="text-red-400 font-bold text-sm">Delaying by 1 year will cost you</p>
+                                    <p class="text-white font-bold text-xl" id="sip-delay-cost">₹12.5 L</p>
+                                    <p class="text-red-300 text-xs mt-1">in final wealth. Start today!</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Donut Chart -->
+                        <div class="mb-6 flex items-center justify-center">
+                            <div class="relative w-40 h-40">
+                                <svg class="w-40 h-40 transform -rotate-90" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="40" fill="transparent" stroke="#374151" stroke-width="12" />
+                                    <circle id="donut-invested" cx="50" cy="50" r="40" fill="transparent" stroke="#6B7280" stroke-width="12" stroke-dasharray="100.53" stroke-dashoffset="75.4" class="transition-all duration-500" />
+                                    <circle id="donut-gains" cx="50" cy="50" r="40" fill="transparent" stroke="#D4AF37" stroke-width="12" stroke-dasharray="100.53" stroke-dashoffset="25.13" class="transition-all duration-500" />
+                                </svg>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="text-center">
+                                        <p class="text-white font-bold text-lg" id="donut-percent">70%</p>
+                                        <p class="text-gray-500 text-xs">Gains</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-3 gap-3 mb-5">
+                            <div class="text-center p-3 rounded-xl bg-gray-800/50">
+                                <p class="text-gray-400 text-xs uppercase tracking-wide mb-1">Invested</p>
+                                <p class="text-white font-bold text-base" id="sip-invested">₹45 L</p>
+                            </div>
+                            <div class="text-center p-3 rounded-xl bg-gold-500/10 border border-gold-500/20">
+                                <p class="text-gold-400 text-xs uppercase tracking-wide mb-1">Wealth Gained</p>
+                                <p class="text-gold-400 font-bold text-base" id="sip-gains">₹1.12 Cr</p>
+                            </div>
+                            <div class="text-center p-3 rounded-xl bg-gradient-to-br from-gold-500/20 to-gold-600/20 border border-gold-500/30">
+                                <p class="text-gold-300 text-xs uppercase tracking-wide mb-1">Total Value</p>
+                                <p class="text-white font-bold text-base" id="sip-total">₹1.57 Cr</p>
+                            </div>
+                        </div>
+
+                        <!-- SIP vs FD Comparison (The Truth Layer) -->
+                        <div class="mb-5 p-4 rounded-xl bg-gradient-to-r from-blue-500/10 to-transparent border border-blue-500/20">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-blue-400 text-xs uppercase tracking-wide">SIP vs Fixed Deposit (6%)</p>
+                            </div>
+                            <p class="text-gray-400 text-sm mb-2">By choosing SIP over FD, you are creating an additional</p>
+                            <p class="text-gold-400 font-bold text-xl" id="sip-alpha">₹45 L</p>
+                            <p class="text-gray-500 text-xs mt-2">in wealth over the same time period.</p>
+                        </div>
+
+                        <!-- Real Purchasing Power (Inflation Reality) -->
+                        <div class="mb-5 p-4 rounded-xl bg-gray-800/30 border border-gray-700">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <p class="text-gray-400 text-xs uppercase tracking-wide mb-2">Real Purchasing Power</p>
+                                    <p class="text-white text-sm">
+                                        While your bank balance will show <span id="sip-nominal-value" class="text-white font-bold">₹5.55 Cr</span>,
+                                    </p>
+                                    <p class="text-white text-sm">
+                                        its purchasing power in today's terms will be <span id="sip-real-value" class="text-gold-400 font-bold">₹2.18 Cr</span>.
+                                    </p>
+                                </div>
+                                <div class="relative group flex-shrink-0 ml-2">
+                                    <svg class="w-4 h-4 text-gray-500 cursor-help" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <div class="absolute right-0 bottom-6 w-64 p-3 rounded-lg bg-obsidian border border-gold-500/30 text-gray-300 text-xs hidden group-hover:block z-10 shadow-xl">
+                                        Inflation erodes the value of money over time. We show you the real value so you can plan for your future lifestyle accurately.
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-500 text-xs mt-2">Calculated at an estimated average inflation of 6-7% p.a.</p>
+                            </div>
+                            
+                            <!-- CTA Buttons -->
+                            <div class="flex flex-col sm:flex-row gap-4 mt-6 overflow-hidden">
+                                <a href="contact.html" id="request-plan-btn" class="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 text-obsidian font-semibold hover:from-gold-400 hover:to-gold-500 transition-all shadow-lg inline-flex items-center justify-center">
+                                    <i data-lucide="file-text" class="w-4 h-4 inline mr-2"></i>
+                                    Request Custom Plan
+                                </a>
+                                <button type="button" onclick="shareOnWhatsApp()" class="flex-1 py-3 px-4 rounded-xl bg-green-600 hover:bg-green-500 text-white font-semibold transition-all flex items-center justify-center gap-2">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                                    Share on WhatsApp
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator 2: FD vs Arbitrage -->
+    <section class="py-20 bg-obsidian">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold-500/10 border border-gold-500/20 mb-4">
+                    <i data-lucide="percent" class="w-4 h-4 text-gold-400"></i>
+                    <span class="text-gold-400 text-sm font-medium">Tax Alpha Calculator</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black text-white mb-4">FD vs. Arbitrage Fund</h2>
+                <p class="text-gray-400 max-w-xl mx-auto">See how much tax you can save by choosing debt-oriented mutual funds over traditional FDs.</p>
+            </div>
+
+            <div class="glass-panel p-8 rounded-2xl max-w-4xl mx-auto animate-fade-in">
+                <!-- Investment Amount Slider -->
+                <div class="mb-8">
+                    <label class="block text-gray-400 text-sm mb-3">Investment Amount</label>
+                    <input type="range" id="tax-investment" min="100000" max="10000000" step="100000" value="1000000" class="w-full accent-gold-500" oninput="calculateTaxAlpha()">
+                    <div class="flex justify-between text-sm mt-2">
+                        <span class="text-gray-500">₹1 L</span>
+                        <span class="text-gold-400 font-mono font-semibold" id="tax-investment-val">₹10 L</span>
+                        <span class="text-gray-500">₹1 Cr</span>
+                    </div>
+                </div>
+
+                <!-- Tax Bracket Selection -->
+                <div class="mb-8">
+                    <label class="block text-gray-400 text-sm mb-3">Your Tax Bracket</label>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="setTaxBracket(10)" class="tax-bracket-btn flex-1 py-2 px-4 rounded-lg border border-gray-700 hover:border-gold-500 transition-all text-sm text-gray-300 hover:text-white bg-gray-800/50">
+                            10%
+                        </button>
+                        <button onclick="setTaxBracket(20)" class="tax-bracket-btn flex-1 py-2 px-4 rounded-lg border border-gray-700 hover:border-gold-500 transition-all text-sm text-gray-300 hover:text-white bg-gray-800/50">
+                            20%
+                        </button>
+                        <button onclick="setTaxBracket(30)" class="tax-bracket-btn flex-1 py-2 px-4 rounded-lg border border-gold-500 bg-gold-500/20 text-white">
+                            30% (Default)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- FD -->
+                    <div class="glass-card p-6 rounded-xl">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-gray-600/30 flex items-center justify-center">
+                                <i data-lucide="building-2" class="w-5 h-5 text-gray-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold">Fixed Deposit</h4>
+                                <p class="text-gray-500 text-xs">~6.5% p.a. (Pre-tax)</p>
+                            </div>
+                        </div>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Interest Earned</span>
+                                <span class="text-white font-mono" id="fd-interest">₹65,000</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Tax Deducted</span>
+                                <span class="text-red-400 font-mono" id="fd-tax">- ₹19,500</span>
+                            </div>
+                            <div class="border-t border-gray-700 pt-3 flex justify-between">
+                                <span class="text-gray-400">Post-Tax Return</span>
+                                <span class="text-white font-bold font-mono" id="fd-nett">₹45,500</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Effective Rate</span>
+                                <span class="text-red-400 font-mono" id="fd-rate">4.55%</span>
+                            </div>
+                        </div>
+                        <!-- Wealth Erosion Alert -->
+                        <div class="mt-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20">
+                            <p class="text-red-400 text-xs">
+                                ⚠️ After 6% Inflation, your real return on this FD is <span id="fd-real-return" class="font-bold">-1.45%</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Arbitrage (Recommended) -->
+                    <div class="glass-card p-6 rounded-xl border-gold-500/30" style="box-shadow: 0 0 30px rgba(197, 160, 89, 0.15), 0 0 60px rgba(197, 160, 89, 0.1);">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-gold-500/20 flex items-center justify-center">
+                                    <i data-lucide="trending-up" class="w-5 h-5 text-gold-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-semibold">Arbitrage Fund</h4>
+                                    <p class="text-gold-400 text-xs">~6.8% p.a. (Tax-efficient)</p>
+                                </div>
+                            </div>
+                            <span class="px-2 py-1 bg-gold-500/20 text-gold-400 text-xs rounded-full font-medium">Recommended</span>
+                        </div>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Interest Earned</span>
+                                <span class="text-white font-mono" id="arb-interest">₹68,000</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Tax Deducted (Indexation)</span>
+                                <span class="text-green-400 font-mono">₹0</span>
+                            </div>
+                            <div class="border-t border-gray-700 pt-3 flex justify-between">
+                                <span class="text-gray-400">Post-Tax Return</span>
+                                <span class="text-gold-400 font-bold font-mono" id="arb-nett">₹68,000</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Effective Rate</span>
+                                <span class="text-gold-400 font-mono">6.80%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Comparison Summary -->
+                <div class="mt-8 p-6 rounded-xl bg-gradient-to-r from-green-500/10 to-gold-500/10 border border-green-500/20">
+                    <p class="text-white text-center font-medium">
+                        By switching <span id="tax-summary-amount" class="text-gold-400 font-bold">₹10 Lakhs</span> to Arbitrage, you save 
+                        <span id="tax-summary-savings" class="text-green-400 font-bold">₹19,500</span> in taxes and increase your usable income by 
+                        <span id="tax-summary-percent" class="text-gold-400 font-bold">49.5%</span>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator 3: Retirement Corpus -->
+    <section class="py-20 bg-obsidian" style="background: linear-gradient(180deg, #0D0D0D 0%, #111111 100%);">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold-500/10 border border-gold-500/20 mb-4">
+                    <i data-lucide="piggy-bank" class="w-4 h-4 text-gold-400"></i>
+                    <span class="text-gold-400 text-sm font-medium">Retirement Planner</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black text-white mb-4">Your Retirement Corpus</h2>
+                <p class="text-gray-400 max-w-xl mx-auto">Calculate how much you need to save today for a comfortable retirement.</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto">
+                <div class="glass-panel p-8 rounded-2xl animate-fade-in">
+                    <!-- Sliders -->
+                    <div class="space-y-8 mb-8">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-gray-400 text-sm">Current Age</label>
+                                <span class="text-gold-400 font-mono font-bold text-lg" id="retire-age">30 Years</span>
+                            </div>
+                            <input type="range" id="retire-current" min="20" max="60" step="1" value="30" class="w-full" oninput="calculateRetirement()">
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                <span>20</span><span>60</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-gray-400 text-sm">Retirement Age</label>
+                                <span class="text-gold-400 font-mono font-bold text-lg" id="retire-target">60 Years</span>
+                            </div>
+                            <input type="range" id="retire-target-age" min="45" max="70" step="1" value="60" class="w-full" oninput="calculateRetirement()">
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                <span>45</span><span>70</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-gray-400 text-sm">Monthly Expense Needed (in Retirement)</label>
+                                <span class="text-gold-400 font-mono font-bold text-lg" id="retire-expense">₹1,00,000</span>
+                            </div>
+                            <input type="range" id="retire-monthly" min="25000" max="500000" step="5000" value="100000" class="w-full" oninput="calculateRetirement()">
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                <span>₹25,000</span><span>₹5,00,000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Results -->
+                    <div class="p-8 rounded-xl bg-gradient-to-br from-gold-500/10 to-obsidian border border-gold-500/20">
+                        <!-- Prominent Corpus Display -->
+                        <div class="text-center mb-6">
+                            <p class="text-gray-400 text-sm uppercase tracking-wide mb-2">Required Retirement Corpus</p>
+                            <p class="text-5xl md:text-6xl font-black text-gold-400 tracking-tight" id="retire-corpus">₹9.86 Cr</p>
+                        </div>
+
+                        <!-- Inflation-Adjusted Expense -->
+                        <div class="mb-6 p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
+                            <p class="text-blue-400 text-sm">
+                                Adjusted for 6% inflation, your ₹<span id="retire-current-expense">1,00,000</span> monthly need will become 
+                                <span id="retire-inflated-expense" class="text-white font-bold">₹5,74,000</span> by the time you retire.
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4 text-sm mb-6">
+                            <div class="text-center p-3 rounded-lg bg-gray-800/50">
+                                <p class="text-gray-400 text-xs mb-1">Years to Retire</p>
+                                <p class="text-white font-bold" id="retire-years">30 Years</p>
+                            </div>
+                            <div class="text-center p-3 rounded-lg bg-gray-800/50">
+                                <p class="text-gray-400 text-xs mb-1">Monthly SIP Needed</p>
+                                <p class="text-gold-400 font-bold" id="retire-sip">₹18,500</p>
+                            </div>
+                        </div>
+
+                        <!-- Lifestyle Protector (Retirement Years) -->
+                        <div class="mb-6">
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-gray-400 text-sm">Post-Retirement Years</label>
+                                <span class="text-gold-400 font-mono font-bold" id="retire-duration">25 Years</span>
+                            </div>
+                            <input type="range" id="retire-duration-years" min="15" max="35" step="1" value="25" class="w-full accent-gold-500" oninput="calculateRetirement()">
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                <span>15</span><span>35</span>
+                            </div>
+                        </div>
+
+                        <!-- Gap Analysis -->
+                        <div class="p-4 rounded-lg bg-gray-800/30 border border-gray-700">
+                            <p class="text-gray-400 text-xs mb-2">Gap Analysis</p>
+                            <p class="text-white text-sm">
+                                Current projected savings vs. Needed Corpus: <span id="retire-gap" class="text-gold-400 font-bold">₹9.86 Cr required</span>
+                            </p>
+                        </div>
+
+                        <!-- Disclaimer -->
+                        <p class="text-gray-500 text-xs text-center mt-4">*Calculated with 12% Pre-retirement returns and 7% Post-retirement returns.</p>
+
+                        <!-- CTA Button -->
+                        <div class="mt-6 text-center">
+                            <a href="contact.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 text-obsidian font-semibold hover:from-gold-400 hover:to-gold-500 transition-all shadow-lg">
+                                <i data-lucide="target" class="w-4 h-4"></i>
+                                How do I reach this goal?
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 bg-obsidian" style="background: linear-gradient(180deg, #111111 0%, #0D0D0D 100%);">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-2xl font-bold text-white mb-4">Ready to build your wealth?</h3>
+            <p class="text-gray-400 mb-8">Let's create a personalized investment strategy based on your goals.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="contact.html" class="btn btn-gold px-8 py-3 text-sm">Book Free Consultation</a>
+                <a href="services.html" class="btn btn-ghost-gold px-8 py-3 text-sm">View Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12" style="background: #000000 !important; position: relative; z-index: 50;">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center">
+                            <span class="text-obsidian font-bold text-sm">A</span>
+                        </div>
+                        <span class="text-lg font-bold tracking-wider text-white">ATHARVA <span class="text-gold-500">WEALTH</span></span>
+                    </div>
+                    <p class="text-gray-600 text-sm">AMFI-Registered Mutual Fund Distributor. We provide access to third-party investment products.</p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#home" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Home</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Services</a></li>
+                        <li><a href="about.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">About Us</a></li>
+                        <li><a href="insights.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Insights</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Our Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Mutual Funds</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Insurance</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Bonds & NCDs</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Direct Equity</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">All Services</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Client Utilities -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Client Utilities</h4>
+                    <ul class="space-y-2">
+                        <li><a href="dsc.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Digital Signature (DSC)</a></li>
+                        <li><a href="founder.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Our Founder</a></li>
+                        <li><a href="tools.html" class="text-gold-400 text-sm transition-colors">Financial Tools</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gold-500/10">
+                <p class="text-gray-600 text-sm text-center">© 2026 Atharva Wealth. All rights reserved. AMFI-Registered Mutual Fund Distributor.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        let inflationAdjusted = false;
+
+        function toggleInflation() {
+            inflationAdjusted = !inflationAdjusted;
+            const btn = document.getElementById('inflation-toggle');
+            const knob = btn.querySelector('span');
+            if (inflationAdjusted) {
+                btn.classList.remove('bg-gray-700');
+                btn.classList.add('bg-gold-500');
+                knob.classList.remove('left-1', 'bg-gray-500');
+                knob.classList.add('left-7', 'bg-white');
+            } else {
+                btn.classList.remove('bg-gold-500');
+                btn.classList.add('bg-gray-700');
+                knob.classList.remove('left-7', 'bg-white');
+                knob.classList.add('left-1', 'bg-gray-500');
+            }
+            calculateSIP();
+        }
+
+        function formatIndianCurrency(amount) {
+            if (amount >= 10000000) {
+                return '₹' + (amount / 10000000).toFixed(2) + ' Cr';
+            } else {
+                return '₹' + (amount / 100000).toFixed(2) + ' L';
+            }
+        }
+
+        // Market Presets
+        function setMarketPreset(rate) {
+            document.getElementById('sip-rate').value = rate;
+            calculateSIP();
+        }
+
+        // Share on WhatsApp
+        function shareOnWhatsApp() {
+            const invested = document.getElementById('sip-invested').textContent;
+            const gains = document.getElementById('sip-gains').textContent;
+            const total = document.getElementById('sip-total').textContent;
+            const years = document.getElementById('sip-years').value;
+            const monthly = document.getElementById('sip-monthly').value;
+            const rate = document.getElementById('sip-rate').value;
+            const stepUp = document.getElementById('sip-stepup').value;
+            
+            const message = `Hi Devang, I'd like to discuss my wealth creation plan:%0A%0A Monthly Investment: ₹${parseInt(monthly).toLocaleString()}%0A Expected Return: ${rate}%0A Annual Step-Up: ${stepUp}%0A Time Period: ${years} years%0A%0A Projected Results:%0A - Amount Invested: ${invested}%0A - Wealth Gained: ${gains}%0A - Total Value: ${total}%0A%0A Please contact me to create a custom plan.`;
+            
+            window.open(`https://wa.me/919029005170?text=${message}`, '_blank');
+        }
+
+        // Elite SIP Calculator with CORRECT Step-Up Algorithm
+        function calculateSIP() {
+            const P = parseInt(document.getElementById('sip-monthly').value);
+            let rate = parseFloat(document.getElementById('sip-rate').value);
+            const stepUp = parseFloat(document.getElementById('sip-stepup').value);
+            const N = parseInt(document.getElementById('sip-years').value);
+
+            const displayRate = rate;
+
+            if (inflationAdjusted) {
+                rate = (((1 + rate / 100) / 1.06) - 1) * 100;
+            }
+
+            document.getElementById('sip-monthly-val').textContent = '₹' + P.toLocaleString();
+            document.getElementById('sip-rate-val').textContent = displayRate + '%';
+            document.getElementById('sip-stepup-val').textContent = stepUp + '%';
+            document.getElementById('sip-years-val').textContent = N + ' Years';
+
+            const finalMonthly = P * Math.pow(1 + stepUp / 100, N);
+            document.getElementById('sip-final-contribution').textContent = `Your final monthly contribution in year ${N} will be ₹${Math.round(finalMonthly).toLocaleString()}`;
+
+            const r = (rate / 100) / 12;
+
+            let totalCorpus = 0;
+            let totalInvested = 0;
+
+            for (let Y = 1; Y <= N; Y++) {
+                const monthlyAmt = P * Math.pow(1 + stepUp / 100, Y - 1);
+                const remainingMonths = (N - Y + 1) * 12;
+                const n = remainingMonths;
+                const fvOfYear = monthlyAmt * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+                totalCorpus += fvOfYear;
+                totalInvested += monthlyAmt * 12;
+            }
+
+            const gains = totalCorpus - totalInvested;
+
+            let delayStartCorpus = 0;
+            for (let Y = 1; Y <= (N - 1); Y++) {
+                const monthlyAmt = P * Math.pow(1 + stepUp / 100, Y - 1);
+                const remainingMonths = (N - Y) * 12;
+                if (remainingMonths > 0) {
+                    const fvOfYear = monthlyAmt * ((Math.pow(1 + r, remainingMonths) - 1) / r) * (1 + r);
+                    delayStartCorpus += fvOfYear;
+                }
+            }
+            const costOfDelay = totalCorpus - delayStartCorpus;
+
+            const fdRate = 6;
+            const fdR = (fdRate / 100) / 12;
+            let fdCorpus = 0;
+            for (let Y = 1; Y <= N; Y++) {
+                const monthlyAmt = P * Math.pow(1 + stepUp / 100, Y - 1);
+                const remainingMonths = (N - Y + 1) * 12;
+                const fvOfYear = monthlyAmt * ((Math.pow(1 + fdR, remainingMonths) - 1) / fdR) * (1 + fdR);
+                fdCorpus += fvOfYear;
+            }
+            const alpha = totalCorpus - fdCorpus;
+
+            const inflationRate = 0.06;
+            const realPurchasingPower = totalCorpus / Math.pow(1 + inflationRate, N);
+
+            document.getElementById('sip-invested').textContent = formatIndianCurrency(totalInvested);
+            document.getElementById('sip-gains').textContent = formatIndianCurrency(gains);
+            document.getElementById('sip-total').textContent = formatIndianCurrency(totalCorpus);
+
+            document.getElementById('sip-summary-years').textContent = N;
+            document.getElementById('sip-summary-total').textContent = formatIndianCurrency(totalCorpus);
+
+            const delayElement = document.getElementById('cost-of-delay');
+            if (N > 1 && costOfDelay > 5000000) {
+                delayElement.classList.remove('hidden');
+                document.getElementById('sip-delay-cost').textContent = formatIndianCurrency(costOfDelay);
+                delayElement.classList.add('border-2', 'bg-red-500/20');
+            } else if (N > 1 && costOfDelay > 0) {
+                delayElement.classList.remove('hidden');
+                document.getElementById('sip-delay-cost').textContent = formatIndianCurrency(costOfDelay);
+                delayElement.classList.remove('border-2', 'bg-red-500/20');
+            } else {
+                delayElement.classList.add('hidden');
+            }
+
+            document.getElementById('sip-alpha').textContent = formatIndianCurrency(Math.max(0, alpha));
+
+            document.getElementById('sip-nominal-value').textContent = formatIndianCurrency(totalCorpus);
+            document.getElementById('sip-real-value').textContent = formatIndianCurrency(realPurchasingPower);
+
+            const total = totalInvested + gains;
+            const investedPercent = (totalInvested / total) * 100;
+            const gainsPercent = (gains / total) * 100;
+
+            document.getElementById('donut-percent').textContent = Math.round(gainsPercent) + '%';
+
+            const circumference = 251.33;
+            const investedOffset = circumference - (circumference * investedPercent / 100);
+            const gainsOffset = circumference - (circumference * gainsPercent / 100);
+
+            document.getElementById('donut-invested').setAttribute('stroke-dashoffset', investedOffset);
+            document.getElementById('donut-gains').setAttribute('stroke-dashoffset', gainsOffset);
+        }
+
+        // ========== TAX ALPHA CALCULATOR ==========
+        let currentTaxBracket = 30;
+
+        function setTaxBracket(rate) {
+            currentTaxBracket = rate;
+            // Update button styles
+            const buttons = document.querySelectorAll('.tax-bracket-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('border-gold-500', 'bg-gold-500/20', 'text-white');
+                btn.classList.add('border-gray-700', 'bg-gray-800/50', 'text-gray-300');
+            });
+            // Highlight selected button
+            event.target.classList.remove('border-gray-700', 'bg-gray-800/50', 'text-gray-300');
+            event.target.classList.add('border-gold-500', 'bg-gold-500/20', 'text-white');
+            calculateTaxAlpha();
+        }
+
+        function formatTaxAmount(amount) {
+            if (amount >= 10000000) {
+                return '₹' + (amount / 10000000).toFixed(2) + ' Cr';
+            } else if (amount >= 100000) {
+                return '₹' + (amount / 100000).toFixed(1) + ' L';
+            }
+            return '₹' + amount.toLocaleString();
+        }
+
+        function calculateTaxAlpha() {
+            const investment = parseInt(document.getElementById('tax-investment').value);
+            const taxRate = currentTaxBracket;
+            const fdRate = 6.5;
+            const arbRate = 6.8;
+            const years = 1;
+            const inflationRate = 6;
+
+            document.getElementById('tax-investment-val').textContent = formatTaxAmount(investment);
+
+            // FD Calculations
+            const fdInterest = investment * (fdRate / 100) * years;
+            const fdTax = fdInterest * (taxRate / 100);
+            const fdNett = fdInterest - fdTax;
+            const fdEffectiveRate = ((fdNett / investment) * 100) / years;
+            const fdRealReturn = fdEffectiveRate - inflationRate;
+
+            // Arbitrage Calculations
+            const arbGains = investment * (arbRate / 100) * years;
+            let arbTax = 0;
+            let arbTaxLabel = '';
+            if (years < 1) {
+                arbTax = arbGains * 0.15;
+                arbTaxLabel = 'Tax Deducted (STCG 15%)';
+            } else {
+                const exemption = 100000;
+                const taxableGains = Math.max(0, arbGains - exemption);
+                arbTax = taxableGains * 0.10;
+                arbTaxLabel = 'Tax Deducted (LTCG 10%)';
+            }
+            const arbNett = arbGains - arbTax;
+            const arbEffectiveRate = ((arbNett / investment) * 100) / years;
+
+            document.getElementById('fd-interest').textContent = formatTaxAmount(Math.round(fdInterest));
+            document.getElementById('fd-tax').textContent = '- ' + formatTaxAmount(Math.round(fdTax));
+            document.getElementById('fd-nett').textContent = formatTaxAmount(Math.round(fdNett));
+            document.getElementById('fd-rate').textContent = fdEffectiveRate.toFixed(2) + '%';
+            document.getElementById('fd-real-return').textContent = fdRealReturn.toFixed(2) + '%';
+
+            const fdRealEl = document.getElementById('fd-real-return');
+            if (fdRealEl && fdRealReturn < 0) {
+                fdRealEl.style.color = '#ef4444';
+            } else if (fdRealEl) {
+                fdRealEl.style.color = '';
+            }
+
+            document.getElementById('arb-interest').textContent = formatTaxAmount(Math.round(arbGains));
+            const arbTaxEl = document.getElementById('arb-tax');
+            if (arbTaxEl) {
+                arbTaxEl.textContent = '- ' + formatTaxAmount(Math.round(arbTax));
+            }
+            document.getElementById('arb-tax-label').textContent = arbTaxLabel;
+            document.getElementById('arb-nett').textContent = formatTaxAmount(Math.round(arbNett));
+            document.getElementById('arb-rate').textContent = arbEffectiveRate.toFixed(2) + '%';
+
+            const taxSavings = fdTax - arbTax;
+            const incomeIncrease = ((arbNett - fdNett) / fdNett) * 100;
+
+            document.getElementById('tax-summary-amount').textContent = formatTaxAmount(investment);
+            document.getElementById('tax-summary-savings').textContent = formatTaxAmount(Math.round(taxSavings));
+            document.getElementById('tax-summary-percent').textContent = incomeIncrease.toFixed(1) + '%';
+        }
+        // ========== END TAX ALPHA CALCULATOR ==========
+
+        // Retirement Calculator with Purchasing Power Logic
+        function calculateRetirement() {
+            const currentAge = parseInt(document.getElementById('retire-current').value);
+            let targetAge = parseInt(document.getElementById('retire-target-age').value);
+            const monthlyExpense = parseInt(document.getElementById('retire-monthly').value);
+            const retirementDuration = parseInt(document.getElementById('retire-duration-years').value);
+            const existingSavings = parseInt(document.getElementById('retire-existing') ? document.getElementById('retire-existing').value : 0) || 0;
+
+            if (targetAge <= currentAge) {
+                targetAge = currentAge + 1;
+                document.getElementById('retire-target-age').value = targetAge;
+            }
+
+            const yearsToRetire = targetAge - currentAge;
+            const preRetirementReturn = 0.12;
+            const postRetirementReturn = 0.07;
+            const inflationRate = 0.06;
+
+            document.getElementById('retire-age').textContent = currentAge + ' Years';
+            document.getElementById('retire-target').textContent = targetAge + ' Years';
+            document.getElementById('retire-expense').textContent = '₹' + monthlyExpense.toLocaleString();
+            document.getElementById('retire-years').textContent = yearsToRetire + ' Years';
+            document.getElementById('retire-duration').textContent = retirementDuration + ' Years';
+            document.getElementById('retire-current-expense').textContent = monthlyExpense.toLocaleString();
+
+            // Step 1 — Inflation-adjusted monthly need at retirement
+            const futureMonthlyNeed = monthlyExpense * Math.pow(1 + inflationRate, yearsToRetire);
+            document.getElementById('retire-inflated-expense').textContent = formatIndianCurrency(Math.round(futureMonthlyNeed));
+
+            // Step 2 — Required retirement corpus (PV of annuity)
+            const rPost = postRetirementReturn / 12;
+            const nPost = retirementDuration * 12;
+            const corpus = futureMonthlyNeed * ((1 - Math.pow(1 + rPost, -nPost)) / rPost);
+
+            // Step 3 — Monthly SIP needed
+            const rPre = preRetirementReturn / 12;
+            const nPre = yearsToRetire * 12;
+            const sip = (corpus * rPre) / ((Math.pow(1 + rPre, nPre) - 1) * (1 + rPre));
+
+            document.getElementById('retire-corpus').textContent = formatIndianCurrency(Math.round(corpus));
+            document.getElementById('retire-sip').textContent = formatIndianCurrency(Math.round(sip));
+
+            // Step 4 — Gap Analysis
+            const currentProjectedSavings = existingSavings * Math.pow(1 + preRetirementReturn, yearsToRetire);
+            const gap = corpus - currentProjectedSavings;
+
+            const gapEl = document.getElementById('retire-gap');
+            const gapMessageEl = document.getElementById('retire-gap-message');
+            if (gap > 0) {
+                gapEl.textContent = formatIndianCurrency(Math.round(gap)) + ' shortfall';
+                const gapSIP = (gap * rPre) / ((Math.pow(1 + rPre, nPre) - 1) * (1 + rPre));
+                if (gapMessageEl) {
+                    gapMessageEl.innerHTML = `You need <span class="text-gold-400 font-bold">${formatIndianCurrency(Math.round(gap))}</span> more — start a SIP of <span class="text-gold-400 font-bold">${formatIndianCurrency(Math.round(gapSIP))}/month</span> to close the gap.`;
+                }
+            } else {
+                gapEl.textContent = 'On Track';
+                if (gapMessageEl) {
+                    gapMessageEl.innerHTML = `<span class="text-green-400 font-bold">You are on track!</span> Your existing savings of ${formatIndianCurrency(existingSavings)} will grow to ${formatIndianCurrency(Math.round(currentProjectedSavings))} by retirement.`;
+                }
+            }
+        }
+
+        // ========== LEAD SUBMISSION TO BACKEND ==========
+        async function submitLeadToBackend(event) {
+            event.preventDefault();
+            
+            const btn = document.getElementById('request-plan-btn');
+            const originalText = btn.innerHTML;
+            
+            // Change button to loading state
+            btn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 inline mr-2 animate-spin"></i> Sending...';
+            btn.disabled = true;
+            btn.classList.add('opacity-75');
+            
+            // Gather current values from all calculators
+            const leadData = {
+                source: 'Atharva Wealth Tools Page',
+                timestamp: new Date().toISOString(),
+                
+                // SIP Calculator Values
+                sip: {
+                    monthlyInvestment: parseInt(document.getElementById('sip-monthly').value),
+                    expectedReturn: parseFloat(document.getElementById('sip-rate').value),
+                    annualStepUp: parseFloat(document.getElementById('sip-stepup').value),
+                    timePeriod: parseInt(document.getElementById('sip-years').value),
+                    totalWealth: document.getElementById('sip-total').textContent,
+                    wealthGained: document.getElementById('sip-gains').textContent,
+                    inflationAdjusted: inflationAdjusted
+                },
+                
+                // Tax Alpha Calculator Values
+                taxAlpha: {
+                    investmentAmount: parseInt(document.getElementById('tax-investment').value),
+                    taxBracket: currentTaxBracket,
+                    fdReturn: 6.5,
+                    arbReturn: 6.8,
+                    taxSavings: document.getElementById('tax-summary-savings').textContent
+                },
+                
+                // Retirement Planner Values
+                retirement: {
+                    currentAge: parseInt(document.getElementById('retire-current').value),
+                    retirementAge: parseInt(document.getElementById('retire-target-age').value),
+                    monthlyExpense: parseInt(document.getElementById('retire-monthly').value),
+                    retirementDuration: parseInt(document.getElementById('retire-duration-years').value),
+                    requiredCorpus: document.getElementById('retire-corpus').textContent,
+                    monthlySIPNeeded: document.getElementById('retire-sip').textContent
+                }
+            };
+            
+            try {
+                const response = await fetch('https://atharvawealth.com/api/submit-lead', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(leadData)
+                });
+                
+                if (response.ok) {
+                    // Success - Show success message
+                    btn.innerHTML = '<i data-lucide="check-circle" class="w-4 h-4 inline mr-2"></i> Request Sent! Check WhatsApp.';
+                    btn.classList.remove('from-gold-500', 'to-gold-600', 'hover:from-gold-400', 'hover:to-gold-500');
+                    btn.classList.add('from-green-500', 'to-green-600', 'hover:from-green-400', 'hover:to-green-500');
+                    
+                    // Show success alert
+                    setTimeout(() => {
+                        alert('Thank you! Your custom plan request has been received. Our team will contact you on WhatsApp shortly.');
+                    }, 500);
+                } else {
+                    throw new Error('Server returned error');
+                }
+            } catch (error) {
+                console.error('Lead submission failed:', error);
+                
+                // Revert button and show error
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                btn.classList.remove('opacity-75');
+                
+                alert('Unable to submit your request. Please try again or contact us directly at +91 90290 05170.');
+            }
+        }
+        // ========== END LEAD SUBMISSION ==========
+
+        // Initialize
+        calculateSIP();
+        calculateTaxAlpha();
+        calculateRetirement();
+    </script>
+</body>
+</html>

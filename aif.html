@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="luxury">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alternative Investment Funds | Atharva Wealth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0D0D0D',
+                        gold: { 50: '#FBF8F3', 100: '#F5EFE3', 200: '#EBD9BE', 300: '#DFBF94', 400: '#D4A56B', 500: '#C5A059', 600: '#A88545', 700: '#8B6B38', 800: '#6F542D', 900: '#524024' }
+                    },
+                    fontFamily: { 'serif': ['Playfair Display', 'serif'], 'sans': ['Montserrat', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #0D0D0D; color: #E5E5E5; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        .glass-card { background: linear-gradient(145deg, rgba(45, 45, 45, 0.4) 0%, rgba(20, 20, 20, 0.6) 100%); backdrop-filter: blur(20px); border: 1px solid rgba(197, 160, 89, 0.15); transition: all 0.4s; }
+        .glass-card:hover { border-color: rgba(197, 160, 89, 0.5); box-shadow: 0 0 40px rgba(197, 160, 89, 0.1), 0 20px 60px rgba(0, 0, 0, 0.4); }
+        .gold-line { background: linear-gradient(90deg, transparent, #C5A059, transparent); height: 1px; }
+        .btn-gold { background: linear-gradient(135deg, #C5A059 0%, #D4A56B 50%, #C5A059 100%); border: none; color: #0D0D0D; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s ease; }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(197, 160, 89, 0.4); }
+        .btn-ghost-gold { background: transparent; border: 1px solid rgba(197, 160, 89, 0.5); color: #C5A059; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s ease; }
+        .btn-ghost-gold:hover { background: rgba(197, 160, 89, 0.1); border-color: #C5A059; color: #EBD9BE; transform: translateY(-2px); }
+        .sidebar-glow { background: radial-gradient(ellipse at top right, rgba(197, 160, 89, 0.1) 0%, transparent 50%); }
+        .breadcrumb-link { color: #C5A059; transition: color 0.3s ease; }
+        .breadcrumb-link:hover { color: #EBD9BE; }
+        .content-section { border-left: 2px solid rgba(197, 160, 89, 0.2); padding-left: 2rem; }
+        .feature-card { background: rgba(30, 30, 30, 0.5); border: 1px solid rgba(197, 160, 89, 0.1); border-radius: 12px; padding: 1.5rem; transition: all 0.3s ease; }
+        .feature-card:hover { border-color: rgba(197, 160, 89, 0.4); background: rgba(30, 30, 30, 0.8); }
+        .animate-fade-in { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .section-padding { padding: 80px 0; }
+        .hero-gradient { background: radial-gradient(ellipse at 50% 100%, rgba(197, 160, 89, 0.15) 0%, transparent 60%); }
+    </style>
+</head>
+<body class="bg-obsidian">
+    <nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(13, 13, 13, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(197, 160, 89, 0.1);">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center flex-shrink-0">
+                      <span class="text-obsidian font-bold text-lg">A</span>
+                    </div>
+                    <span class="text-xl font-bold tracking-wider text-white">ATHARVA <span class="text-gold-500">WEALTH</span></span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html#home" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Home</a>
+                    <a href="services.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Services</a>
+                    <a href="about.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">About Us</a>
+                    <a href="insights.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Insights</a>
+                    <a href="tools.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Tools</a>
+                    <a href="dsc.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">DSC</a>
+                    <a href="contact.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Contact</a>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="contact.html" class="btn btn-gold px-6 py-2 text-xs">Book Consultation</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-white p-2" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-obsidian border-t border-gold-500/10">
+            <div class="container mx-auto px-6 py-4 flex flex-col gap-4">
+                <a href="index.html#home" class="text-gray-300 hover:text-gold-400 py-2">Home</a>
+                <a href="services.html" class="text-gray-300 hover:text-gold-400 py-2">Services</a>
+                <a href="about.html" class="text-gray-300 hover:text-gold-400 py-2">About Us</a>
+                <a href="index.html#insights" class="text-gray-300 hover:text-gold-400 py-2">Insights</a>
+                <a href="contact.html" class="text-gray-300 hover:text-gold-400 py-2">Contact</a>
+                <a href="contact.html" class="btn btn-gold w-full py-2 text-xs mt-2">Book Consultation</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="pt-32 pb-20 hero-gradient">
+        <div class="container mx-auto px-6">
+            <nav class="mb-8 animate-fade-in">
+                <ol class="flex items-center gap-2 text-sm">
+                    <li><a href="index.html" class="breadcrumb-link">Home</a></li>
+                    <li class="text-gray-600">/</li>
+                    <li><a href="services.html" class="breadcrumb-link">Services</a></li>
+                    <li class="text-gray-600">/</li>
+                    <li class="text-gold-500">Alternative Investment Funds</li>
+                </ol>
+            </nav>
+            <div class="max-w-3xl animate-fade-in delay-100">
+                <p class="text-gold-500 text-sm tracking-[0.3em] uppercase mb-4 font-medium">Premium Investment Opportunities</p>
+                <h1 class="text-5xl md:text-6xl font-serif font-bold tracking-tight text-white mb-6">Alternative Investment <span class="text-gold-500">Funds</span></h1>
+                <p class="text-gray-300 text-lg leading-relaxed max-w-2xl">Exclusive access to premium AIF opportunities including private equity, venture capital, and infrastructure funds for sophisticated investors.</p>
+            </div>
+        </div>
+        <div class="gold-line mt-12"></div>
+    </section>
+
+    <section class="section-padding bg-obsidian">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div class="lg:col-span-2">
+                    <div class="mb-12 animate-fade-in delay-100">
+                        <h2 class="text-3xl font-serif font-bold text-white mb-6">Overview</h2>
+                        <div class="content-section">
+                            <p class="text-gray-300 leading-relaxed mb-6">Alternative Investment Funds (AIFs) represent a sophisticated class of investments that go beyond traditional stocks and bonds. Our AIF advisory provides qualified investors access to exclusive opportunities including private equity, venture capital, infrastructure funds, and special situation assets.</p>
+                            <p class="text-gray-300 leading-relaxed mb-6">These investments are designed for high-net-worth individuals and institutional investors seeking diversification beyond conventional asset classes and potentially superior risk-adjusted returns.</p>
+                            <p class="text-gray-300 leading-relaxed">We conduct rigorous due diligence on fund managers, analyze historical performance, and evaluate investment theses to curate the best AIF opportunities aligned with your portfolio needs.</p>
+                        </div>
+                    </div>
+                    <div class="mb-12 animate-fade-in delay-200">
+                        <h2 class="text-3xl font-serif font-bold text-white mb-6">AIF Categories</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="feature-card">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-lg bg-gold-500/10 flex items-center justify-center flex-shrink-0">
+                                        <svg class="h-5 w-5 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                                    </div>
+                                    <div><h4 class="text-white font-semibold mb-1">Category I - Startups</h4><p class="text-gray-500 text-sm">Early-stage venture capital funds</p></div>
+                                </div>
+                            </div>
+                            <div class="feature-card">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-lg bg-gold-500/10 flex items-center justify-center flex-shrink-0">
+                                        <svg class="h-5 w-5 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                                    </div>
+                                    <div><h4 class="text-white font-semibold mb-1">Category II - Private Equity</h4><p class="text-gray-500 text-sm">Growth & buyout investments</p></div>
+                                </div>
+                            </div>
+                            <div class="feature-card">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-lg bg-gold-500/10 flex items-center justify-center flex-shrink-0">
+                                        <svg class="h-5 w-5 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                    </div>
+                                    <div><h4 class="text-white font-semibold mb-1">Category III - Hedge Funds</h4><p class="text-gray-500 text-sm">Special situation & alternate strategies</p></div>
+                                </div>
+                            </div>
+                            <div class="feature-card">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-lg bg-gold-500/10 flex items-center justify-center flex-shrink-0">
+                                        <svg class="h-5 w-5 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                                    </div>
+                                    <div><h4 class="text-white font-semibold mb-1">Infrastructure Funds</h4><p class="text-gray-500 text-sm">Long-term real asset investments</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-12 animate-fade-in delay-300">
+                        <h2 class="text-3xl font-serif font-bold text-white mb-6">Who Should Invest</h2>
+                        <div class="glass-card p-8 rounded-xl">
+                            <ul class="space-y-4">
+                                <li class="flex items-start gap-4"><span class="w-2 h-2 rounded-full bg-gold-500 mt-2 flex-shrink-0"></span><span class="text-gray-300">Qualified Institutional Buyers (QIBs) and High Net Worth Individuals (HNIs)</span></li>
+                                <li class="flex items-start gap-4"><span class="w-2 h-2 rounded-full bg-gold-500 mt-2 flex-shrink-0"></span><span class="text-gray-300">Investors seeking portfolio diversification beyond traditional assets</span></li>
+                                <li class="flex items-start gap-4"><span class="w-2 h-2 rounded-full bg-gold-500 mt-2 flex-shrink-0"></span><span class="text-gray-300">Those with investment horizon of 5-10 years for illiquidity premium</span></li>
+                                <li class="flex items-start gap-4"><span class="w-2 h-2 rounded-full bg-gold-500 mt-2 flex-shrink-0"></span><span class="text-gray-300">Sophisticated investors understanding complex fund structures</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-1">
+                    <div class="sticky top-24">
+                        <div class="glass-card rounded-2xl p-8 sidebar-glow mb-8">
+                            <h3 class="text-xl font-serif font-bold text-white mb-2">Get Started</h3>
+                            <p class="text-gray-400 text-sm mb-6">Explore exclusive AIF opportunities</p>
+                            <form class="space-y-4">
+                                <div><input type="text" placeholder="Your Name" class="w-full px-4 py-3 bg-obsidian/50 border border-gold-500/20 rounded-lg text-white placeholder-gray-500 focus:border-gold-500 focus:outline-none"></div>
+                                <div><input type="email" placeholder="Email Address" class="w-full px-4 py-3 bg-obsidian/50 border border-gold-500/20 rounded-lg text-white placeholder-gray-500 focus:border-gold-500 focus:outline-none"></div>
+                                <div><input type="tel" placeholder="Phone Number" class="w-full px-4 py-3 bg-obsidian/50 border border-gold-500/20 rounded-lg text-white placeholder-gray-500 focus:border-gold-500 focus:outline-none"></div>
+                                <div><select class="w-full px-4 py-3 bg-obsidian/50 border border-gold-500/20 rounded-lg text-gray-400 focus:border-gold-500 focus:outline-none"><option value="" disabled selected>AIF Category Interest</option><option value="PE" class="text-white">Private Equity</option><option value="VC" class="text-white">Venture Capital</option><option value="Infra" class="text-white">Infrastructure</option></select></div>
+                                <button type="button" class="btn btn-gold w-full py-3 text-sm">Request Callback</button>
+                            </form>
+                        </div>
+                        <div class="glass-card rounded-xl p-6">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 rounded-lg bg-gold-500/10 flex items-center justify-center">
+                                    <svg class="h-6 w-6 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                </div>
+                                <div><h4 class="text-white font-semibold">AIF Guide</h4><p class="text-gray-500 text-xs">Download investment guide</p></div>
+                            </div>
+                            <button class="btn btn-ghost-gold w-full py-2 text-xs">Download PDF</button>
+                        </div>
+                        <div class="mt-8">
+                            <h4 class="text-white font-semibold mb-4 tracking-wide text-sm">Other Services</h4>
+                            <div class="space-y-2">
+                                <a href="pms.html" class="block p-3 rounded-lg bg-obsidian/30 border border-gold-500/10 hover:border-gold-500/30 transition-colors"><p class="text-gold-400 text-sm font-medium">Portfolio Management</p><p class="text-gray-500 text-xs">Active risk management</p></a>
+                                <a href="services.html" class="block p-3 rounded-lg bg-obsidian/30 border border-gold-500/10 hover:border-gold-500/30 transition-colors"><p class="text-gold-400 text-sm font-medium">All Services</p><p class="text-gray-500 text-xs">View complete range</p></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16" style="background: linear-gradient(180deg, #111111 0%, #0D0D0D 100%);">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-serif font-bold text-white mb-4">Explore Exclusive Opportunities</h2>
+                <p class="text-gray-400 mb-8">Connect with our AIF specialists to learn about premium opportunities</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="btn btn-gold px-8 py-3 text-sm">Schedule Consultation</button>
+                    <button class="btn btn-ghost-gold px-8 py-3 text-sm">Call +91 90290 05170</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12" style="background: #000000 !important; position: relative; z-index: 50;">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center">
+                            <span class="text-obsidian font-bold text-sm">A</span>
+                        </div>
+                        <span class="text-lg font-bold tracking-wider text-white">ATHARVA <span class="text-gold-500">WEALTH</span></span>
+                    </div>
+                    <p class="text-gray-600 text-sm">AMFI-Registered Mutual Fund Distributor. We provide access to third-party investment products.</p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#home" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Home</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Services</a></li>
+                        <li><a href="about.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">About Us</a></li>
+                        <li><a href="insights.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Insights</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Our Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Mutual Funds</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Insurance</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Bonds & NCDs</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Direct Equity</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">All Services</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Client Utilities -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Client Utilities</h4>
+                    <ul class="space-y-2">
+                        <li><a href="dsc.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Digital Signature (DSC)</a></li>
+                        <li><a href="founder.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Our Founder</a></li>
+                        <li><a href="tools.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Financial Tools</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gold-500/10">
+                <p class="text-gray-600 text-sm text-center">© 2026 Atharva Wealth. All rights reserved. SEBI Registered Investment Advisor.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

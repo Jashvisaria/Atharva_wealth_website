@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="luxury">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Atharva Wealth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0D0D0D',
+                        gold: { 50: '#FBF8F3', 100: '#F5EFE3', 200: '#EBD9BE', 300: '#DFBF94', 400: '#D4A56B', 500: '#C5A059', 600: '#A88545', 700: '#8B6B38', 800: '#6F542D', 900: '#524024' }
+                    },
+                    fontFamily: { 'serif': ['Playfair Display', 'serif'], 'sans': ['Montserrat', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #0D0D0D; color: #E5E5E5; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-content {
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .glass-panel {
+            background: linear-gradient(145deg, rgba(45, 45, 45, 0.5) 0%, rgba(20, 20, 20, 0.7) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+        }
+        
+        .glass-card { 
+            background: linear-gradient(145deg, rgba(45, 45, 45, 0.4) 0%, rgba(20, 20, 20, 0.6) 100%); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(197, 160, 89, 0.15); 
+            transition: all 0.4s; 
+        }
+        .glass-card:hover { 
+            border-color: rgba(197, 160, 89, 0.5); 
+            box-shadow: 0 0 40px rgba(197, 160, 89, 0.15), 0 20px 60px rgba(0, 0, 0, 0.4); 
+        }
+
+        .column-card {
+            background: linear-gradient(180deg, rgba(30, 30, 30, 0.8) 0%, rgba(15, 15, 15, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            transition: all 0.4s ease;
+        }
+        .column-card:hover {
+            border-color: rgba(197, 160, 89, 0.6);
+            box-shadow: 0 0 60px rgba(197, 160, 89, 0.15);
+        }
+        
+        .product-item {
+            border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+            transition: all 0.3s ease;
+        }
+        .product-item:hover {
+            border-color: rgba(197, 160, 89, 0.4);
+            background: rgba(197, 160, 89, 0.05);
+        }
+        .product-item:last-child { border-bottom: none; }
+        
+        .gold-line { background: linear-gradient(90deg, transparent, #C5A059, transparent); height: 1px; }
+        .btn-gold { background: linear-gradient(135deg, #C5A059 0%, #D4A56B 50%, #C5A059 100%); border: none; color: #0D0D0D; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s ease; }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(197, 160, 89, 0.4); }
+        .btn-ghost-gold { background: transparent; border: 1px solid rgba(197, 160, 89, 0.5); color: #C5A059; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.3s ease; }
+        .btn-ghost-gold:hover { background: rgba(197, 160, 89, 0.1); border-color: #C5A059; color: #EBD9BE; transform: translateY(-2px); }
+        
+        .animate-fade-in { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .section-padding { padding: 100px 0; }
+        .hero-gradient { background: radial-gradient(ellipse at 50% 0%, rgba(197, 160, 89, 0.1) 0%, transparent 60%); }
+    </style>
+</head>
+<body class="bg-obsidian">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(13, 13, 13, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(197, 160, 89, 0.1);">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center flex-shrink-0">
+                      <span class="text-obsidian font-bold text-lg">A</span>
+                    </div>
+                    <span class="text-xl font-bold tracking-wider text-white">ATHARVA <span class="text-gold-500">WEALTH</span></span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html#home" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Home</a>
+                    <a href="services.html" class="text-gold-400 text-sm font-medium tracking-wide">Services</a>
+                    <a href="about.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">About Us</a>
+                    <a href="insights.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Insights</a>
+                    <a href="tools.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Tools</a>
+                    <a href="contact.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Contact</a>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="contact.html" class="btn btn-gold px-6 py-2 text-xs">Book Consultation</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-white p-2" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <i data-lucide="menu" class="h-8 w-8"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-obsidian border-t border-gold-500/10">
+            <div class="container mx-auto px-6 py-4 flex flex-col gap-4">
+                <a href="index.html#home" class="text-gray-300 hover:text-gold-400 py-2">Home</a>
+                <a href="services.html" class="text-gold-400 py-2">Services</a>
+                <a href="about.html" class="text-gray-300 hover:text-gold-400 py-2">About Us</a>
+                <a href="contact.html" class="text-gray-300 hover:text-gold-400 py-2">Contact</a>
+                <a href="contact.html" class="btn btn-gold w-full py-2 text-xs mt-2">Book Consultation</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="pt-32 pb-8 hero-gradient">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center animate-fade-in">
+                <p class="text-gold-500 text-sm tracking-[0.3em] uppercase mb-4 font-medium">Our Solutions</p>
+                <h1 class="text-5xl md:text-6xl font-black tracking-tight text-white mb-6">Our <span class="text-gold-500">Services</span></h1>
+                <p class="text-gray-300 text-lg leading-relaxed max-w-2xl">A comprehensive suite of wealth management products designed to meet every financial objective—from growth to protection.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCT TREE SECTION -->
+    <section class="pt-8 pb-20 bg-obsidian" style="background: linear-gradient(180deg, #0D0D0D 0%, #111111 100%);">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black tracking-tight text-white">The Product <span class="text-gold-500">Tree</span></h2>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Three distinct pillars of wealth management—each designed to fulfill a specific financial purpose.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- COLUMN A: EQUITY -->
+                <div class="column-card rounded-3xl p-8 animate-fade-in delay-100">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center" style="background: rgba(197, 160, 89, 0.1); border: 1px solid rgba(197, 160, 89, 0.3);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 5-7"/></svg>
+                        </div>
+                        <h3 class="text-2xl font-black tracking-tight text-white">EQUITY</h3>
+                        <p class="text-green-400 text-sm uppercase tracking-widest mt-2">The Growth Branch</p>
+                    </div>
+
+                    <!-- Listed Equity -->
+                    <div class="mb-6">
+                        <p class="text-gold-500 text-xs uppercase tracking-widest mb-3 font-semibold">Listed Equity</p>
+                        <div class="space-y-0">
+                            <div class="product-item px-4 py-3 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="mutual-funds">
+                                <p class="text-white font-medium text-sm">Mutual Funds</p>
+                                <p class="text-gray-500 text-xs mt-1">40+ AMCs with direct plans</p>
+                            </div>
+                            <div class="product-item px-4 py-3 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="pms">
+                                <p class="text-white font-medium text-sm">PMS (Portfolio Management)</p>
+                                <p class="text-gray-500 text-xs mt-1">Discretionary portfolio services</p>
+                            </div>
+                            <div class="product-item px-4 py-3 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="aif-equity">
+                                <p class="text-white font-medium text-sm">AIF Equity</p>
+                                <p class="text-gray-500 text-xs mt-1">Category I & II funds</p>
+                            </div>
+                            <div class="product-item px-4 py-3 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="direct-equity">
+                                <p class="text-white font-medium text-sm">Direct Equity Broking</p>
+                                <p class="text-gray-500 text-xs mt-1">Institutional execution</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Unlisted/Private -->
+                    <div>
+                        <p class="text-gold-500 text-xs uppercase tracking-widest mb-3 font-semibold">Unlisted / Private</p>
+                        <div class="space-y-0">
+                            <div class="product-item px-4 py-3 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="sif">
+                                <p class="text-white font-medium text-sm">SIF (Startup Investment Fund)</p>
+                            </div>
+                            <div class="product-item px-4 py-3 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="unlisted-equity">
+                                <p class="text-white font-medium text-sm">Buy/Sale of Unlisted Equity</p>
+                            </div>
+                            <div class="product-item px-4 py-3 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="private-equity">
+                                <p class="text-white font-medium text-sm">Private Equity</p>
+                            </div>
+                            <div class="product-item px-4 py-3 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="startup-investing">
+                                <p class="text-white font-medium text-sm">Startup Investing</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUMN B: DEBT -->
+                <div class="column-card rounded-3xl p-8 animate-fade-in delay-200">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center" style="background: rgba(197, 160, 89, 0.1); border: 1px solid rgba(197, 160, 89, 0.3);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <h3 class="text-2xl font-black tracking-tight text-white">DEBT</h3>
+                        <p class="text-blue-400 text-sm uppercase tracking-widest mt-2">The Stability Branch</p>
+                    </div>
+
+                    <!-- NCDs -->
+                    <div class="mb-6">
+                        <p class="text-gold-500 text-xs uppercase tracking-widest mb-3 font-semibold">NCDs</p>
+                        <div class="space-y-0">
+                            <div class="product-item px-4 py-3 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="ncd-listed">
+                                <p class="text-white font-medium text-sm">Listed NCDs</p>
+                                <p class="text-gray-500 text-xs mt-1">Corporate debentures on exchanges</p>
+                            </div>
+                            <div class="product-item px-4 py-3 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="ncd-unlisted">
+                                <p class="text-white font-medium text-sm">Unlisted NCDs</p>
+                                <p class="text-gray-500 text-xs mt-1">Direct placement securities</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Specialized -->
+                    <div class="mb-6">
+                        <p class="text-gold-500 text-xs uppercase tracking-widest mb-3 font-semibold">Specialized</p>
+                        <div class="space-y-0">
+                            <div class="product-item px-4 py-3 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="re-ncd">
+                                <p class="text-white font-medium text-sm">Real Estate Sr Secured NCD</p>
+                            </div>
+                            <div class="product-item px-4 py-3 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="p2p-lending">
+                                <p class="text-white font-medium text-sm">P2P Lending Products</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fixed Income -->
+                    <div>
+                        <p class="text-gold-500 text-xs uppercase tracking-widest mb-3 font-semibold">Fixed Income</p>
+                        <div class="space-y-0">
+                            <div class="product-item px-4 py-3 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="aif-debt">
+                                <p class="text-white font-medium text-sm">AIF Debt</p>
+                            </div>
+                            <div class="product-item px-4 py-3 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="bonds">
+                                <p class="text-white font-medium text-sm">Bonds</p>
+                            </div>
+                            <div class="product-item px-4 py-3 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="invoice-discounting">
+                                <p class="text-white font-medium text-sm">Invoice Discounting</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUMN C: INSURANCE -->
+                <div class="column-card rounded-3xl p-8 animate-fade-in delay-300">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center" style="background: rgba(197, 160, 89, 0.1); border: 1px solid rgba(197, 160, 89, 0.3);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3"/><path d="M12 19v3"/><path d="M4.93 4.93l2.12 2.12"/><path d="M16.95 16.95l2.12 2.12"/><path d="M2 12h3"/><path d="M19 12h3"/><path d="M4.93 19.07l2.12-2.12"/><path d="M16.95 7.05l2.12-2.12"/><circle cx="12" cy="12" r="5"/></svg>
+                        </div>
+                        <h3 class="text-2xl font-black tracking-tight text-white">INSURANCE</h3>
+                        <p class="text-purple-400 text-sm uppercase tracking-widest mt-2">The Protection Branch</p>
+                    </div>
+
+                    <div class="space-y-0">
+                        <div class="product-item px-4 py-4 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="life-insurance">
+                            <p class="text-white font-medium text-sm">Life Insurance</p>
+                            <p class="text-gray-500 text-xs mt-1">Term, ULIP, Endowment, Money Back</p>
+                        </div>
+                        <div class="product-item px-4 py-4 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="general-insurance">
+                            <p class="text-white font-medium text-sm">General Insurance</p>
+                            <p class="text-gray-500 text-xs mt-1">Motor, Home, Property, Marine</p>
+                        </div>
+                        <div class="product-item px-4 py-4 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="health-insurance">
+                            <p class="text-white font-medium text-sm">Health Insurance</p>
+                            <p class="text-gray-500 text-xs mt-1">Individual, Family, Senior Citizen</p>
+                        </div>
+                        <div class="product-item px-4 py-4 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="travel-insurance">
+                            <p class="text-white font-medium text-sm">Travel Insurance</p>
+                            <p class="text-gray-500 text-xs mt-1">Domestic & International</p>
+                        </div>
+                        <div class="product-item px-4 py-4 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="critical-illness">
+                            <p class="text-white font-medium text-sm">Critical Illness Cover</p>
+                        </div>
+                        <div class="product-item px-4 py-4 cursor-pointer hover:bg-white/5 rounded-lg transition-colors" data-product="group-insurance">
+                            <p class="text-white font-medium text-sm">Group Insurance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADMINISTRATIVE SERVICES - Subtle Bar -->
+    <section class="py-12 bg-obsidian" style="background: linear-gradient(180deg, #0D0D0D 0%, #0a0a0a 100%);">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6 p-6 rounded-xl border border-gold-500/20" style="background: linear-gradient(90deg, rgba(197, 160, 89, 0.03) 0%, rgba(30, 30, 30, 0.5) 100%);">
+                    <div class="flex items-center gap-6">
+                        <div class="hidden md:flex items-center gap-2 text-gray-500">
+                            <i data-lucide="file-signature" class="w-4 h-4"></i>
+                            <span class="text-gray-600">|</span>
+                            <i data-lucide="briefcase" class="w-4 h-4"></i>
+                            <span class="text-gray-600">|</span>
+                            <i data-lucide="globe" class="w-4 h-4"></i>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <p class="text-gold-500/60 text-xs tracking-[0.2em] uppercase mb-1">Administrative & Compliance</p>
+                            <p class="text-gray-400 text-sm">We provide end-to-end <span class="text-white font-medium">Digital Signature (DSC)</span> support for your tax and corporate compliance needs.</p>
+                        </div>
+                    </div>
+                    <a href="dsc.html" class="btn btn-ghost-gold px-6 py-2 text-xs whitespace-nowrap">View DSC Portal</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="py-20" style="background: linear-gradient(180deg, #111111 0%, #0D0D0D 100%);">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-black tracking-tight text-white mb-4">Ready to build your portfolio?</h2>
+                <p class="text-gray-400 mb-8">Schedule a consultation with our wealth advisors.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="contact.html" class="btn btn-gold px-8 py-3 text-sm">Book Consultation</a>
+                    <button class="btn btn-ghost-gold px-8 py-3 text-sm">Call +91 90290 05170</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12" style="background: #000000 !important; position: relative; z-index: 50;">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center">
+                            <span class="text-obsidian font-bold text-sm">A</span>
+                        </div>
+                        <span class="text-lg font-bold tracking-wider text-white">ATHARVA <span class="text-gold-500">WEALTH</span></span>
+                    </div>
+                    <p class="text-gray-600 text-sm">AMFI-Registered Mutual Fund Distributor. We provide access to third-party investment products.</p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#home" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Home</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Services</a></li>
+                        <li><a href="about.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">About Us</a></li>
+                        <li><a href="insights.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Insights</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Our Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Mutual Funds</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Insurance</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Bonds & NCDs</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Direct Equity</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">All Services</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Client Utilities -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Client Utilities</h4>
+                    <ul class="space-y-2">
+                        <li><a href="dsc.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Digital Signature (DSC)</a></li>
+                        <li><a href="founder.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Our Founder</a></li>
+                        <li><a href="tools.html" class="text-gold-400 text-sm transition-colors">Financial Tools</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gold-500/10">
+                <p class="text-gray-600 text-sm text-center">© 2026 Atharva Wealth. All rights reserved. AMFI-Registered Mutual Fund Distributor.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function toggleService(descId) {
+            const desc = document.getElementById(descId);
+            const icon = document.getElementById(descId + '-icon');
+            
+            if (desc.classList.contains('hidden')) {
+                desc.classList.remove('hidden');
+                if (icon) icon.classList.add('rotate-180');
+            } else {
+                desc.classList.add('hidden');
+                if (icon) icon.classList.remove('rotate-180');
+            }
+            lucide.createIcons();
+        }
+
+        const productData = {
+            'mutual-funds': {
+                title: 'Mutual Fund Expertise',
+                description: 'Access to 40+ Asset Management Companies across India. We focus on tax-efficient growth based on your risk profile and investment horizon. Our experts curate portfolios across equity, debt, hybrid, and specialized categories—ensuring optimal diversification and risk-adjusted returns.',
+                icon: 'trending-up',
+                color: 'green'
+            },
+            'pms': {
+                title: 'Portfolio Management Services',
+                description: 'Discretionary portfolio services for HNI investors focusing on alpha generation through concentrated stock picking.',
+                icon: 'briefcase',
+                color: 'green'
+            },
+            'aif-equity': {
+                title: 'Alternative Investment Funds',
+                description: 'Sophisticated investment vehicles for high-net-worth individuals, targeting unique market opportunities and private equity.',
+                icon: 'bar-chart-2',
+                color: 'green'
+            },
+            'direct-equity': {
+                title: 'Direct Equity Broking',
+                description: 'Institutional-grade execution for secondary market transactions, backed by deep technical research and market timing.',
+                icon: 'line-chart',
+                color: 'green'
+            },
+            'sif': {
+                title: 'SIF (Startup Investment Fund)',
+                description: 'Direct access to high-potential early-stage ventures, curated for long-term exponential growth.',
+                icon: 'rocket',
+                color: 'green'
+            },
+            'unlisted-equity': {
+                title: 'Buy/Sale of Unlisted Equity',
+                description: 'Liquidity and discovery for Pre-IPO shares and unlisted companies before they hit the public exchanges.',
+                icon: 'building',
+                color: 'green'
+            },
+            'private-equity': {
+                title: 'Private Equity',
+                description: 'Capital investment into private companies with a focus on long-term value creation and strategic exits.',
+                icon: 'briefcase',
+                color: 'green'
+            },
+            'startup-investing': {
+                title: 'Startup Investing',
+                description: 'Direct access to early-stage high-growth companies, curated through our strategic data science approach.',
+                icon: 'rocket',
+                color: 'green'
+            },
+            'ncd-listed': {
+                title: 'Listed NCDs',
+                description: 'High-yield fixed income instruments offering superior returns compared to traditional FDs, with structured collateral.',
+                icon: 'landmark',
+                color: 'blue'
+            },
+            'ncd-unlisted': {
+                title: 'Unlisted NCDs',
+                description: 'High-yield fixed income instruments offering superior returns compared to traditional FDs, with structured collateral.',
+                icon: 'landmark',
+                color: 'blue'
+            },
+            're-ncd': {
+                title: 'Real Estate Sr Secured NCD',
+                description: 'Asset-backed fixed income with senior-charge security on premium real estate projects, offering superior risk-adjusted returns.',
+                icon: 'home',
+                color: 'blue'
+            },
+            'p2p-lending': {
+                title: 'P2P Lending Products',
+                description: 'Direct lending platforms that provide monthly passive income by connecting investors with credit-worthy borrowers.',
+                icon: 'users',
+                color: 'blue'
+            },
+            'aif-debt': {
+                title: 'AIF Debt',
+                description: 'Sophisticated fixed-income structures providing higher yields through private credit and structured debt obligations.',
+                icon: 'landmark',
+                color: 'blue'
+            },
+            'bonds': {
+                title: 'Bonds',
+                description: 'Secured government and corporate debt instruments providing stable, predictable interest income with capital preservation.',
+                icon: 'file-text',
+                color: 'blue'
+            },
+            'invoice-discounting': {
+                title: 'Invoice Discounting',
+                description: 'Short-term liquidity solutions where you earn high yields by funding unpaid blue-chip corporate invoices.',
+                icon: 'file-text',
+                color: 'blue'
+            },
+            'life-insurance': {
+                title: 'Life Insurance',
+                description: 'Comprehensive protection through Term, ULIP, and Endowment plans to ensure your family\'s financial future and legacy.',
+                icon: 'heart',
+                color: 'purple'
+            },
+            'general-insurance': {
+                title: 'General Insurance',
+                description: 'Risk mitigation for your physical assets, including Motor, Home, Property, and Marine insurance.',
+                icon: 'shield',
+                color: 'purple'
+            },
+            'health-insurance': {
+                title: 'Health Insurance',
+                description: 'Full-spectrum medical coverage for Individuals, Families, and Senior Citizens, ensuring health crises don\'t drain your wealth.',
+                icon: 'heart-pulse',
+                color: 'purple'
+            },
+            'travel-insurance': {
+                title: 'Travel Insurance',
+                description: 'Global protection for Domestic and International travel, covering medical emergencies and trip cancellations.',
+                icon: 'plane',
+                color: 'purple'
+            },
+            'critical-illness': {
+                title: 'Critical Illness Cover',
+                description: 'Fixed-benefit payouts upon diagnosis of major illnesses, providing a financial cushion for recovery and specialized treatment.',
+                icon: 'shield-alert',
+                color: 'purple'
+            },
+            'group-insurance': {
+                title: 'Group Insurance',
+                description: 'Tailored employee benefit solutions for corporate entities, providing group health and life coverage.',
+                icon: 'users',
+                color: 'purple'
+            }
+        };
+
+        function openModal(productId) {
+            const product = productData[productId];
+            if (!product) return;
+
+            document.getElementById('modal-title').textContent = product.title;
+            document.getElementById('modal-description').textContent = product.description;
+
+            const iconContainer = document.getElementById('modal-icon');
+            const iconContent = document.getElementById('modal-icon-content');
+            
+            const colorMap = {
+                green: { bg: 'bg-green-500/20', border: 'border-green-500/30', text: 'text-green-400' },
+                blue: { bg: 'bg-blue-500/20', border: 'border-blue-500/30', text: 'text-blue-400' },
+                purple: { bg: 'bg-purple-500/20', border: 'border-purple-500/30', text: 'text-purple-400' }
+            };
+            const colors = colorMap[product.color] || colorMap.green;
+            
+    </script>
+
+    <!-- Insight Box Modal -->
+    <div id="insight-modal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-lg" onclick="closeInsightModal()"></div>
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="relative w-full max-w-[420px] bg-gradient-to-b from-gray-900 to-black border border-gold-500/40 rounded-2xl p-8 shadow-2xl shadow-gold-500/20">
+                <button onclick="closeInsightModal()" class="absolute right-3 top-3 p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-full transition-colors z-10">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+                <h3 id="insight-title" class="text-2xl font-bold text-white mb-4 font-serif pr-8"></h3>
+                <div id="insight-desc" class="text-gray-300 text-sm leading-relaxed mb-2"></div>
+                <div id="insight-example" class="mt-4 pt-4 border-t border-gold-500/20">
+                    <p class="text-gold-400 text-xs font-semibold uppercase tracking-wider mb-2">💡 Why It Matters</p>
+                    <p id="insight-example-text" class="text-gray-400 text-sm italic leading-relaxed"></p>
+                </div>
+                <a href="contact.html" class="block mt-6">
+                    <button class="w-full py-3 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-semibold rounded-lg hover:from-gold-400 hover:to-gold-500 transition-all">
+                        Discuss with Devang Visaria
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const serviceInsights = {
+            'mutual-funds': { 
+                title: 'Mutual Funds', 
+                desc: 'Think of mutual funds as a professionally managed basket where your money is spread across 20-50 different stocks or bonds. A fund manager makes the daily decisions so you don\'t have to.',
+                example: 'Like hiring a captain to steer your ship while you relax. If you want to invest ₹10,000/month, a Systematic Investment Plan (SIP) lets you start small and build wealth over time without worrying about market timing.'
+            },
+            'pms': { 
+                title: 'PMS (Portfolio Management Services)', 
+                desc: 'PMS gives you direct ownership of individual stocks in your demat account—not units of a fund. It\'s like having a personal chef who cooks exactly what you want, not a buffet where everyone gets the same meal.',
+                example: 'Perfect forHNIs with ₹25+ lakhs who want concentrated bets on 15-20 high-conviction stocks. Unlike mutual funds, you see exactly what shares you own and can customize the strategy to your beliefs.'
+            },
+            'aif-equity': { 
+                title: 'AIF (Alternative Investment Funds)', 
+                desc: 'AIFs are exclusive investment clubs for sophisticated investors. They access private equity, venture capital, and special situations that regular retail investors cannot—think behind-the-scenes access to tomorrow\'s unicorns.',
+                example: 'Imagine being an early investor in Flipkart or Zomato before they went public. AIFs give ultra-HNIs (₹1Cr+) access to these hidden gems with 5-7 year lock-ins.'
+            },
+            'direct-equity': { 
+                title: 'Direct Equity Broking', 
+                desc: 'This is for investors who want to pick their own stocks and trade directly on the BSE/NSE. You have full control but also full responsibility—like driving your own car instead of hiring a driver.',
+                example: 'You research a company, believe IT stocks will rise, and directly buy HDFC Bank or Infosys shares through a broker. Best for those who enjoy analyzing balance sheets and market trends.'
+            },
+            'sif': { 
+                title: 'SIF (Startup Investment Fund)', 
+                desc: 'SIFs let you invest in early-stage startups that haven\'t gone public yet. These are high-risk, high-reward bets on entrepreneurs building the next big thing—like being a venture capitalist with a smaller ticket size.',
+                example: '₹25-50 lakhs invested in a promising EdTech startup today could become ₹5 crores if it scales—but there\'s also a chance the startup doesn\'t succeed. It\'s the wild west of wealth creation.'
+            },
+            'unlisted-equity': { 
+                title: 'Unlisted Equity', 
+                desc: 'Unlisted equity means buying shares of companies that aren\'t traded on the stock exchange. You get in before the IPO—essentially buying a house in a developing neighborhood before prices explode.',
+                example: 'Pre-IPO allotments of companies like Lodha or Hyundai India let you buy at a discount. You hold until listing, then exit at a premium when public trading begins.'
+            },
+            'private-equity': { 
+                title: 'Private Equity', 
+                desc: 'Private equity involves buying significant stakes in established private companies to grow them. It\'s like becoming a silent partner in a family business—bringing capital and expertise to scale operations.',
+                example: 'PE firms buy family-run manufacturing companies, professionalize them, and sell at 5-10x returns. As an investor, you ride this value creation journey through PE funds.'
+            },
+            'startup-investing': { 
+                title: 'Startup Investing', 
+                desc: 'Direct angel investing in startups or through dedicated platforms. You become a backer of founders with big ideas—like being a film producer who funds movies hoping for a blockbuster.',
+                example: '₹10 lakhs invested in OYO or Swiggy in early days would be worth crores today. It\'s high risk but offers asymmetric returns impossible in public markets.'
+            },
+            'ncd-listed': { 
+                title: 'Listed NCDs', 
+                desc: 'NCDs (Non-Convertible Debentures) are essentially IOUs from companies that pay you fixed interest. Listed ones trade on stock exchanges—so you can earn 9-11% interest AND sell your holding if needed.',
+                example: 'Like a fixed deposit but issued by companies instead of banks. HDFC or Tata Motors NCDs might pay 9.5%—significantly higher than bank FDs—while your money stays liquid.'
+            },
+            'ncd-unlisted': { 
+                title: 'Unlisted NCDs', 
+                desc: 'These are NCDs that don\'t trade on exchanges. You hold them until maturity for steady returns—like buying a bond and keeping it in your locker until it matures.',
+                example: 'A 3-year NBFC NCD paying 11% gives you predictable income. No daily price fluctuations—just steady interest payments every quarter.'
+            },
+            're-ncd': { 
+                title: 'Real Estate NCDs', 
+                desc: 'Real Estate NCDs are secured debentures backed by property assets. If the developer defaults, you have first claim on their properties—like having a mortgage on your name.',
+                example: 'A ₹10 lakh investment in a premium developer\'s NCD could yield 10-12% with your property as security. It\'s fixed income with real estate as the safety net.'
+            },
+            'p2p-lending': { 
+                title: 'P2P Lending', 
+                desc: 'Peer-to-peer platforms connect lenders directly to borrowers—cutting out the bank as the middleman. You earn interest directly from borrowers, assessed by credit scores.',
+                example: 'You lend ₹1 lakh to a borrower with A+ credit score earning 15%—significantly more than FD rates. The platform handles collections; you earn the spread.'
+            },
+            'aif-debt': { 
+                title: 'AIF Debt Funds', 
+                desc: 'These are private debt funds that lend to companies banks reject. Higher risk means higher returns—like being a private money lender to businesses that can\'t get bank loans.',
+                example: 'A stressed asset fund might buy debt of a company facing temporary issues at a discount, then earn 15-18% when the company recovers. Not for the faint-hearted.'
+            },
+            'bonds': { 
+                title: 'Bonds (Govt & Corporate)', 
+                desc: 'Bonds are loans you give to governments or companies in exchange for regular interest. Government bonds (G-Secs) are the safest—like keeping money under the government\'s guarantee.',
+                example: '10-year G-Sec yields around 7% with zero default risk. Corporate bonds from AAA-rated companies offer 7.5-8%—stable, predictable, and capital-protected.'
+            },
+            'invoice-discounting': { 
+                title: 'Invoice Discounting', 
+                desc: 'Businesses sell their unpaid invoices to investors at a discount to get immediate cash. You buy a ₹1 lakh invoice for ₹95,000, receive ₹1 lakh when customer pays—earning 5% in 30-60 days.',
+                example: 'A supplier to a big retailer has ₹50 lakhs in unpaid invoices. You buy them at 92%, get paid when retailer settles in 45 days. Like arbitrage—quick, short-term returns.'
+            },
+            'life-insurance': { 
+                title: 'Life Insurance', 
+                desc: 'Life insurance is not an investment—it\'s income replacement for your family if something happens to you. Term plans are pure protection; ULIPs and endowments mix insurance with savings.',
+                example: 'A 35-year-old buying ₹1 crore term cover for ₹1,000/year ensures his family receives ₹1 crore if he passes away. The smartest financial decision most people ignore.'
+            },
+            'general-insurance': { 
+                title: 'General Insurance', 
+                desc: 'General insurance protects your assets—car, home, business—against damage or theft. It\'s a necessary expense that prevents one bad event from wiping out your savings.',
+                example: 'A ₹20 lakh car with comprehensive insurance costs ₹50,000/year. One accident repair without insurance could cost ₹5 lakhs. The math is simple—pay small, avoid catastrophic loss.'
+            },
+            'health-insurance': { 
+                title: 'Health Insurance', 
+                desc: 'Medical inflation in India runs at 15-20% annually. A ₹5 lakh health cover today might feel sufficient, but in 10 years it\'ll be inadequate. Health insurance is your shield against rising medical costs.',
+                example: 'A 3-day hospital stay in a Mumbai corporate hospital can cost ₹3-5 lakhs. With a ₹10 lakh health cover, your family won\'t have to liquidate investments to pay medical bills.'
+            },
+            'travel-insurance': { 
+                title: 'Travel Insurance', 
+                desc: 'Travel insurance covers trip cancellations, lost baggage, medical emergencies abroad, and flight delays. It\'s a small expense that prevents a ruined vacation from becoming a financial disaster.',
+                example: 'Your Europe trip costs ₹3 lakhs. Flight gets cancelled, hotel is non-refundable—travel insurance reimburses everything. Costs ₹3,000 but saves ₹3 lakhs.'
+            },
+            'critical-illness': { 
+                title: 'Critical Illness Cover', 
+                desc: 'This pays a lump sum if you\'re diagnosed with serious illnesses like cancer, kidney failure, or heart disease. It\'s a financial cushion when you can\'t work and medical bills pile up.',
+                example: 'Cancer treatment can cost ₹15-25 lakhs. A ₹50 lakh critical illness cover pays you ₹50 lakhs on diagnosis—not reimbursement—so you can focus on recovery, not finances.'
+            },
+            'group-insurance': { 
+                title: 'Group Insurance', 
+                desc: 'Employers provide group insurance as a benefit, but it typically ends when you leave the company. It\'s a starting point—not your complete safety net. Personal coverage gives you control.',
+                example: 'Your corporate cover of ₹5 lakhs ends when you switch jobs. A personal term plan of ₹1 crore stays with you for life, regardless of employment. Build on your employer\'s foundation.'
+            }
+        };
+
+        function openInsightModal(serviceId) {
+            const data = serviceInsights[serviceId];
+            if (data) {
+                document.getElementById('insight-title').textContent = data.title;
+                document.getElementById('insight-desc').textContent = data.desc;
+                document.getElementById('insight-example-text').textContent = data.example;
+            } else {
+                document.getElementById('insight-title').textContent = serviceId.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                document.getElementById('insight-desc').textContent = 'This is a specialized investment product. Let\'s discuss how it fits into your portfolio.';
+                document.getElementById('insight-example-text').textContent = 'Consult Devang Visaria for a personalized strategy on this asset class.';
+            }
+            document.getElementById('insight-modal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeInsightModal() {
+            document.getElementById('insight-modal').classList.add('hidden');
+        }
+
+        // Global Event Listener - catches ALL product-item clicks
+        document.querySelectorAll('.product-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productId = this.getAttribute('data-product');
+                if (productId) {
+                    openInsightModal(productId);
+                }
+            });
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeInsightModal();
+            }
+        });
+    </script>
+</body>
+</html>

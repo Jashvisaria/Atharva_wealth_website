@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="luxury">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Atharva Wealth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0D0D0D',
+                        gold: {
+                            50: '#FBF8F3',
+                            100: '#F5EFE3',
+                            200: '#EBD9BE',
+                            300: '#DFBF94',
+                            400: '#D4A56B',
+                            500: '#C5A059',
+                            600: '#A88545',
+                            700: '#8B6B38',
+                            800: '#6F542D',
+                            900: '#524024',
+                        }
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Base styles from tools.html */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #0D0D0D; 
+            color: #E5E5E5;
+            padding-top: 80px;
+        }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        
+        .glass-panel {
+            background: linear-gradient(145deg, rgba(45, 45, 45, 0.5) 0%, rgba(20, 20, 20, 0.7) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+        }
+        
+        .glass-card { 
+            background: linear-gradient(145deg, rgba(45, 45, 45, 0.4) 0%, rgba(20, 20, 20, 0.6) 100%); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(197, 160, 89, 0.15); 
+            transition: all 0.4s; 
+        }
+        .glass-card:hover { 
+            border-color: rgba(197, 160, 89, 0.5); 
+            box-shadow: 0 0 40px rgba(197, 160, 89, 0.15), 0 20px 60px rgba(0, 0, 0, 0.4);
+            transform: translateY(-4px);
+        }
+
+        .gold-glow { text-shadow: 0 0 40px rgba(197, 160, 89, 0.3); }
+        .gold-line { background: linear-gradient(90deg, transparent, #C5A059, transparent); height: 1px; }
+        
+        .btn-gold {
+            background: linear-gradient(135deg, #C5A059 0%, #D4A56B 50%, #C5A059 100%);
+            border: none;
+            color: #0D0D0D;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            height: 45px;
+            line-height: 1 !important;
+            padding: 0 24px !important;
+            box-sizing: border-box;
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(197, 160, 89, 0.4);
+        }
+
+        /* Header buttons visibility */
+        .hidden.md\:flex .btn {
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        /* Nav button containers */
+        div:has(> button.btn-ghost-gold),
+        div:has(> .btn-gold) {
+            display: flex !important;
+            visibility: visible !important;
+        }
+
+        .btn-ghost-gold {
+            background: transparent;
+            border: 1px solid rgba(197, 160, 89, 0.5);
+            color: #C5A059;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            height: 45px;
+            line-height: 1 !important;
+            padding: 0 16px !important;
+            box-sizing: border-box;
+        }
+        .btn-ghost-gold:hover {
+            background: rgba(197, 160, 89, 0.1);
+            border-color: #C5A059;
+            color: #EBD9BE;
+            transform: translateY(-2px);
+        }
+
+        .form-input {
+            background: rgba(30, 30, 30, 0.6);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            color: #E5E5E5;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #C5A059;
+            outline: none;
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.2);
+        }
+        .form-input::placeholder {
+            color: #666;
+        }
+        
+        #leadPortfolio option {
+            background: #1a1a1a !important;
+            color: #E5E5E5 !important;
+        }
+        #leadPortfolio option:hover {
+            background: #2a2a2a !important;
+            color: #C5A059 !important;
+        }
+        #leadPortfolio option[value=""] {
+            color: #888888 !important;
+        }
+        #leadCountryCode option {
+            background: #1a1a1a !important;
+            color: #E5E5E5 !important;
+        }
+        #leadCountryCode option:hover {
+            background: #2a2a2a !important;
+            color: #C5A059 !important;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in-delay {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+            animation-delay: 0.2s;
+        }
+
+        .animate-fade-in-delay-2 {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+            animation-delay: 0.4s;
+        }
+
+        /* Force all backgrounds transparent - removes grey blocks */
+        .grid, .container, section, footer, div, span, p, article, aside, main, section {
+            background-color: transparent !important;
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+        
+        /* Body black */
+        body {
+            background-color: #0D0D0D !important;
+            background: #0D0D0D !important;
+            --b1: #0D0D0D;
+            --b2: #0D0D0D;
+            --b3: #0D0D0D;
+        }
+        
+        /* Force ALL elements to be transparent */
+        * {
+            background-color: transparent !important;
+            background: transparent !important;
+        }
+
+        /* Exception: keep gold circle logo visible */
+        .from-gold-400.to-gold-600 {
+            background: linear-gradient(to bottom right, #D4A56B, #A88545) !important;
+        }
+
+        /* Exception: keep DNA quiz button visible */
+        button[onclick="startQuizFromConfirm()"] {
+            background: linear-gradient(135deg, #C5A059 0%, #D4A56B 50%, #C5A059 100%) !important;
+        }
+        
+        /* Specific fix for form container */
+        #step1 {
+            background: transparent !important;
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
+        
+        /* Form card container */
+        .animate-fade-in {
+            background: transparent !important;
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
+        
+        /* Grid and gap fixes */
+        .gap-12, .gap-8, .gap-6 {
+            background: transparent !important;
+            background-color: transparent !important;
+        }
+        
+        /* Contact section specific */
+        .lg\:grid-cols-2 {
+            background: transparent !important;
+            background-color: transparent !important;
+        }
+        
+        /* Ensure no daisyUI grey backgrounds leak through */
+        [data-theme], .tooltip, .dropdown, .menu, .modal, .modal-box, .glass-panel, .glass-card {
+            background-color: transparent !important;
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+        
+        /* Button visibility fix */
+        button[onclick="showConfirmPopup()"] {
+            background: linear-gradient(135deg, #C5A059 0%, #D4A56B 50%, #C5A059 100%) !important;
+            background-color: #C5A059 !important;
+            color: #000000 !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: inline-flex !important;
+            position: relative !important;
+            z-index: 10 !important;
+        }
+        
+        /* Remove grey blocks below button */
+        button[onclick="showConfirmPopup()"]::after {
+            display: none !important;
+            content: none !important;
+        }
+    </style>
+</head>
+<body class="bg-obsidian">
+    <!-- Navigation - EXACT COPY FROM TOOLS.HTML -->
+    <nav class="fixed top-0 left-0 right-0 z-[99999]" style="background: #000000 !important; border-bottom: 1px solid rgba(197, 160, 89, 0.1);">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center flex-shrink-0">
+                      <span class="text-obsidian font-bold text-lg">A</span>
+                    </div>
+                    <span class="text-xl font-bold tracking-wider text-white">ATHARVA <span class="text-gold-500">WEALTH</span></span>
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html#home" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Home</a>
+                    <a href="services.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Services</a>
+                    <a href="about.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">About Us</a>
+                    <a href="insights.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Insights</a>
+                    <a href="tools.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Tools</a>
+                    <a href="contact.html" class="text-gray-400 hover:text-gold-400 transition-colors text-sm font-medium tracking-wide">Contact</a>
+                </div>
+                <div class="flex items-center gap-4" style="display: flex !important; visibility: visible !important; opacity: 1 !important;">
+                    <a href="contact.html" class="px-6 py-2 text-xs" style="visibility: visible !important; opacity: 1 !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; background: linear-gradient(135deg, #C5A059 0%, #D4A56B 50%, #C5A059 100%) !important; color: #000000 !important; font-weight: 600 !important; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.1em; height: 40px;">Book Consultation</a>
+                </div>
+                <button class="md:hidden text-white p-2" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-gold-500/10" style="position: fixed; top: 80px; left: 0; right: 0; z-index: 99998;">
+            <div class="container mx-auto px-6 py-4 flex flex-col gap-4">
+                <a href="index.html#home" class="text-gray-300 hover:text-gold-400 py-2">Home</a>
+                <a href="services.html" class="text-gray-300 hover:text-gold-400 py-2">Services</a>
+                <a href="about.html" class="text-gray-300 hover:text-gold-400 py-2">About Us</a>
+                <a href="insights.html" class="text-gray-300 hover:text-gold-400 py-2">Insights</a>
+                <a href="tools.html" class="text-gray-300 hover:text-gold-400 py-2">Tools</a>
+                <a href="contact.html" class="text-gray-300 hover:text-gold-400 py-2">Contact</a>
+                <a href="contact.html" class="btn btn-gold w-full py-2 text-xs mt-2">Book Consultation</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with proper spacing -->
+    <section class="pt-48 pb-20" style="background: radial-gradient(ellipse at 50% 0%, rgba(197, 160, 89, 0.1) 0%, transparent 60%);">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center animate-fade-in">
+                <h1 class="text-5xl md:text-6xl font-black tracking-tighter text-white mb-6">Start a Conversation About Your <span class="text-gold-500">Financial Future.</span></h1>
+                <p class="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">18 Years of helping investors navigate markets with discipline and data-driven clarity.</p>
+            </div>
+        </div>
+        <div class="gold-line mt-12"></div>
+    </section>
+
+    <!-- Trust Bar -->
+    <section class="py-12" style="background: #000000 !important;">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center animate-fade-in-delay">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-gold-500/10 border border-gold-500/20 flex items-center justify-center">
+                        <i data-lucide="award" class="w-7 h-7 text-gold-400"></i>
+                    </div>
+                    <p class="text-white font-semibold text-lg">18+ Years</p>
+                    <p class="text-gray-500 text-sm">Experience</p>
+                </div>
+                <div class="text-center animate-fade-in-delay">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-gold-500/10 border border-gold-500/20 flex items-center justify-center">
+                        <i data-lucide="graduation-cap" class="w-7 h-7 text-gold-400"></i>
+                    </div>
+                    <p class="text-white font-semibold text-lg">SIMSR Alumni</p>
+                    <p class="text-gray-500 text-sm">Management Education</p>
+                </div>
+                <div class="text-center animate-fade-in-delay-2">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-gold-500/10 border border-gold-500/20 flex items-center justify-center">
+                        <i data-lucide="users" class="w-7 h-7 text-gold-400"></i>
+                    </div>
+                    <p class="text-white font-semibold text-lg">500+ Families</p>
+                    <p class="text-gray-500 text-sm">Advised</p>
+                </div>
+                <div class="text-center animate-fade-in-delay-2">
+                    <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-gold-500/10 border border-gold-500/20 flex items-center justify-center">
+                        <i data-lucide="shield-check" class="w-7 h-7 text-gold-400"></i>
+                    </div>
+                    <p class="text-white font-semibold text-lg">AMFI-Registered</p>
+                    <p class="text-gray-500 text-sm">Mutual Fund Distributor</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Grid -->
+    <section class="py-20" style="background: #000000 !important; overflow: visible !important; position: relative; z-index: 10;">
+        <div class="container mx-auto px-6" style="overflow: visible !important;">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12" style="overflow: visible !important;">
+                <!-- Left: Contact Form -->
+                <div class="p-8 rounded-2xl animate-fade-in" style="background: transparent !important; border: 1px solid rgba(197, 160, 89, 0.15); overflow: visible !important;">
+                    <h2 class="text-2xl font-black text-white mb-2">Start Your Journey</h2>
+                    <p class="text-gray-400 mb-8 text-sm">Complete this 30-second assessment for personalized insights from Devang Visaria.</p>
+                    
+                    <!-- STEP 1: Basic Info -->
+                    <div id="step1" class="space-y-6 transition-opacity duration-500" style="overflow: visible !important;">
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">Full Name</label>
+                            <input type="text" id="leadName" placeholder="Your Name" class="form-input w-full px-4 py-3 rounded-lg">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">WhatsApp Number</label>
+                            <div class="flex gap-2">
+                                <select id="leadCountryCode" class="form-input px-3 py-3 rounded-lg" style="background: rgba(30, 30, 30, 0.6); border: 1px solid rgba(197, 160, 89, 0.2); color: #E5E5E5; min-width: 100px;">
+                                    <option value="+91">+91 🇮🇳</option>
+                                    <option value="+1">+1 🇺🇸</option>
+                                    <option value="+44">+44 🇬🇧</option>
+                                    <option value="+971">+971 🇦🇪</option>
+                                    <option value="+65">+65 🇸🇬</option>
+                                    <option value="+61">+61 🇦🇺</option>
+                                </select>
+                                <input type="tel" id="leadPhone" placeholder="90290 05170" class="form-input flex-1 px-4 py-3 rounded-lg">
+                            </div>
+                            <p id="phoneError" class="text-red-400 text-xs mt-1 hidden"></p>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">Portfolio Size</label>
+                            <select id="leadPortfolio" class="form-input w-full px-4 py-3 rounded-lg" style="background: #1a1a1a !important; color: #E5E5E5 !important; border: 1px solid rgba(197, 160, 89, 0.3) !important;">
+                                <option value="" style="background: #1a1a1a; color: #888888;">Select portfolio range</option>
+                                <option value="Under ₹10 Lakhs" style="background: #1a1a1a; color: #E5E5E5;">Under ₹10 Lakhs</option>
+                                <option value="₹10 - ₹25 Lakhs" style="background: #1a1a1a; color: #E5E5E5;">₹10 - ₹25 Lakhs</option>
+                                <option value="₹25 - ₹50 Lakhs" style="background: #1a1a1a; color: #E5E5E5;">₹25 - ₹50 Lakhs</option>
+                                <option value="₹50 Lakhs - ₹1 Crore" style="background: #1a1a1a; color: #E5E5E5;">₹50 Lakhs - ₹1 Crore</option>
+                                <option value="₹1 - ₹5 Crores" style="background: #1a1a1a; color: #E5E5E5;">₹1 - ₹5 Crores</option>
+                                <option value="Above ₹5 Crores" style="background: #1a1a1a; color: #E5E5E5;">Above ₹5 Crores</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">Message</label>
+                            <textarea id="leadMessage" rows="3" placeholder="Tell us about your financial goals..." class="form-input w-full px-4 py-3 rounded-lg resize-none mb-6"></textarea>
+                        </div>
+                        
+                        <button type="button" onclick="showConfirmPopup()" class="w-full mt-2 py-3 px-6 text-sm font-semibold uppercase tracking-wider rounded-lg text-black bg-gradient-to-r from-[#C5A059] via-[#D4A56B] to-[#C5A059] hover:from-[#D4A56B] hover:to-[#C5A059] transition-all duration-300 hover:shadow-xl hover:shadow-gold-500/30" style="display: inline-flex !important; align-items: center !important; justify-content: center !important; height: 50px; opacity: 1; visibility: visible; position: relative;">Request Consultation</button>
+                    </div>
+                    
+                    <!-- STEP 2: Quiz -->
+                    <div id="step2" class="hidden transition-opacity duration-500">
+                        <div class="mb-6">
+                            <p class="text-gold-400 text-sm mb-2">Help us understand your goals:</p>
+                            <p class="text-gray-400 text-xs">Please complete this 30-second DNA test so Devang can provide better insights.</p>
+                        </div>
+                        
+                        <!-- Progress Bar -->
+                        <div class="w-full h-1 bg-gray-800 rounded-full mb-6 overflow-hidden">
+                            <div id="quizProgress" class="h-full bg-gradient-to-r from-gold-500 to-gold-400 transition-all duration-300" style="width: 20%"></div>
+                        </div>
+                        
+                        <!-- Question Container -->
+                        <div id="questionContainer" class="space-y-4">
+                            <p id="questionText" class="text-white font-medium text-lg"></p>
+                            <div id="optionButtons" class="space-y-3"></div>
+                        </div>
+                        
+                        <!-- Navigation -->
+                        <div class="flex gap-3 mt-6">
+                            <button type="button" onclick="prevQuestion()" id="prevBtn" class="hidden px-4 py-2 border border-gray-600 text-gray-400 rounded-lg hover:border-gold-500 hover:text-gold-400 transition-colors">Back</button>
+                            <button type="button" onclick="nextQuestion()" id="nextBtn" class="hidden btn btn-gold flex-1">Next</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Confirmation Popup Modal -->
+                    <div id="confirmPopup" class="fixed inset-0 z-[100] hidden" style="background-color: rgba(0, 0, 0, 0.9) !important;">
+                        <div class="absolute inset-0 bg-black/80 backdrop-blur-lg" onclick="closeConfirmPopup()" style="background-color: rgba(0, 0, 0, 0.9) !important;"></div>
+                        <div class="flex items-center justify-center min-h-screen p-4">
+                            <div class="relative w-full max-w-[420px] bg-[#1a1a1a] border border-gold-500/40 rounded-2xl p-8 shadow-2xl shadow-gold-500/20" style="background-color: #1a1a1a !important; background: #1a1a1a !important;">
+                                <div class="text-center">
+                                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gold-500/20 border border-gold-500/30 flex items-center justify-center">
+                                        <i data-lucide="help-circle" class="w-8 h-8 text-gold-400"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-white mb-4 font-serif">Before we connect...</h3>
+                                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                                        Would you like to discover your <span class="text-gold-400 font-medium">Investor DNA (Risk Profile)</span> first? It helps us provide better financial advice tailored to you.
+                                    </p>
+                                    <div class="flex flex-col gap-3">
+                                        <button onclick="startQuizFromConfirm()" style="background: linear-gradient(135deg, #C5A059 0%, #D4A56B 50%, #C5A059 100%) !important; color: #0D0D0D; font-weight: 700; padding: 1rem 2rem; border-radius: 8px; width: 100%; border: none; cursor: pointer; font-size: 16px; letter-spacing: 0.05em; display: block; opacity: 1; visibility: visible;">
+                                            Yes, Discover my DNA
+                                        </button>
+                                        <button onclick="submitWithoutQuiz()" style="background: transparent; color: #E5E5E5; font-weight: 500; padding: 1rem 2rem; border-radius: 8px; width: 100%; border: 1px solid #6B7280; cursor: pointer; font-size: 16px; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#9CA3AF'; this.style.color='#FFFFFF';" onmouseout="this.style.borderColor='#6B7280'; this.style.color='#E5E5E5';">
+                                            No, Submit Directly
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quiz Popup Modal -->
+                    <div id="quizPopup" class="fixed inset-0 z-[100] hidden" style="background-color: rgba(0, 0, 0, 0.9) !important;">
+                        <div class="absolute inset-0 bg-black/80 backdrop-blur-lg" onclick="closeQuizPopup()" style="background-color: rgba(0, 0, 0, 0.9) !important;"></div>
+                        <div class="flex items-center justify-center min-h-screen p-4">
+                            <!-- Value-Add Offer -->
+                            <div id="popupOffer" class="relative w-full max-w-[420px] bg-[#1a1a1a] border border-gold-500/40 rounded-2xl p-8 shadow-2xl shadow-gold-500/20" style="background-color: #1a1a1a !important; background: #1a1a1a !important;">
+                                <button onclick="closeQuizPopup()" class="absolute right-3 top-3 p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-full transition-colors z-10">
+                                    <i data-lucide="x" class="w-6 h-6"></i>
+                                </button>
+                                <div class="text-center">
+                                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gold-500/20 border border-gold-500/30 flex items-center justify-center">
+                                        <i data-lucide="sparkles" class="w-8 h-8 text-gold-400"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-white mb-4 font-serif">Before we connect...</h3>
+                                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                                        Would you like to take our <span class="text-gold-400 font-medium">30-second Investor DNA assessment</span>? This helps Devang Visaria provide much more accurate insights for your specific goals.
+                                    </p>
+                                    <div class="flex flex-col gap-3">
+                                        <button onclick="startQuizFromPopup()" class="w-full py-3 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-semibold rounded-lg hover:from-gold-400 hover:to-gold-500 transition-all">
+                                            Take the Quiz
+                                        </button>
+                                        <button onclick="skipQuizAndSubmit()" class="w-full py-3 border border-gray-600 text-gray-400 rounded-lg hover:border-gray-500 hover:text-gray-300 transition-colors">
+                                            Skip & Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Quiz Container (Hidden initially) -->
+                            <div id="popupQuizContainer" class="relative w-full max-w-[420px] bg-[#1a1a1a] border border-gold-500/40 rounded-2xl p-6 shadow-2xl shadow-gold-500/20 hidden" style="background-color: #1a1a1a !important; background: #1a1a1a !important;">
+                                <div class="mb-4">
+                                    <p class="text-gold-400 text-xs font-semibold uppercase tracking-wider mb-1">Investor DNA Assessment</p>
+                                    <div class="w-full h-1 bg-gray-800 rounded-full">
+                                        <div id="popupQuizProgress" class="h-full bg-gradient-to-r from-gold-500 to-gold-400 transition-all duration-300" style="width: 20%"></div>
+                                    </div>
+                                </div>
+                                <div id="popupQuestionContainer" class="space-y-4">
+                                    <p id="popupQuestionText" class="text-white font-medium text-lg"></p>
+                                    <div id="popupOptionButtons" class="space-y-3"></div>
+                                </div>
+                                <div class="flex gap-3 mt-6">
+                                    <button type="button" onclick="closeQuizPopup()" class="px-4 py-2 border border-gray-600 text-gray-400 rounded-lg hover:border-gold-500 hover:text-gold-400 transition-colors text-sm">Cancel</button>
+                                    <button type="button" onclick="popupNextQuestion()" id="popupNextBtn" class="hidden btn btn-gold flex-1 text-sm">Next</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Loading State -->
+                            <div id="popupLoading" class="relative w-full max-w-[420px] bg-[#1a1a1a] border border-gold-500/40 rounded-2xl p-8 shadow-2xl shadow-gold-500/20 hidden" style="background-color: #1a1a1a !important; background: #1a1a1a !important;">
+                                <div class="text-center py-8">
+                                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gold-500/20 flex items-center justify-center animate-pulse">
+                                        <i data-lucide="loader-2" class="w-8 h-8 text-gold-400 animate-spin"></i>
+                                    </div>
+                                    <p class="text-white font-medium">Analyzing your DNA...</p>
+                                    <p class="text-gray-400 text-sm mt-2">Preparing your personalized strategy</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Hidden Form for Submission - Using action for direct submit -->
+                    <form id="contactForm" action="https://script.google.com/macros/s/AKfycbzjVJ_P06Pzx1Z5mefHFTfuhfUgYWye83htYapYGaP67K7CEf-opYZGW7K3wUv_XCJa-w/exec" method="POST" target="hiddenFrame" class="hidden">
+                        <input type="text" name="FullName" id="formFullName">
+                        <input type="text" name="WhatsApp" id="formWhatsApp">
+                        <input type="text" name="Portfolio" id="formPortfolio">
+                        <input type="text" name="InvestorDNA" id="formInvestorDNA">
+                        <input type="text" name="Message" id="formMessage">
+                    </form>
+                    
+                    <!-- Direct Form for Google Sheets -->
+                    <form id="gsheetForm" action="https://script.google.com/macros/s/AKfycbzjVJ_P06Pzx1Z5mefHFTfuhfUgYWye83htYapYGaP67K7CEf-opYZGW7K3wUv_XCJa-w/exec" method="POST" target="hiddenFrame">
+                        <input type="text" name="FullName" id="gsFullName">
+                        <input type="text" name="WhatsApp" id="gsWhatsApp">
+                        <input type="text" name="Portfolio" id="gsPortfolio">
+                        <input type="text" name="InvestorDNA" id="gsInvestorDNA">
+                        <input type="text" name="Message" id="gsMessage">
+                    </form>
+                    
+                    <!-- Hidden iframe for background form submission -->
+                    <iframe name="hiddenFrame" id="hiddenFrame" class="hidden"></iframe>
+                    
+                    
+                </div>
+                
+                <!-- Right: Direct Contact -->
+                <div class="space-y-6 animate-fade-in-delay">
+                    <div class="p-8 rounded-2xl text-center" style="background: transparent !important; border: 1px solid rgba(197, 160, 89, 0.15);">
+                        <a href="https://wa.me/919029005170" class="w-full py-4 px-6 inline-flex items-center justify-center gap-3 rounded-lg transition-all duration-300" style="background: #25D366; color: #ffffff; font-weight: 700; border: 1px solid #25D366; box-shadow: 0 0 15px rgba(37, 211, 102, 0.3);" onmouseover="this.style.background='#2ECC71'; this.style.boxShadow='0 0 25px rgba(37, 211, 102, 0.6)';" onmouseout="this.style.background='#25D366'; this.style.boxShadow='0 0 15px rgba(37, 211, 102, 0.3)';">
+                            <svg class="w-5 h-5" fill="#ffffff" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.404 3.684 2.237 2.445 3.893 5.994 3.893 9.984 0 6.556-5.338 11.891-11.893 11.891-3.22 0-6.257-1.24-8.403-3.684zm12.592-3.239c-2.475-2.686-6.123-4.168-9.925-4.168-5.412 0-9.886 4.396-9.889 9.888 0 2.758 1.14 5.304 3.114 7.314l-3.115 6.169 6.423-1.688c1.873.967 4.104 1.482 6.383 1.482 5.412 0 9.886-4.396 9.889-9.888 0-2.746-1.14-5.304-3.114-7.314z"/></svg>
+                            Chat on WhatsApp
+                        </a>
+                    </div>
+                    
+                    <div class="p-8 rounded-2xl" style="background: transparent !important; border: 1px solid rgba(197, 160, 89, 0.15);">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-gold-500/10 border border-gold-500/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-gold-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-2">Mulund West Office</h4>
+                                <p class="text-gray-400 text-sm leading-relaxed select-all">
+                                    6, Ground Floor, Naresh Smruti,<br>
+                                    Vithal Nagar, S.L. Road,<br>
+                                    Near Shreyas Shubham Building,<br>
+                                    Mulund West, Mumbai – 400080
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-8 rounded-2xl" style="background: transparent !important; border: 1px solid rgba(197, 160, 89, 0.15);">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-gold-500/10 border border-gold-500/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="mail" class="w-6 h-6 text-gold-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold mb-2">Email Strategy Desk</h4>
+                                <a href="mailto:atharvawealth2011@gmail.com" class="text-gold-400 hover:text-gold-300 text-sm transition-colors">
+                                    atharvawealth2011@gmail.com
+                                </a>
+                                <p class="text-gray-500 text-xs mt-1">We respond within 24 hours</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Maps -->
+    <section class="pb-20" style="background: #000000 !important; position: relative; z-index: 1;">
+        <div class="container mx-auto px-6">
+            <div class="p-2 rounded-2xl" style="background: transparent !important; border: 1px solid rgba(197, 160, 89, 0.2);">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7537.1741050636165!2d72.94210185010209!3d19.169545076633288!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b921d013f31d%3A0x1745a17f1064f7a7!2sMatrix%20Computer%20Solutions!5e0!3m2!1sen!2sus!4v1774275528940!5m2!1sen!2sus" width="100%" height="450" style="border:0; border-radius: 16px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+<!-- Footer -->
+    <footer class="py-12" style="background: #000000 !important; position: relative; z-index: 50;">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center">
+                            <span class="text-obsidian font-bold text-sm">A</span>
+                        </div>
+                        <span class="text-lg font-bold tracking-wider text-white">ATHARVA <span class="text-gold-500">WEALTH</span></span>
+                    </div>
+                    <p class="text-gray-600 text-sm">AMFI-Registered Mutual Fund Distributor. We provide access to third-party investment products.</p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#home" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Home</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Services</a></li>
+                        <li><a href="about.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">About Us</a></li>
+                        <li><a href="insights.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Insights</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Our Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Mutual Funds</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Insurance</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Bonds & NCDs</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Direct Equity</a></li>
+                        <li><a href="services.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">All Services</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Client Utilities -->
+                <div>
+                    <h4 class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Client Utilities</h4>
+                    <ul class="space-y-2">
+                        <li><a href="dsc.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Digital Signature (DSC)</a></li>
+                        <li><a href="founder.html" class="text-gray-500 hover:text-gold-400 text-sm transition-colors">Our Founder</a></li>
+                        <li><a href="tools.html" class="text-gold-400 text-sm transition-colors">Financial Tools</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gold-500/10">
+                <p class="text-gray-600 text-sm text-center">© 2026 Atharva Wealth. All rights reserved. AMFI-Registered Mutual Fund Distributor.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxlyFJghR2MTHuAQDk1SxkmS_7mcpyq4Bx23GBx_J0tPL1F1zOBWna15-C-cdEJ0zrwig/exec';
+        const EMAILJS_PUBLIC_KEY = 'B53y65BC72nfTafBJ';
+        const EMAILJS_SERVICE_ID = 'service_mtgg6qh';
+        const EMAILJS_TEMPLATE_ID = 'template_03kipyn';
+        const DAD_EMAIL = 'atharvawealth2011@gmail.com';
+
+        if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY && !EMAILJS_PUBLIC_KEY.startsWith('YOUR_')) {
+            emailjs.init(EMAILJS_PUBLIC_KEY);
+        }
+
+        async function sendLeadToEmailJS(formData, source) {
+            if (typeof emailjs === 'undefined' || !EMAILJS_PUBLIC_KEY || EMAILJS_PUBLIC_KEY.startsWith('YOUR_')) return;
+            try {
+                console.log("EmailJS config:", { publicKey: "B53y65BC72nfTafBJ", serviceId: "service_mtgg6qh", templateId: "template_03kipyn" });
+                await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+                    from_name: formData.FullName || formData.name,
+                    whatsapp: formData.WhatsApp || formData.whatsapp,
+                    portfolio: formData.Portfolio || formData.portfolio,
+                    message: formData.Message || formData.message,
+                    to_email: "atharvawealth2011@gmail.com"
+                });
+                console.log("EmailJS success");
+            } catch (err) {
+                console.log('EmailJS send failed:', err);
+            }
+        }
+
+        async function sendLeadToSheets(formData, source) {
+            if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes('YOUR_')) return;
+            try {
+                console.log("Sending to sheets URL:", "https://script.google.com/macros/s/AKfycbxlyFJghR2MTHuAQDk1SxkmS_7mcpyq4Bx23GBx_J0tPL1F1zOBWna15-C-cdEJ0zrwig/exec");
+                await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        timestamp: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+                        name: formData.name,
+                        whatsapp: formData.whatsapp,
+                        portfolio: formData.portfolio,
+                        message: formData.message,
+                        source: source
+                    })
+                });
+                console.log("Sheets response received");
+            } catch (err) {
+                console.log('Sheets send failed:', err);
+            }
+        }
+
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            console.log("Form submitted - starting dual capture");
+
+            const submitBtn = document.getElementById('submitBtn');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+            }
+
+            const formData = {
+                name: document.getElementById('leadName') ? document.getElementById('leadName').value : '',
+                whatsapp: document.getElementById('leadPhone') ? document.getElementById('leadPhone').value : '',
+                portfolio: document.getElementById('leadPortfolio') ? document.getElementById('leadPortfolio').value : '',
+                message: document.getElementById('leadMessage') ? document.getElementById('leadMessage').value : ''
+            };
+
+            try {
+                await sendLeadToEmailJS(formData, 'Contact Page');
+                await sendLeadToSheets(formData, 'Contact Page');
+
+                const form = document.getElementById('contactForm');
+                if (form) {
+                    form.reset();
+                    form.classList.add('hidden');
+                }
+
+                const step1 = document.getElementById('step1');
+                if (step1) {
+                    step1.innerHTML = `
+                        <div class="text-center py-12">
+                            <div class="text-gold-400 text-5xl mb-4">✓</div>
+                            <h3 class="text-2xl font-serif text-white mb-3">Details Submitted Successfully!</h3>
+                            <p class="text-gray-400 mb-8">Our team will contact you within 24 hours.</p>
+                        </div>`;
+                }
+
+                setTimeout(() => {
+                    if (form) {
+                        form.classList.remove('hidden');
+                        form.reset();
+                    }
+                    if (step1) {
+                        location.reload();
+                    }
+                }, 4000);
+            } catch (error) {
+                console.log("ERROR:", error.message, error);
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Request Consultation';
+                }
+                alert('Something went wrong. Please try again or WhatsApp us directly.');
+            }
+        }
+
+        const formEl = document.getElementById('contactForm');
+        if (formEl) {
+            formEl.addEventListener('submit', handleFormSubmit);
+        }
+
+        const finalLead = {
+            name: '',
+            phone: '',
+            portfolio: '',
+            dnaResult: '',
+            totalScore: 0
+        };
+        
+        const questions = [
+            { question: "What is your primary investment goal?", options: [{ text: "Capital Protection & Safety", score: 1 }, { text: "Steady Growth & Income", score: 2 }, { text: "Maximum Wealth Creation", score: 3 }] },
+            { question: "How would you react to a 15% market drop?", options: [{ text: "Sell everything immediately", score: 1 }, { text: "Hold and wait it out", score: 2 }, { text: "Buy more at lower prices", score: 3 }] },
+            { question: "What is your investment time horizon?", options: [{ text: "Less than 2 years", score: 1 }, { text: "3 to 7 years", score: 2 }, { text: "10+ years", score: 3 }] },
+            { question: "Which portfolio mix appeals to you most?", options: [{ text: "FDs, Bonds & Gold", score: 1 }, { text: "Mix of Equity & Debt", score: 2 }, { text: "Direct Equity & PMS", score: 3 }] },
+            { question: "How would you describe your risk tolerance?", options: [{ text: "Very Low - I worry about losses", score: 1 }, { text: "Moderate - Some volatility is okay", score: 2 }, { text: "High - I can handle big swings", score: 3 }] }
+        ];
+
+        let currentQuestionIndex = 0;
+        let popupQuizIndex = 0;
+        let popupQuizScore = 0;
+        let savedFormData = null;
+
+        function validatePhoneNumber(phone, countryCode) {
+            const phoneError = document.getElementById('phoneError');
+            if (phoneError) phoneError.classList.add('hidden');
+            
+            const cleaned = phone.replace(/[\s\-\(\)]/g, '');
+            
+            if (countryCode === '+91') {
+                if (!/^[6-9]\d{9}$/.test(cleaned)) {
+                    if (phoneError) {
+                        phoneError.textContent = 'Enter valid 10-digit Indian number';
+                        phoneError.classList.remove('hidden');
+                    }
+                    return false;
+                }
+            } else {
+                if (!/^\d{7,15}$/.test(cleaned)) {
+                    if (phoneError) {
+                        phoneError.textContent = 'Enter valid phone number';
+                        phoneError.classList.remove('hidden');
+                    }
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function showConfirmPopup() {
+            const name = document.getElementById('leadName').value.trim();
+            const phone = document.getElementById('leadPhone').value.trim();
+            const countryCode = document.getElementById('leadCountryCode').value;
+            if (!name || !phone) { alert('Please fill in your Name and WhatsApp Number.'); return; }
+            if (!validatePhoneNumber(phone, countryCode)) return;
+            const fullPhone = countryCode + phone;
+            savedFormData = { fullName: name, whatsapp: fullPhone, portfolio: document.getElementById('leadPortfolio').value || 'Not Specified', message: document.getElementById('leadMessage').value || '' };
+            document.getElementById('confirmPopup').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeConfirmPopup() { document.getElementById('confirmPopup').classList.add('hidden'); }
+
+        function submitWithoutQuiz() {
+            closeConfirmPopup();
+            if (!savedFormData) return;
+            const btn = document.querySelector('button[onclick="showConfirmPopup()"]');
+            btn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 inline mr-2 animate-spin"></i> Sending...';
+            btn.disabled = true;
+            
+            const leadData = {
+                FullName: savedFormData.fullName,
+                WhatsApp: savedFormData.whatsapp,
+                Portfolio: savedFormData.portfolio,
+                InvestorDNA: 'Skipped',
+                Message: savedFormData.message
+            };
+            
+            console.log("Sending data:", leadData);
+            
+            sendLeadToEmailJS(leadData, 'Contact Page');
+            sendLeadToSheets(leadData, 'Contact Page').then(() => {
+                showSuccessMessage(savedFormData.fullName);
+            }).catch(() => {
+                showSuccessMessage(savedFormData.fullName);
+            });
+        }
+
+        function showSuccessMessage(name) {
+            const step1 = document.getElementById('step1');
+            if (step1) {
+                step1.innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="text-gold-400 text-5xl mb-4">✓</div>
+                        <h3 class="text-2xl font-serif text-white mb-3">Details Submitted Successfully!</h3>
+                        <p class="text-gray-400 mb-8">Our team will contact you within 24 hours.</p>
+                    </div>`;
+            }
+            setTimeout(() => {
+                const btn = document.querySelector('button[onclick="showConfirmPopup()"]');
+                if (btn) {
+                    btn.innerHTML = 'Request Consultation';
+                    btn.disabled = false;
+                }
+                const form = document.getElementById('contactForm');
+                if (form) form.reset();
+                if (step1) {
+                    step1.innerHTML = `
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">Full Name</label>
+                            <input type="text" id="leadName" placeholder="Your Name" class="form-input w-full px-4 py-3 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">WhatsApp Number</label>
+                            <div class="flex gap-2">
+                                <select id="leadCountryCode" class="form-input px-3 py-3 rounded-lg" style="background: rgba(30, 30, 30, 0.6); border: 1px solid rgba(197, 160, 89, 0.2); color: #E5E5E5; min-width: 100px;">
+                                    <option value="+91">+91 🇮🇳</option>
+                                    <option value="+1">+1 🇺🇸</option>
+                                    <option value="+44">+44 🇬🇧</option>
+                                    <option value="+971">+971 🇦🇪</option>
+                                    <option value="+65">+65 🇸🇬</option>
+                                    <option value="+61">+61 🇦🇺</option>
+                                </select>
+                                <input type="tel" id="leadPhone" placeholder="90290 05170" class="form-input flex-1 px-4 py-3 rounded-lg">
+                            </div>
+                            <p id="phoneError" class="text-red-400 text-xs mt-1 hidden"></p>
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">Portfolio Size</label>
+                            <select id="leadPortfolio" class="form-input w-full px-4 py-3 rounded-lg" style="background: #1a1a1a !important; color: #E5E5E5 !important; border: 1px solid rgba(197, 160, 89, 0.3) !important;">
+                                <option value="" style="background: #1a1a1a; color: #888888;">Select portfolio range</option>
+                                <option value="Under ₹10 Lakhs" style="background: #1a1a1a; color: #E5E5E5;">Under ₹10 Lakhs</option>
+                                <option value="₹10 - ₹25 Lakhs" style="background: #1a1a1a; color: #E5E5E5;">₹10 - ₹25 Lakhs</option>
+                                <option value="₹25 - ₹50 Lakhs" style="background: #1a1a1a; color: #E5E5E5;">₹25 - ₹50 Lakhs</option>
+                                <option value="₹50 Lakhs - ₹1 Crore" style="background: #1a1a1a; color: #E5E5E5;">₹50 Lakhs - ₹1 Crore</option>
+                                <option value="₹1 - ₹5 Crores" style="background: #1a1a1a; color: #E5E5E5;">₹1 - ₹5 Crores</option>
+                                <option value="Above ₹5 Crores" style="background: #1a1a1a; color: #E5E5E5;">Above ₹5 Crores</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">Message (Optional)</label>
+                            <textarea id="leadMessage" rows="3" placeholder="Tell us about your financial goals..." class="form-input w-full px-4 py-3 rounded-lg resize-none mb-6"></textarea>
+                        </div>
+                        <button type="button" onclick="showConfirmPopup()" class="w-full py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold rounded-lg hover:from-gold-400 hover:to-gold-500 transition-all duration-300 shadow-lg">
+                            Request Consultation
+                        </button>`;
+                }
+            }, 12000);
+        }
+
+        function startQuizFromConfirm() {
+            sessionStorage.setItem('atharvaFormData', JSON.stringify(savedFormData));
+            closeConfirmPopup();
+            showQuizPopup();
+        }
+
+        function showQuizPopup() {
+            const name = document.getElementById('leadName').value.trim();
+            const phone = document.getElementById('leadPhone').value.trim();
+            if (!name || !phone) { alert('Please fill in your Name and WhatsApp Number.'); return; }
+            finalLead.name = name; finalLead.phone = phone; finalLead.portfolio = document.getElementById('leadPortfolio').value || 'Not Specified'; finalLead.message = document.getElementById('leadMessage').value || '';
+            document.getElementById('quizPopup').classList.remove('hidden');
+            document.getElementById('popupOffer').classList.remove('hidden');
+            document.getElementById('popupQuizContainer').classList.add('hidden');
+            document.getElementById('popupLoading').classList.add('hidden');
+            lucide.createIcons();
+        }
+
+        function closeQuizPopup() { document.getElementById('quizPopup').classList.add('hidden'); popupQuizIndex = 0; popupQuizScore = 0; }
+
+        function startQuizFromPopup() {
+            document.getElementById('popupOffer').classList.add('hidden');
+            document.getElementById('popupQuizContainer').classList.remove('hidden');
+            popupQuizIndex = 0; popupQuizScore = 0;
+            showPopupQuestion(0);
+        }
+
+        function showPopupQuestion(index) {
+            const q = questions[index];
+            document.getElementById('popupQuestionText').textContent = q.question;
+            document.getElementById('popupQuizProgress').style.width = ((index + 1) / questions.length) * 100 + '%';
+            document.getElementById('popupOptionButtons').innerHTML = q.options.map((opt) => `<button type="button" onclick="popupSelectOption(${opt.score})" class="w-full text-left px-4 py-3 rounded-lg border border-gray-700 hover:border-gold-500 hover:bg-gold-500/10 transition-all text-gray-300 hover:text-white text-sm">${opt.text}</button>`).join('');
+            const nextBtn = document.getElementById('popupNextBtn');
+            if (index === questions.length - 1) { nextBtn.textContent = 'Finish'; nextBtn.classList.remove('hidden'); } else { nextBtn.classList.add('hidden'); }
+        }
+
+        function popupSelectOption(score) { popupQuizScore += score; popupNextQuestion(); }
+
+        function popupNextQuestion() {
+            if (popupQuizIndex < questions.length - 1) { popupQuizIndex++; showPopupQuestion(popupQuizIndex); } else { submitWithQuizResult(); }
+        }
+
+        function submitWithQuizResult() {
+            document.getElementById('popupQuizContainer').classList.add('hidden');
+            document.getElementById('popupLoading').classList.remove('hidden');
+            lucide.createIcons();
+            finalLead.dnaResult = popupQuizScore <= 5 ? 'Conservative Investor' : popupQuizScore >= 12 ? 'Aggressive Investor' : 'Moderate Investor';
+            setTimeout(() => { submitFormData(); }, 1500);
+        }
+
+        function skipQuizAndSubmit() { finalLead.dnaResult = 'Skipped'; submitFormData(); }
+
+        async function submitFormData() {
+            document.getElementById('popupOffer').classList.add('hidden');
+            document.getElementById('popupQuizContainer').classList.add('hidden');
+            document.getElementById('popupLoading').classList.remove('hidden');
+            let message = finalLead.message || '';
+            if (finalLead.dnaResult && finalLead.dnaResult !== 'Skipped') { message += ` | DNA Score: ${popupQuizScore}/15 | DNA Type: ${finalLead.dnaResult}`; }
+            
+            const leadData = {
+                FullName: finalLead.name,
+                WhatsApp: finalLead.phone,
+                Portfolio: finalLead.portfolio,
+                InvestorDNA: finalLead.dnaResult || 'Skipped',
+                Message: message
+            };
+            
+            console.log("Sending data:", leadData);
+            
+            try { 
+                await sendLeadToEmailJS(leadData, 'Contact Page');
+                await sendLeadToSheets(leadData, 'Contact Page');
+                showFormSuccess(finalLead.name);
+            } catch (e) {
+                console.log("Submit error:", e);
+                showFormSuccess(finalLead.name);
+            }
+        }
+
+        function showFormSuccess(name) {
+            document.getElementById('quizPopup').classList.add('hidden');
+            const step1 = document.getElementById('step1');
+            if (step1) {
+                step1.innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="text-gold-400 text-5xl mb-4">✓</div>
+                        <h3 class="text-2xl font-serif text-white mb-3">Details Submitted Successfully!</h3>
+                        <p class="text-gray-400 mb-8">Our team will contact you within 24 hours.</p>
+                    </div>`;
+            }
+            setTimeout(() => {
+                const btn = document.querySelector('button[onclick="showConfirmPopup()"]');
+                if (btn) {
+                    btn.innerHTML = 'Request Consultation';
+                    btn.disabled = false;
+                }
+                const form = document.getElementById('contactForm');
+                if (form) form.reset();
+                if (step1) {
+                    step1.innerHTML = `
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">Full Name</label>
+                            <input type="text" id="leadName" placeholder="Your Name" class="form-input w-full px-4 py-3 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">WhatsApp Number</label>
+                            <div class="flex gap-2">
+                                <select id="leadCountryCode" class="form-input px-3 py-3 rounded-lg" style="background: rgba(30, 30, 30, 0.6); border: 1px solid rgba(197, 160, 89, 0.2); color: #E5E5E5; min-width: 100px;">
+                                    <option value="+91">+91 🇮🇳</option>
+                                    <option value="+1">+1 🇺🇸</option>
+                                    <option value="+44">+44 🇬🇧</option>
+                                    <option value="+971">+971 🇦🇪</option>
+                                    <option value="+65">+65 🇸🇬</option>
+                                    <option value="+61">+61 🇦🇺</option>
+                                </select>
+                                <input type="tel" id="leadPhone" placeholder="90290 05170" class="form-input flex-1 px-4 py-3 rounded-lg">
+                            </div>
+                            <p id="phoneError" class="text-red-400 text-xs mt-1 hidden"></p>
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">Portfolio Size</label>
+                            <select id="leadPortfolio" class="form-input w-full px-4 py-3 rounded-lg" style="background: #1a1a1a !important; color: #E5E5E5 !important; border: 1px solid rgba(197, 160, 89, 0.3) !important;">
+                                <option value="" style="background: #1a1a1a; color: #888888;">Select portfolio range</option>
+                                <option value="Under ₹10 Lakhs" style="background: #1a1a1a; color: #E5E5E5;">Under ₹10 Lakhs</option>
+                                <option value="₹10 - ₹25 Lakhs" style="background: #1a1a1a; color: #E5E5E5;">₹10 - ₹25 Lakhs</option>
+                                <option value="₹25 - ₹50 Lakhs" style="background: #1a1a1a; color: #E5E5E5;">₹25 - ₹50 Lakhs</option>
+                                <option value="₹50 Lakhs - ₹1 Crore" style="background: #1a1a1a; color: #E5E5E5;">₹50 Lakhs - ₹1 Crore</option>
+                                <option value="₹1 - ₹5 Crores" style="background: #1a1a1a; color: #E5E5E5;">₹1 - ₹5 Crores</option>
+                                <option value="Above ₹5 Crores" style="background: #1a1a1a; color: #E5E5E5;">Above ₹5 Crores</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 text-sm mb-2">Message (Optional)</label>
+                            <textarea id="leadMessage" rows="3" placeholder="Tell us about your financial goals..." class="form-input w-full px-4 py-3 rounded-lg resize-none mb-6"></textarea>
+                        </div>
+                        <button type="button" onclick="showConfirmPopup()" class="w-full py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold rounded-lg hover:from-gold-400 hover:to-gold-500 transition-all duration-300 shadow-lg">
+                            Request Consultation
+                        </button>`;
+                }
+            }, 12000);
+        }
+
+        function showQuestion(index) {
+            const q = questions[index];
+            document.getElementById('questionText').textContent = q.question;
+            document.getElementById('quizProgress').style.width = ((index + 1) / questions.length) * 100 + '%';
+            document.getElementById('optionButtons').innerHTML = q.options.map((opt) => `<button type="button" onclick="selectOption(${opt.score})" class="w-full text-left px-4 py-3 rounded-lg border border-gray-700 hover:border-gold-500 hover:bg-gold-500/10 transition-all text-gray-300 hover:text-white">${opt.text}</button>`).join('');
+            document.getElementById('prevBtn').classList.toggle('hidden', index === 0);
+            const nextBtn = document.getElementById('nextBtn');
+            if (index === questions.length - 1) { nextBtn.textContent = 'Finish & Request Consultation'; nextBtn.classList.remove('hidden'); } else { nextBtn.textContent = 'Next'; nextBtn.classList.add('hidden'); }
+        }
+
+        function selectOption(score) { finalLead.totalScore += score; nextQuestion(); }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) { currentQuestionIndex++; showQuestion(currentQuestionIndex); } else { submitFinalLead(); }
+        }
+
+        function prevQuestion() { if (currentQuestionIndex > 0) { currentQuestionIndex--; showQuestion(currentQuestionIndex); } }
+
+        function submitFinalLead() {
+            const score = finalLead.totalScore;
+            finalLead.dnaResult = score <= 5 ? 'Conservative Investor' : score >= 12 ? 'Aggressive Investor' : 'Moderate Investor';
+            const message = `DNA Score: ${score}/15 | Portfolio: ${finalLead.portfolio}`;
+            document.getElementById('gsFullName').value = finalLead.name;
+            document.getElementById('gsWhatsApp').value = finalLead.phone;
+            document.getElementById('gsPortfolio').value = finalLead.portfolio;
+            document.getElementById('gsInvestorDNA').value = finalLead.dnaResult;
+            document.getElementById('gsMessage').value = message;
+            document.getElementById('step2').innerHTML = '<div class="text-center py-8"><div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gold-500/20 flex items-center justify-center animate-pulse"><i data-lucide="loader-2" class="w-8 h-8 text-gold-400 animate-spin"></i></div><p class="text-white font-medium">Analyzing your DNA...</p><p class="text-gray-400 text-sm mt-2">Preparing your personalized strategy</p></div>';
+            lucide.createIcons();
+            document.getElementById('gsheetForm').submit();
+            const data = new URLSearchParams();
+            data.append('FullName', finalLead.name); data.append('WhatsApp', finalLead.phone); data.append('Portfolio', finalLead.portfolio); data.append('InvestorDNA', finalLead.dnaResult); data.append('Message', message);
+            fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: data }).catch(() => {});
+            setTimeout(() => { document.getElementById('step2').classList.add('hidden'); document.getElementById('contactSuccess').classList.remove('hidden'); lucide.createIcons(); }, 2000);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            checkAndSubmitWithQuiz();
+        });
+
+        function checkAndSubmitWithQuiz() {
+            const formData = sessionStorage.getItem('atharvaFormData');
+            if (formData) {
+                const data = JSON.parse(formData);
+                finalLead.name = data.fullName;
+                finalLead.phone = data.whatsapp;
+                finalLead.portfolio = data.portfolio;
+                finalLead.message = data.message;
+                sessionStorage.removeItem('atharvaFormData');
+                showQuizPopup();
+            }
+        }
+    </script>
+</body>
+</html>
