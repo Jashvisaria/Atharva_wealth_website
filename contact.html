@@ -684,20 +684,21 @@
         async function sendLeadToSheets(formData, source) {
             if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes('YOUR_')) return;
             try {
-                console.log("Sending to sheets URL:", "https://script.google.com/macros/s/AKfycbxlyFJghR2MTHuAQDk1SxkmS_7mcpyq4Bx23GBx_J0tPL1F1zOBWna15-C-cdEJ0zrwig/exec");
-                await fetch(APPS_SCRIPT_URL, {
-                    method: 'POST',
-                    headers: { "Content-Type": "application/json" },
+                console.log("Sending to sheets URL:", APPS_SCRIPT_URL);
+                fetch(APPS_SCRIPT_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: { "Content-Type": "text/plain" },
                     body: JSON.stringify({
                         timestamp: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
-                        name: formData.name,
-                        whatsapp: formData.whatsapp,
-                        portfolio: formData.portfolio,
-                        message: formData.message,
-                        source: source
+                        name: formData.FullName || formData.name,
+                        whatsapp: formData.WhatsApp || formData.whatsapp,
+                        portfolio: formData.Portfolio || formData.portfolio,
+                        message: formData.Message || formData.message,
+                        source: formData.source || source || "Contact Page"
                     })
                 });
-                console.log("Sheets response received");
+                console.log("Sheets request sent (fire-and-forget)");
             } catch (err) {
                 console.log('Sheets send failed:', err);
             }
@@ -1084,9 +1085,19 @@
             document.getElementById('step2').innerHTML = '<div class="text-center py-8"><div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gold-500/20 flex items-center justify-center animate-pulse"><i data-lucide="loader-2" class="w-8 h-8 text-gold-400 animate-spin"></i></div><p class="text-white font-medium">Analyzing your DNA...</p><p class="text-gray-400 text-sm mt-2">Preparing your personalized strategy</p></div>';
             lucide.createIcons();
             document.getElementById('gsheetForm').submit();
-            const data = new URLSearchParams();
-            data.append('FullName', finalLead.name); data.append('WhatsApp', finalLead.phone); data.append('Portfolio', finalLead.portfolio); data.append('InvestorDNA', finalLead.dnaResult); data.append('Message', message);
-            fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: data }).catch(() => {});
+            fetch(APPS_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "text/plain" },
+                body: JSON.stringify({
+                    timestamp: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+                    name: finalLead.name,
+                    whatsapp: finalLead.phone,
+                    portfolio: finalLead.portfolio,
+                    message: message,
+                    source: "Contact Page - Quiz"
+                })
+            }).catch(() => {});
             setTimeout(() => { document.getElementById('step2').classList.add('hidden'); document.getElementById('contactSuccess').classList.remove('hidden'); lucide.createIcons(); }, 2000);
         }
 
