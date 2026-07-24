@@ -656,6 +656,7 @@
     <script>
         const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxlyFJghR2MTHuAQDk1SxkmS_7mcpyq4Bx23GBx_J0tPL1F1zOBWna15-C-cdEJ0zrwig/exec';
         const EMAILJS_PUBLIC_KEY = 'B53y65BC72nfTafBJ';
+        const FORM_SECRET = "atharva2026-XyZ9kLm3"; // shared token, must match Apps Script
         const EMAILJS_SERVICE_ID = 'service_mtgg6qh';
         const EMAILJS_TEMPLATE_ID = 'template_03kipyn';
         const DAD_EMAIL = 'atharvawealth2011@gmail.com';
@@ -690,6 +691,7 @@
                     mode: "no-cors",
                     headers: { "Content-Type": "text/plain" },
                     body: JSON.stringify({
+                        formToken: FORM_SECRET,
                         timestamp: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
                         name: formData.FullName || formData.name,
                         whatsapp: formData.WhatsApp || formData.whatsapp,
