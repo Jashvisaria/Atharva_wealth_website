@@ -14,6 +14,7 @@ const pageNames = [
   'goal-planning',
   'dsc',
   'success',
+  'insights',
 ]
 
 export default defineConfig({
