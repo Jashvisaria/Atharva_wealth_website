@@ -25,3 +25,5 @@ dist-ssr
 
 .vercel
 credentials.json
+.env*
+__pycache__/

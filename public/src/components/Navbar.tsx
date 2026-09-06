@@ -1,4 +1,4 @@
-import { Menu, X } from "lucide-react";
+import { Menu, X, Font, Shield } from "lucide-react";
 import { useState } from "react";
 
 const Navbar = () => {
@@ -37,6 +37,12 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         <a className="btn btn-outline btn-primary">Client Login</a>
+        <a href="/blog" className="hover:text-amber-500 ml-2">
+          <Font className="ml-2 size=18" /> Blog
+        </a>
+        <a href="/admin" className="hover:text-amber-500 ml-2">
+          <Shield className="ml-2 size=18" /> Admin
+        </a>
       </div>
     </div>
   );
