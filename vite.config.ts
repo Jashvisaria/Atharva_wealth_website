@@ -20,6 +20,7 @@ export default defineConfig({
         'mutual-funds': resolve(__dirname, 'mutual-funds.html'),
         'goal-planning': resolve(__dirname, 'goal-planning.html'),
         success: resolve(__dirname, 'success.html'),
+        app: resolve(__dirname, 'app.html'),
       }
     }
   }
