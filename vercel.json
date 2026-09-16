@@ -4,5 +4,11 @@
   "installCommand": "npm install",
   "framework": "vite",
   "cleanUrls": false,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/blog", "destination": "/app.html" },
+    { "source": "/blog/(.*)", "destination": "/app.html" },
+    { "source": "/admin", "destination": "/app.html" },
+    { "source": "/admin/(.*)", "destination": "/app.html" }
+  ]
 }

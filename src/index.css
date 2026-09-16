@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #0D0D0D;
+  color: #E5E5E5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(197, 160, 89, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(197, 160, 89, 0.02) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.4), transparent);
+}
+
+.glass-panel {
+  background: linear-gradient(145deg, rgba(45, 45, 45, 0.5) 0%, rgba(20, 20, 20, 0.7) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(197, 160, 89, 0.2);
+}
+
+.glass-card {
+  background: linear-gradient(145deg, rgba(45, 45, 45, 0.4) 0%, rgba(20, 20, 20, 0.6) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(197, 160, 89, 0.15);
+  transition: all 0.4s;
+}
+
+.glass-card:hover {
+  border-color: rgba(197, 160, 89, 0.5);
+  box-shadow: 0 0 40px rgba(197, 160, 89, 0.15), 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Ported from the static site's inline styles (e.g. about.html) so admin/blog
+   buttons match the existing brand look without duplicating Tailwind CDN setup. */
+.btn-gold {
+  background: linear-gradient(135deg, #C5A059 0%, #D4A56B 50%, #C5A059 100%);
+  border: none;
+  color: #0D0D0D;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(197, 160, 89, 0.4);
+}
+.btn-ghost-gold {
+  background: transparent;
+  border: 1px solid rgba(197, 160, 89, 0.5);
+  color: #C5A059;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+.btn-ghost-gold:hover {
+  background: rgba(197, 160, 89, 0.1);
+  border-color: #C5A059;
+  color: #EBD9BE;
+  transform: translateY(-2px);
+}
+
+/* Rendered/edited Tiptap article content (blog post body + admin editor) */
+.rich-content {
+  color: #D1D5DB;
+  line-height: 1.75;
+}
+.rich-content h1 {
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  font-size: 1.875rem;
+  font-weight: 800;
+  margin: 2rem 0 1rem;
+}
+.rich-content h2 {
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 1.75rem 0 0.75rem;
+}
+.rich-content h3 {
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 1.5rem 0 0.5rem;
+}
+.rich-content p {
+  margin: 0.75rem 0;
+}
+.rich-content ul,
+.rich-content ol {
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
+}
+.rich-content ul {
+  list-style: disc;
+}
+.rich-content ol {
+  list-style: decimal;
+}
+.rich-content blockquote {
+  border-left: 3px solid rgba(197, 160, 89, 0.5);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: #9CA3AF;
+  font-style: italic;
+}
+.rich-content a {
+  color: #C5A059;
+  text-decoration: underline;
+}

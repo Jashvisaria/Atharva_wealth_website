@@ -6,6 +6,7 @@ import AdminLogin from './pages/admin/AdminLogin'
 import AdminBlogsList from './pages/admin/AdminBlogsList'
 import AdminBlogNew from './pages/admin/AdminBlogNew'
 import AdminBlogEdit from './pages/admin/AdminBlogEdit'
+import RequireAdmin from './components/admin/RequireAdmin'
 
 function App() {
   return (
@@ -13,11 +14,39 @@ function App() {
       <Routes>
         <Route path="/blog" element={<BlogList />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
-        <Route path="/admin" element={<AdminHome />} />
         <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin/blogs" element={<AdminBlogsList />} />
-        <Route path="/admin/blogs/new" element={<AdminBlogNew />} />
-        <Route path="/admin/blogs/:id/edit" element={<AdminBlogEdit />} />
+        <Route
+          path="/admin"
+          element={
+            <RequireAdmin>
+              <AdminHome />
+            </RequireAdmin>
+          }
+        />
+        <Route
+          path="/admin/blogs"
+          element={
+            <RequireAdmin>
+              <AdminBlogsList />
+            </RequireAdmin>
+          }
+        />
+        <Route
+          path="/admin/blogs/new"
+          element={
+            <RequireAdmin>
+              <AdminBlogNew />
+            </RequireAdmin>
+          }
+        />
+        <Route
+          path="/admin/blogs/:id/edit"
+          element={
+            <RequireAdmin>
+              <AdminBlogEdit />
+            </RequireAdmin>
+          }
+        />
       </Routes>
     </BrowserRouter>
   )

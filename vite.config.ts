@@ -1,9 +1,31 @@
-import { defineConfig } from 'vite'
+import { defineConfig, type Plugin } from 'vite'
 import { resolve } from 'path'
 import react from '@vitejs/plugin-react'
 
+// In dev, Vite's SPA fallback serves the root index.html (the static homepage)
+// for any unmatched path. The React blog/admin app lives at app.html instead,
+// so requests under /blog and /admin need to be routed there. Rewriting the
+// request URL to /app.html lets Vite's own HTML middleware transform it
+// normally (same result as visiting /app.html directly); the browser's
+// address bar / BrowserRouter location is unaffected since this only changes
+// which file the dev server responds with.
+function reactAppRoutes(): Plugin {
+  return {
+    name: 'react-app-routes',
+    configureServer(server) {
+      server.middlewares.use((req, _res, next) => {
+        const url = req.url?.split('?')[0] ?? ''
+        if (url === '/blog' || url.startsWith('/blog/') || url === '/admin' || url.startsWith('/admin/')) {
+          req.url = '/app.html'
+        }
+        next()
+      })
+    },
+  }
+}
+
 export default defineConfig({
-  plugins: [react()],
+  plugins: [reactAppRoutes(), react()],
   build: {
     rollupOptions: {
       input: {
