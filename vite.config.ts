@@ -11,6 +11,7 @@ const pageNames = [
   'aif',
   'mutual-funds',
   'founder',
+  'meghna',
   'goal-planning',
   'dsc',
   'success',
