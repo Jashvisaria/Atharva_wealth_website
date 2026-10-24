@@ -345,15 +345,15 @@
                         
                         <div class="grid grid-cols-3 gap-3 mb-5">
                             <div class="text-center p-3 rounded-xl bg-gray-800/50">
-                                <p class="text-gray-400 text-xs uppercase tracking-wide mb-1">Invested</p>
+                                <p id="sip-invested-label" class="text-gray-400 text-xs uppercase tracking-wide mb-1">Invested</p>
                                 <p class="text-white font-bold text-base" id="sip-invested">₹45 L</p>
                             </div>
                             <div class="text-center p-3 rounded-xl bg-gold-500/10 border border-gold-500/20">
-                                <p class="text-gold-400 text-xs uppercase tracking-wide mb-1">Wealth Gained</p>
+                                <p id="sip-gains-label" class="text-gold-400 text-xs uppercase tracking-wide mb-1">Wealth Gained</p>
                                 <p class="text-gold-400 font-bold text-base" id="sip-gains">₹1.12 Cr</p>
                             </div>
                             <div class="text-center p-3 rounded-xl bg-gradient-to-br from-gold-500/20 to-gold-600/20 border border-gold-500/30">
-                                <p class="text-gold-300 text-xs uppercase tracking-wide mb-1">Total Value</p>
+                                <p id="sip-total-label" class="text-gold-300 text-xs uppercase tracking-wide mb-1">Total Value</p>
                                 <p class="text-white font-bold text-base" id="sip-total">₹1.57 Cr</p>
                             </div>
                         </div>
@@ -419,7 +419,7 @@
                     <span class="text-gold-400 text-sm font-medium">Tax Alpha Calculator</span>
                 </div>
                 <h2 class="text-3xl md:text-4xl font-black text-white mb-4">FD vs. Arbitrage Fund</h2>
-                <p class="text-gray-400 max-w-xl mx-auto">See how much tax you can save by choosing debt-oriented mutual funds over traditional FDs.</p>
+                <p class="text-gray-400 max-w-xl mx-auto">Compare the estimated post-tax return of a fixed deposit with an arbitrage (equity-oriented) fund. An illustration, not tax advice.</p>
             </div>
 
             <div class="glass-panel p-8 rounded-2xl max-w-4xl mx-auto animate-fade-in">
@@ -450,6 +450,37 @@
                     </div>
                 </div>
 
+                <!-- Holding period -->
+                <div class="mb-8">
+                    <label class="block text-gray-400 text-sm mb-3">Arbitrage fund holding period</label>
+                    <div class="flex flex-wrap gap-3">
+                        <button type="button" onclick="setHoldingPeriod('short', this)" class="holding-btn flex-1 py-2 px-4 rounded-lg border border-gray-700 hover:border-gold-500 transition-all text-sm text-gray-300 hover:text-white bg-gray-800/50">
+                            12 months or less (short-term)
+                        </button>
+                        <button type="button" onclick="setHoldingPeriod('long', this)" class="holding-btn flex-1 py-2 px-4 rounded-lg border border-gold-500 bg-gold-500/20 text-white transition-all text-sm">
+                            Over 12 months (long-term)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Illustrative assumptions -->
+                <div class="grid grid-cols-1 md:grid-cols-3 md:items-end gap-4 mb-3">
+                    <div>
+                        <label for="tax-fd-rate" class="block text-gray-400 text-xs mb-2">FD return, % p.a. (illustrative)</label>
+                        <input type="number" id="tax-fd-rate" min="0" max="100" step="0.1" value="6.5" inputmode="decimal" oninput="calculateTaxAlpha()" class="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm font-mono focus:outline-none focus:border-gold-500">
+                    </div>
+                    <div>
+                        <label for="tax-arb-rate" class="block text-gray-400 text-xs mb-2">Arbitrage fund return, % p.a. (illustrative)</label>
+                        <input type="number" id="tax-arb-rate" min="0" max="100" step="0.1" value="6.8" inputmode="decimal" oninput="calculateTaxAlpha()" class="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm font-mono focus:outline-none focus:border-gold-500">
+                    </div>
+                    <div>
+                        <label for="tax-other-ltcg" class="block text-gray-400 text-xs mb-2">Other eligible LTCG already realized this financial year (&#8377;)</label>
+                        <input type="number" id="tax-other-ltcg" min="0" step="1000" value="0" inputmode="numeric" oninput="calculateTaxAlpha()" class="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm font-mono focus:outline-none focus:border-gold-500">
+                    </div>
+                </div>
+                <p id="tax-input-error" class="hidden text-red-400 text-xs mb-6">Enter valid, non-negative numbers (returns up to 100%) to see the estimate.</p>
+                <p class="text-gray-500 text-xs mb-8">Returns are illustrative assumptions, not guaranteed or current market quotes. The other-LTCG amount uses up part of the shared &#8377;1.25 lakh annual threshold.</p>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- FD -->
                     <div class="glass-card p-6 rounded-xl">
@@ -459,7 +490,7 @@
                             </div>
                             <div>
                                 <h4 class="text-white font-semibold">Fixed Deposit</h4>
-                                <p class="text-gray-500 text-xs">~6.5% p.a. (Pre-tax)</p>
+                                <p id="fd-rate-label" class="text-gray-500 text-xs">~6.5% p.a. (pre-tax, illustrative)</p>
                             </div>
                         </div>
                         <div class="space-y-3 text-sm">
@@ -468,22 +499,22 @@
                                 <span class="text-white font-mono" id="fd-interest">₹65,000</span>
                             </div>
                             <div class="flex justify-between">
-                                <span class="text-gray-400">Tax Deducted</span>
-                                <span class="text-red-400 font-mono" id="fd-tax">- ₹19,500</span>
+                                <span class="text-gray-400">Estimated tax (slab + cess)</span>
+                                <span class="text-red-400 font-mono whitespace-nowrap" id="fd-tax">-&nbsp;₹20,280</span>
                             </div>
                             <div class="border-t border-gray-700 pt-3 flex justify-between">
                                 <span class="text-gray-400">Post-Tax Return</span>
-                                <span class="text-white font-bold font-mono" id="fd-nett">₹45,500</span>
+                                <span class="text-white font-bold font-mono" id="fd-nett">₹44,720</span>
                             </div>
                             <div class="flex justify-between">
                                 <span class="text-gray-400">Effective Rate</span>
-                                <span class="text-red-400 font-mono" id="fd-rate">4.55%</span>
+                                <span class="text-red-400 font-mono" id="fd-rate">4.47%</span>
                             </div>
                         </div>
                         <!-- Wealth Erosion Alert -->
                         <div class="mt-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20">
                             <p class="text-red-400 text-xs">
-                                ⚠️ After 6% Inflation, your real return on this FD is <span id="fd-real-return" class="font-bold">-1.45%</span>
+                                ⚠️ After 6% Inflation, your real return on this FD is <span id="fd-real-return" class="font-bold">-1.53%</span>
                             </p>
                         </div>
                     </div>
@@ -497,10 +528,10 @@
                                 </div>
                                 <div>
                                     <h4 class="text-white font-semibold">Arbitrage Fund</h4>
-                                    <p class="text-gold-400 text-xs">~6.8% p.a. (Tax-efficient)</p>
+                                    <p id="arb-rate-label" class="text-gold-400 text-xs">~6.8% p.a. (illustrative)</p>
                                 </div>
                             </div>
-                            <span class="px-2 py-1 bg-gold-500/20 text-gold-400 text-xs rounded-full font-medium">Recommended</span>
+                            <span class="px-2 py-1 bg-gold-500/20 text-gold-400 text-xs rounded-full font-medium">Illustration</span>
                         </div>
                         <div class="space-y-3 text-sm">
                             <div class="flex justify-between">
@@ -508,8 +539,8 @@
                                 <span class="text-white font-mono" id="arb-interest">₹68,000</span>
                             </div>
                             <div class="flex justify-between">
-                                <span class="text-gray-400">Tax Deducted (Indexation)</span>
-                                <span class="text-green-400 font-mono">₹0</span>
+                                <span class="text-gray-400" id="arb-tax-label">Estimated tax on gains (LTCG 12.5% + cess)</span>
+                                <span class="text-green-400 font-mono whitespace-nowrap" id="arb-tax">₹0</span>
                             </div>
                             <div class="border-t border-gray-700 pt-3 flex justify-between">
                                 <span class="text-gray-400">Post-Tax Return</span>
@@ -517,20 +548,22 @@
                             </div>
                             <div class="flex justify-between">
                                 <span class="text-gray-400">Effective Rate</span>
-                                <span class="text-gold-400 font-mono">6.80%</span>
+                                <span class="text-gold-400 font-mono" id="arb-rate">6.80%</span>
                             </div>
                         </div>
+                        <p class="text-gray-500 text-xs mt-3" id="arb-threshold-note"></p>
                     </div>
                 </div>
 
                 <!-- Dynamic Comparison Summary -->
                 <div class="mt-8 p-6 rounded-xl bg-gradient-to-r from-green-500/10 to-gold-500/10 border border-green-500/20">
-                    <p class="text-white text-center font-medium">
-                        By switching <span id="tax-summary-amount" class="text-gold-400 font-bold">₹10 Lakhs</span> to Arbitrage, you save 
-                        <span id="tax-summary-savings" class="text-green-400 font-bold">₹19,500</span> in taxes and increase your usable income by 
-                        <span id="tax-summary-percent" class="text-gold-400 font-bold">49.5%</span>.
+                    <p class="text-white text-center font-medium" id="tax-summary-text">
+                        Estimated tax on <span id="tax-summary-amount" class="text-gold-400 font-bold">₹10 Lakhs</span>: tax difference (FD minus arbitrage) <span id="tax-summary-savings" class="text-green-400 font-bold">₹20,280</span>; post-tax return difference <span id="tax-summary-percent" class="text-gold-400 font-bold">+52.1%</span>.
                     </p>
                 </div>
+                <p class="text-gray-500 text-xs mt-4 leading-relaxed" id="tax-disclaimer">
+                    Illustration only; not tax advice or a calculation of your actual tax liability. The arbitrage estimate assumes the fund qualifies as an equity-oriented fund under the Income Tax rules and that required conditions, including securities transaction tax where applicable, are met. For transfers on or after 23 July 2024 it applies: short-term gains at 20%, long-term gains at 12.5% on the amount above the &#8377;1.25 lakh annual threshold, which is shared across all of your eligible long-term gains in the financial year, plus 4% health and education cess. FD interest is estimated at the slab rate you pick plus cess, which is a simplification. Surcharge, loss set-off, your total income and other individual factors are not included. Debt-oriented mutual funds are taxed differently and are not covered here.
+                </p>
             </div>
         </div>
     </section>
@@ -590,14 +623,14 @@
                         <!-- Prominent Corpus Display -->
                         <div class="text-center mb-6">
                             <p class="text-gray-400 text-sm uppercase tracking-wide mb-2">Required Retirement Corpus</p>
-                            <p class="text-5xl md:text-6xl font-black text-gold-400 tracking-tight" id="retire-corpus">₹9.86 Cr</p>
+                            <p class="text-5xl md:text-6xl font-black text-gold-400 tracking-tight" id="retire-corpus">₹14.89 Cr</p>
                         </div>
 
                         <!-- Inflation-Adjusted Expense -->
                         <div class="mb-6 p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
                             <p class="text-blue-400 text-sm">
                                 Adjusted for 6% inflation, your ₹<span id="retire-current-expense">1,00,000</span> monthly need will become 
-                                <span id="retire-inflated-expense" class="text-white font-bold">₹5,74,000</span> by the time you retire.
+                                <span id="retire-inflated-expense" class="text-white font-bold">₹5.74 L</span> by the time you retire.
                             </p>
                         </div>
                         
@@ -608,7 +641,7 @@
                             </div>
                             <div class="text-center p-3 rounded-lg bg-gray-800/50">
                                 <p class="text-gray-400 text-xs mb-1">Monthly SIP Needed</p>
-                                <p class="text-gold-400 font-bold" id="retire-sip">₹18,500</p>
+                                <p class="text-gold-400 font-bold" id="retire-sip">₹42,183</p>
                             </div>
                         </div>
 
@@ -624,16 +657,24 @@
                             </div>
                         </div>
 
+                        <!-- Existing savings -->
+                        <div class="mb-6">
+                            <label for="retire-existing" class="block text-gray-400 text-sm mb-2">Existing retirement savings (₹)</label>
+                            <input type="number" id="retire-existing" min="0" step="10000" value="0" inputmode="numeric" oninput="calculateRetirement()" class="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm font-mono focus:outline-none focus:border-gold-500">
+                            <p id="retire-existing-error" class="hidden text-red-400 text-xs mt-2">Enter a valid, non-negative amount.</p>
+                        </div>
+
                         <!-- Gap Analysis -->
                         <div class="p-4 rounded-lg bg-gray-800/30 border border-gray-700">
                             <p class="text-gray-400 text-xs mb-2">Gap Analysis</p>
                             <p class="text-white text-sm">
-                                Current projected savings vs. Needed Corpus: <span id="retire-gap" class="text-gold-400 font-bold">₹9.86 Cr required</span>
+                                Current projected savings vs. Needed Corpus: <span id="retire-gap" class="text-gold-400 font-bold">₹14.89 Cr shortfall</span>
                             </p>
+                            <p id="retire-gap-message" class="text-gray-400 text-xs mt-2">Enter existing retirement savings to see how much of the corpus they cover.</p>
                         </div>
 
                         <!-- Disclaimer -->
-                        <p class="text-gray-500 text-xs text-center mt-4">*Calculated with 12% Pre-retirement returns and 7% Post-retirement returns.</p>
+                        <p class="text-gray-500 text-xs text-center mt-4">*Illustration only: assumes 12% pre-retirement and 7% post-retirement returns, and 6% inflation both until retirement and throughout retirement (expenses keep rising each year). Existing savings are assumed to grow at the pre-retirement return. Not financial advice.</p>
 
                         <!-- CTA Button -->
                         <div class="mt-6 text-center">
@@ -740,9 +781,10 @@
         function formatIndianCurrency(amount) {
             if (amount >= 10000000) {
                 return '₹' + (amount / 10000000).toFixed(2) + ' Cr';
-            } else {
+            } else if (amount >= 100000) {
                 return '₹' + (amount / 100000).toFixed(2) + ' L';
             }
+            return '₹' + Math.round(amount).toLocaleString('en-IN');
         }
 
         // Market Presets
@@ -775,61 +817,66 @@
 
             const displayRate = rate;
 
-            if (inflationAdjusted) {
-                rate = (((1 + rate / 100) / 1.06) - 1) * 100;
-            }
-
             document.getElementById('sip-monthly-val').textContent = '₹' + P.toLocaleString();
             document.getElementById('sip-rate-val').textContent = displayRate + '%';
             document.getElementById('sip-stepup-val').textContent = stepUp + '%';
             document.getElementById('sip-years-val').textContent = N + ' Years';
 
-            const finalMonthly = P * Math.pow(1 + stepUp / 100, N);
+            const finalMonthly = P * Math.pow(1 + stepUp / 100, N - 1);
             document.getElementById('sip-final-contribution').textContent = `Your final monthly contribution in year ${N} will be ₹${Math.round(finalMonthly).toLocaleString()}`;
 
-            const r = (rate / 100) / 12;
-
-            let totalCorpus = 0;
-            let totalInvested = 0;
-
-            for (let Y = 1; Y <= N; Y++) {
-                const monthlyAmt = P * Math.pow(1 + stepUp / 100, Y - 1);
-                const remainingMonths = (N - Y + 1) * 12;
-                const n = remainingMonths;
-                const fvOfYear = monthlyAmt * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
-                totalCorpus += fvOfYear;
-                totalInvested += monthlyAmt * 12;
+            // Instalments are paid at the start of each month; each year's 12 instalments
+            // are valued at the end of that year, then compounded for the years that remain.
+            function sipCorpus(annualRate, delayYears) {
+                const mr = (annualRate / 100) / 12;
+                const yearGrowth = Math.pow(1 + mr, 12);
+                let corpus = 0;
+                for (let Y = 1; Y <= N - delayYears; Y++) {
+                    const monthlyAmt = P * Math.pow(1 + stepUp / 100, Y - 1);
+                    const fvOfYear = monthlyAmt * ((yearGrowth - 1) / mr) * (1 + mr);
+                    corpus += fvOfYear * Math.pow(yearGrowth, N - delayYears - Y);
+                }
+                return corpus;
             }
 
-            const gains = totalCorpus - totalInvested;
+            let nominalCorpus = sipCorpus(rate, 0);
+            let totalInvested = 0;
+            for (let Y = 1; Y <= N; Y++) {
+                totalInvested += P * Math.pow(1 + stepUp / 100, Y - 1) * 12;
+            }
 
-            let delayStartCorpus = 0;
-            for (let Y = 1; Y <= (N - 1); Y++) {
-                const monthlyAmt = P * Math.pow(1 + stepUp / 100, Y - 1);
-                const remainingMonths = (N - Y) * 12;
-                if (remainingMonths > 0) {
-                    const fvOfYear = monthlyAmt * ((Math.pow(1 + r, remainingMonths) - 1) / r) * (1 + r);
-                    delayStartCorpus += fvOfYear;
+            // Cost of delaying the start by one year, and SIP vs a 6% FD (both nominal)
+            let nominalCostOfDelay = nominalCorpus - sipCorpus(rate, 1);
+            let nominalAlpha = nominalCorpus - sipCorpus(6, 0);
+
+            // Inflation is applied exactly once: real = nominal / (1 + inflation)^N
+            const inflationRate = 0.06;
+            const inflationFactor = Math.pow(1 + inflationRate, N);
+            const realPurchasingPower = nominalCorpus / inflationFactor;
+
+            // Headline figures follow the toggle; the nominal/real comparison box always shows both
+            const displayScale = inflationAdjusted ? 1 / inflationFactor : 1;
+            const totalCorpus = nominalCorpus * displayScale;
+            const costOfDelay = nominalCostOfDelay * displayScale;
+            const alpha = nominalAlpha * displayScale;
+
+            // Invested is always the nominal sum of contributions. In the today's-money view the gain is
+            // real corpus minus contributions deflated from the month each one is paid.
+            let gainsBase = totalInvested;
+            if (inflationAdjusted) {
+                gainsBase = 0;
+                for (let m = 0; m < N * 12; m++) {
+                    const monthlyAmt = P * Math.pow(1 + stepUp / 100, Math.floor(m / 12));
+                    gainsBase += monthlyAmt / Math.pow(1 + inflationRate, m / 12);
                 }
             }
-            const costOfDelay = totalCorpus - delayStartCorpus;
+            const gains = totalCorpus - gainsBase;
 
-            const fdRate = 6;
-            const fdR = (fdRate / 100) / 12;
-            let fdCorpus = 0;
-            for (let Y = 1; Y <= N; Y++) {
-                const monthlyAmt = P * Math.pow(1 + stepUp / 100, Y - 1);
-                const remainingMonths = (N - Y + 1) * 12;
-                const fvOfYear = monthlyAmt * ((Math.pow(1 + fdR, remainingMonths) - 1) / fdR) * (1 + fdR);
-                fdCorpus += fvOfYear;
-            }
-            const alpha = totalCorpus - fdCorpus;
-
-            const inflationRate = 0.06;
-            const realPurchasingPower = totalCorpus / Math.pow(1 + inflationRate, N);
-
+            document.getElementById('sip-invested-label').textContent = inflationAdjusted ? 'Invested (Nominal)' : 'Invested';
+            document.getElementById('sip-gains-label').textContent = inflationAdjusted ? "Real Gain (Today's ₹)" : 'Wealth Gained';
+            document.getElementById('sip-total-label').textContent = inflationAdjusted ? "Real Value (Today's ₹)" : 'Total Value';
             document.getElementById('sip-invested').textContent = formatIndianCurrency(totalInvested);
-            document.getElementById('sip-gains').textContent = formatIndianCurrency(gains);
+            document.getElementById('sip-gains').textContent = (gains < 0 ? '-' : '') + formatIndianCurrency(Math.abs(gains));
             document.getElementById('sip-total').textContent = formatIndianCurrency(totalCorpus);
 
             document.getElementById('sip-summary-years').textContent = N;
@@ -850,12 +897,11 @@
 
             document.getElementById('sip-alpha').textContent = formatIndianCurrency(Math.max(0, alpha));
 
-            document.getElementById('sip-nominal-value').textContent = formatIndianCurrency(totalCorpus);
+            document.getElementById('sip-nominal-value').textContent = formatIndianCurrency(nominalCorpus);
             document.getElementById('sip-real-value').textContent = formatIndianCurrency(realPurchasingPower);
 
-            const total = totalInvested + gains;
-            const investedPercent = (totalInvested / total) * 100;
-            const gainsPercent = (gains / total) * 100;
+            const gainsPercent = totalCorpus > 0 ? Math.max(0, (gains / totalCorpus) * 100) : 0;
+            const investedPercent = 100 - gainsPercent;
 
             document.getElementById('donut-percent').textContent = Math.round(gainsPercent) + '%';
 
@@ -893,67 +939,140 @@
             return '₹' + amount.toLocaleString();
         }
 
+        let currentHolding = 'long';
+
+        function setHoldingPeriod(kind, btn) {
+            currentHolding = kind;
+            document.querySelectorAll('.holding-btn').forEach(b => {
+                b.classList.remove('border-gold-500', 'bg-gold-500/20', 'text-white');
+                b.classList.add('border-gray-700', 'bg-gray-800/50', 'text-gray-300');
+            });
+            btn.classList.remove('border-gray-700', 'bg-gray-800/50', 'text-gray-300');
+            btn.classList.add('border-gold-500', 'bg-gold-500/20', 'text-white');
+            calculateTaxAlpha();
+        }
+
+        function taxSetText(id, text) {
+            const el = document.getElementById(id);
+            if (el) el.textContent = text;
+        }
+
+        // Returns a non-negative finite number within max, or null (and flags the field) if invalid
+        function readTaxInput(id, max) {
+            const el = document.getElementById(id);
+            const raw = el ? String(el.value).trim() : '';
+            const v = Number(raw);
+            const ok = raw !== '' && Number.isFinite(v) && v >= 0 && v <= max;
+            if (el) {
+                el.classList.toggle('border-red-500', !ok);
+                el.classList.toggle('border-gray-700', ok);
+            }
+            return ok ? v : null;
+        }
+
+        // Exact rupees with Indian digit grouping, e.g. ₹1,25,000
+        function formatTaxRupees(amount) {
+            return '₹' + Math.round(amount).toLocaleString('en-IN');
+        }
+
+        // Tax deducted: "-" + non-breaking space + amount, and no sign when the tax is zero
+        function deductionText(amount) {
+            const rounded = Math.round(amount);
+            return rounded > 0 ? '-\u00A0' + formatTaxAmount(rounded) : formatTaxAmount(0);
+        }
+
+        function signedTaxAmount(amount) {
+            const rounded = Math.round(amount);
+            return (rounded < 0 ? '-' : '') + formatTaxAmount(Math.abs(rounded));
+        }
+
+        // Simplified illustration: FD interest at the chosen slab + cess; equity-oriented (arbitrage) fund
+        // gains at 20% (short-term) or 12.5% above the remaining Rs 1.25 lakh threshold (long-term), + cess.
         function calculateTaxAlpha() {
             const investment = parseInt(document.getElementById('tax-investment').value);
             const taxRate = currentTaxBracket;
-            const fdRate = 6.5;
-            const arbRate = 6.8;
-            const years = 1;
+            const fdRate = readTaxInput('tax-fd-rate', 100);
+            const arbRate = readTaxInput('tax-arb-rate', 100);
+            const otherLtcg = readTaxInput('tax-other-ltcg', 1e12);
             const inflationRate = 6;
+            const cess = 0.04;
+            const ltcgThreshold = 125000;
 
-            document.getElementById('tax-investment-val').textContent = formatTaxAmount(investment);
+            taxSetText('tax-investment-val', formatTaxAmount(investment));
 
-            // FD Calculations
-            const fdInterest = investment * (fdRate / 100) * years;
-            const fdTax = fdInterest * (taxRate / 100);
+            const errorEl = document.getElementById('tax-input-error');
+            if (!(investment >= 0) || fdRate === null || arbRate === null || otherLtcg === null) {
+                if (errorEl) errorEl.classList.remove('hidden');
+                ['fd-interest', 'fd-tax', 'fd-nett', 'fd-rate', 'fd-real-return', 'arb-interest', 'arb-tax', 'arb-nett', 'arb-rate']
+                    .forEach(id => taxSetText(id, '—'));
+                taxSetText('arb-threshold-note', '');
+                const invalidSummary = document.getElementById('tax-summary-text');
+                if (invalidSummary) {
+                    invalidSummary.innerHTML = 'Estimate unavailable: <span id="tax-summary-amount">—</span> <span id="tax-summary-savings">—</span> <span id="tax-summary-percent">—</span>';
+                }
+                return;
+            }
+            if (errorEl) errorEl.classList.add('hidden');
+
+            taxSetText('fd-rate-label', '~' + fdRate + '% p.a. (pre-tax, illustrative)');
+            taxSetText('arb-rate-label', '~' + arbRate + '% p.a. (illustrative)');
+
+            // FD: interest taxed at the selected slab rate plus cess
+            const fdInterest = investment * (fdRate / 100);
+            const fdTax = fdInterest * (taxRate / 100) * (1 + cess);
             const fdNett = fdInterest - fdTax;
-            const fdEffectiveRate = ((fdNett / investment) * 100) / years;
+            const fdEffectiveRate = investment > 0 ? (fdNett / investment) * 100 : 0;
             const fdRealReturn = fdEffectiveRate - inflationRate;
 
-            // Arbitrage Calculations
-            const arbGains = investment * (arbRate / 100) * years;
+            // Arbitrage fund (assumed equity-oriented): gains taxed by holding period
+            const arbGains = investment * (arbRate / 100);
             let arbTax = 0;
-            let arbTaxLabel = '';
-            if (years < 1) {
-                arbTax = arbGains * 0.15;
-                arbTaxLabel = 'Tax Deducted (STCG 15%)';
+            let arbTaxLabel;
+            let thresholdNote = '';
+            if (currentHolding === 'short') {
+                arbTax = arbGains * 0.20 * (1 + cess);
+                arbTaxLabel = 'Estimated tax on gains (STCG 20% + cess)';
+                thresholdNote = 'Short-term gains are taxed from the first rupee; the ₹1.25 lakh LTCG threshold does not apply.';
             } else {
-                const exemption = 100000;
-                const taxableGains = Math.max(0, arbGains - exemption);
-                arbTax = taxableGains * 0.10;
-                arbTaxLabel = 'Tax Deducted (LTCG 10%)';
+                const remainingThreshold = Math.max(0, ltcgThreshold - otherLtcg);
+                const taxableGains = Math.max(0, arbGains - remainingThreshold);
+                arbTax = taxableGains * 0.125 * (1 + cess);
+                arbTaxLabel = 'Estimated tax on gains (LTCG 12.5% + cess)';
+                thresholdNote = 'Remaining ₹1.25 lakh threshold: ' + formatTaxRupees(remainingThreshold) +
+                    '. Gains taxed at 12.5%: ' + formatTaxRupees(taxableGains) + '.';
             }
             const arbNett = arbGains - arbTax;
-            const arbEffectiveRate = ((arbNett / investment) * 100) / years;
+            const arbEffectiveRate = investment > 0 ? (arbNett / investment) * 100 : 0;
 
-            document.getElementById('fd-interest').textContent = formatTaxAmount(Math.round(fdInterest));
-            document.getElementById('fd-tax').textContent = '- ' + formatTaxAmount(Math.round(fdTax));
-            document.getElementById('fd-nett').textContent = formatTaxAmount(Math.round(fdNett));
-            document.getElementById('fd-rate').textContent = fdEffectiveRate.toFixed(2) + '%';
-            document.getElementById('fd-real-return').textContent = fdRealReturn.toFixed(2) + '%';
+            taxSetText('fd-interest', formatTaxAmount(Math.round(fdInterest)));
+            taxSetText('fd-tax', deductionText(fdTax));
+            taxSetText('fd-nett', formatTaxAmount(Math.round(fdNett)));
+            taxSetText('fd-rate', fdEffectiveRate.toFixed(2) + '%');
+            taxSetText('fd-real-return', fdRealReturn.toFixed(2) + '%');
 
             const fdRealEl = document.getElementById('fd-real-return');
-            if (fdRealEl && fdRealReturn < 0) {
-                fdRealEl.style.color = '#ef4444';
-            } else if (fdRealEl) {
-                fdRealEl.style.color = '';
+            if (fdRealEl) fdRealEl.style.color = fdRealReturn < 0 ? '#ef4444' : '';
+
+            taxSetText('arb-interest', formatTaxAmount(Math.round(arbGains)));
+            taxSetText('arb-tax-label', arbTaxLabel);
+            taxSetText('arb-tax', deductionText(arbTax));
+            taxSetText('arb-nett', formatTaxAmount(Math.round(arbNett)));
+            taxSetText('arb-rate', arbEffectiveRate.toFixed(2) + '%');
+            taxSetText('arb-threshold-note', thresholdNote);
+
+            // Neutral summary: shows the difference whichever way it falls
+            const taxDifference = fdTax - arbTax;
+            const returnDifference = fdNett > 0 ? ((arbNett - fdNett) / fdNett) * 100 : null;
+            const returnText = returnDifference === null ? 'n/a' : (returnDifference >= 0 ? '+' : '') + returnDifference.toFixed(1) + '%';
+
+            const summaryEl = document.getElementById('tax-summary-text');
+            if (summaryEl) {
+                summaryEl.innerHTML =
+                    'Estimated tax on <span id="tax-summary-amount" class="text-gold-400 font-bold">' + formatTaxAmount(investment) + '</span>: ' +
+                    'arbitrage <span class="text-white font-bold">' + formatTaxAmount(Math.round(arbTax)) + '</span> vs FD <span class="text-white font-bold">' + formatTaxAmount(Math.round(fdTax)) + '</span>. ' +
+                    'Tax difference (FD minus arbitrage): <span id="tax-summary-savings" class="' + (taxDifference >= 0 ? 'text-green-400' : 'text-red-400') + ' font-bold">' + signedTaxAmount(taxDifference) + '</span>; ' +
+                    'post-tax return difference: <span id="tax-summary-percent" class="text-gold-400 font-bold">' + returnText + '</span>.';
             }
-
-            document.getElementById('arb-interest').textContent = formatTaxAmount(Math.round(arbGains));
-            const arbTaxEl = document.getElementById('arb-tax');
-            if (arbTaxEl) {
-                arbTaxEl.textContent = '- ' + formatTaxAmount(Math.round(arbTax));
-            }
-            document.getElementById('arb-tax-label').textContent = arbTaxLabel;
-            document.getElementById('arb-nett').textContent = formatTaxAmount(Math.round(arbNett));
-            document.getElementById('arb-rate').textContent = arbEffectiveRate.toFixed(2) + '%';
-
-            const taxSavings = fdTax - arbTax;
-            const incomeIncrease = ((arbNett - fdNett) / fdNett) * 100;
-
-            document.getElementById('tax-summary-amount').textContent = formatTaxAmount(investment);
-            document.getElementById('tax-summary-savings').textContent = formatTaxAmount(Math.round(taxSavings));
-            document.getElementById('tax-summary-percent').textContent = incomeIncrease.toFixed(1) + '%';
         }
         // ========== END TAX ALPHA CALCULATOR ==========
 
@@ -963,7 +1082,7 @@
             let targetAge = parseInt(document.getElementById('retire-target-age').value);
             const monthlyExpense = parseInt(document.getElementById('retire-monthly').value);
             const retirementDuration = parseInt(document.getElementById('retire-duration-years').value);
-            const existingSavings = parseInt(document.getElementById('retire-existing') ? document.getElementById('retire-existing').value : 0) || 0;
+            const existingSavings = readTaxInput('retire-existing', 1e12);
 
             if (targetAge <= currentAge) {
                 targetAge = currentAge + 1;
@@ -982,39 +1101,57 @@
             document.getElementById('retire-duration').textContent = retirementDuration + ' Years';
             document.getElementById('retire-current-expense').textContent = monthlyExpense.toLocaleString();
 
+            const existingErrorEl = document.getElementById('retire-existing-error');
+            if (existingSavings === null) {
+                if (existingErrorEl) existingErrorEl.classList.remove('hidden');
+                ['retire-corpus', 'retire-sip', 'retire-gap', 'retire-inflated-expense'].forEach(id => taxSetText(id, '—'));
+                taxSetText('retire-gap-message', '');
+                return;
+            }
+            if (existingErrorEl) existingErrorEl.classList.add('hidden');
+
             // Step 1 — Inflation-adjusted monthly need at retirement
             const futureMonthlyNeed = monthlyExpense * Math.pow(1 + inflationRate, yearsToRetire);
             document.getElementById('retire-inflated-expense').textContent = formatIndianCurrency(Math.round(futureMonthlyNeed));
 
-            // Step 2 — Required retirement corpus (PV of annuity)
+            // Step 2 — Required retirement corpus. Expenses keep rising with inflation through retirement
+            // (monthly-equivalent rate), so withdrawals form a growing annuity discounted at the post-retirement
+            // return: corpus = E0 * (1 - q^n) / (r - g), where q = (1 + g) / (1 + r).
             const rPost = postRetirementReturn / 12;
+            const gInflation = Math.pow(1 + inflationRate, 1 / 12) - 1;
             const nPost = retirementDuration * 12;
-            const corpus = futureMonthlyNeed * ((1 - Math.pow(1 + rPost, -nPost)) / rPost);
+            const growthRatio = (1 + gInflation) / (1 + rPost);
+            const corpus = Math.abs(rPost - gInflation) < 1e-12
+                ? futureMonthlyNeed * nPost / (1 + rPost)
+                : futureMonthlyNeed * (1 - Math.pow(growthRatio, nPost)) / (rPost - gInflation);
 
-            // Step 3 — Monthly SIP needed
+            // Step 3 — Existing savings grow at the pre-retirement return (monthly compounding, like the SIP);
+            // the monthly SIP only has to cover the remaining gap.
             const rPre = preRetirementReturn / 12;
             const nPre = yearsToRetire * 12;
-            const sip = (corpus * rPre) / ((Math.pow(1 + rPre, nPre) - 1) * (1 + rPre));
+            const currentProjectedSavings = existingSavings * Math.pow(1 + rPre, nPre);
+            const gap = corpus - currentProjectedSavings;
+            const sip = gap > 0 ? (gap * rPre) / ((Math.pow(1 + rPre, nPre) - 1) * (1 + rPre)) : 0;
 
             document.getElementById('retire-corpus').textContent = formatIndianCurrency(Math.round(corpus));
             document.getElementById('retire-sip').textContent = formatIndianCurrency(Math.round(sip));
 
             // Step 4 — Gap Analysis
-            const currentProjectedSavings = existingSavings * Math.pow(1 + preRetirementReturn, yearsToRetire);
-            const gap = corpus - currentProjectedSavings;
-
             const gapEl = document.getElementById('retire-gap');
             const gapMessageEl = document.getElementById('retire-gap-message');
             if (gap > 0) {
                 gapEl.textContent = formatIndianCurrency(Math.round(gap)) + ' shortfall';
-                const gapSIP = (gap * rPre) / ((Math.pow(1 + rPre, nPre) - 1) * (1 + rPre));
-                if (gapMessageEl) {
-                    gapMessageEl.innerHTML = `You need <span class="text-gold-400 font-bold">${formatIndianCurrency(Math.round(gap))}</span> more — start a SIP of <span class="text-gold-400 font-bold">${formatIndianCurrency(Math.round(gapSIP))}/month</span> to close the gap.`;
-                }
             } else {
                 gapEl.textContent = 'On Track';
-                if (gapMessageEl) {
-                    gapMessageEl.innerHTML = `<span class="text-green-400 font-bold">You are on track!</span> Your existing savings of ${formatIndianCurrency(existingSavings)} will grow to ${formatIndianCurrency(Math.round(currentProjectedSavings))} by retirement.`;
+            }
+            if (gapMessageEl) {
+                if (existingSavings === 0) {
+                    gapMessageEl.textContent = 'Enter existing retirement savings to see how much of the corpus they cover.';
+                } else if (gap > 0) {
+                    const covered = Math.round((currentProjectedSavings / corpus) * 100);
+                    gapMessageEl.innerHTML = `Your ${formatIndianCurrency(existingSavings)} should grow to about <span class="text-gold-400 font-bold">${formatIndianCurrency(Math.round(currentProjectedSavings))}</span> (${covered}% of the corpus). A SIP of <span class="text-gold-400 font-bold">${formatIndianCurrency(Math.round(sip))}/month</span> would close the remaining gap.`;
+                } else {
+                    gapMessageEl.innerHTML = `<span class="text-green-400 font-bold">On track.</span> Your ${formatIndianCurrency(existingSavings)} should grow to about ${formatIndianCurrency(Math.round(currentProjectedSavings))} by retirement, which covers the required corpus.`;
                 }
             }
         }
@@ -1051,8 +1188,8 @@
                 taxAlpha: {
                     investmentAmount: parseInt(document.getElementById('tax-investment').value),
                     taxBracket: currentTaxBracket,
-                    fdReturn: 6.5,
-                    arbReturn: 6.8,
+                    fdReturn: parseFloat(document.getElementById('tax-fd-rate').value),
+                    arbReturn: parseFloat(document.getElementById('tax-arb-rate').value),
                     taxSavings: document.getElementById('tax-summary-savings').textContent
                 },
                 
