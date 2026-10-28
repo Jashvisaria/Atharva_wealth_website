@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="luxury">
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PPHM4RW8');</script>
+<!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services | Atharva Wealth</title>
@@ -90,6 +97,10 @@
     </style>
 </head>
 <body class="bg-obsidian">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PPHM4RW8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50" style="background: rgba(13, 13, 13, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(197, 160, 89, 0.1);">
         <div class="container mx-auto px-6 py-4">
@@ -556,7 +567,8 @@
                 purple: { bg: 'bg-purple-500/20', border: 'border-purple-500/30', text: 'text-purple-400' }
             };
             const colors = colorMap[product.color] || colorMap.green;
-            
+            // Note: the rest of this legacy modal body was never written (no caller, no matching markup); closed so the script parses.
+        }
     </script>
 
     <!-- Insight Box Modal -->
@@ -570,8 +582,9 @@
                 <h3 id="insight-title" class="text-2xl font-bold text-white mb-4 font-serif pr-8"></h3>
                 <div id="insight-desc" class="text-gray-300 text-sm leading-relaxed mb-2"></div>
                 <div id="insight-example" class="mt-4 pt-4 border-t border-gold-500/20">
-                    <p class="text-gold-400 text-xs font-semibold uppercase tracking-wider mb-2">💡 Why It Matters</p>
+                    <p class="text-gold-400 text-xs font-semibold uppercase tracking-wider mb-2">💡 Illustrative Example</p>
                     <p id="insight-example-text" class="text-gray-400 text-sm italic leading-relaxed"></p>
+                    <p class="text-gray-600 text-xs mt-3">Examples are for illustration only. They are not offers, quotes or guarantees; actual terms, returns and risks vary by product and provider.</p>
                 </div>
                 <a href="contact.html" class="block mt-6">
                     <button class="w-full py-3 bg-gradient-to-r from-gold-500 to-gold-600 text-black font-semibold rounded-lg hover:from-gold-400 hover:to-gold-500 transition-all">
@@ -592,7 +605,7 @@
             'pms': { 
                 title: 'PMS (Portfolio Management Services)', 
                 desc: 'PMS gives you direct ownership of individual stocks in your demat account—not units of a fund. It\'s like having a personal chef who cooks exactly what you want, not a buffet where everyone gets the same meal.',
-                example: 'Perfect forHNIs with ₹25+ lakhs who want concentrated bets on 15-20 high-conviction stocks. Unlike mutual funds, you see exactly what shares you own and can customize the strategy to your beliefs.'
+                example: 'Suited to HNIs investing at or above the regulatory minimum (₹50 lakhs) who want concentrated bets on 15-20 high-conviction stocks. Unlike mutual funds, you see exactly what shares you own and can customize the strategy to your beliefs.'
             },
             'aif-equity': { 
                 title: 'AIF (Alternative Investment Funds)', 
@@ -607,82 +620,82 @@
             'sif': { 
                 title: 'SIF (Startup Investment Fund)', 
                 desc: 'SIFs let you invest in early-stage startups that haven\'t gone public yet. These are high-risk, high-reward bets on entrepreneurs building the next big thing—like being a venture capitalist with a smaller ticket size.',
-                example: '₹25-50 lakhs invested in a promising EdTech startup today could become ₹5 crores if it scales—but there\'s also a chance the startup doesn\'t succeed. It\'s the wild west of wealth creation.'
+                example: 'An investment in a promising EdTech startup could grow many times over if it scales—but there\'s also a real chance the startup doesn\'t succeed and the money is lost. It\'s the wild west of wealth creation.'
             },
             'unlisted-equity': { 
                 title: 'Unlisted Equity', 
                 desc: 'Unlisted equity means buying shares of companies that aren\'t traded on the stock exchange. You get in before the IPO—essentially buying a house in a developing neighborhood before prices explode.',
-                example: 'Pre-IPO allotments of companies like Lodha or Hyundai India let you buy at a discount. You hold until listing, then exit at a premium when public trading begins.'
+                example: 'Pre-IPO shares are bought before a company lists. If it lists, the price can be higher or lower than what you paid, and unlisted shares can be hard to sell before then.'
             },
             'private-equity': { 
                 title: 'Private Equity', 
                 desc: 'Private equity involves buying significant stakes in established private companies to grow them. It\'s like becoming a silent partner in a family business—bringing capital and expertise to scale operations.',
-                example: 'PE firms buy family-run manufacturing companies, professionalize them, and sell at 5-10x returns. As an investor, you ride this value creation journey through PE funds.'
+                example: 'PE firms buy family-run manufacturing companies, professionalize them, and aim to sell at a gain. As an investor, you share in this journey through PE funds, but outcomes vary widely and losses are possible.'
             },
             'startup-investing': { 
                 title: 'Startup Investing', 
                 desc: 'Direct angel investing in startups or through dedicated platforms. You become a backer of founders with big ideas—like being a film producer who funds movies hoping for a blockbuster.',
-                example: '₹10 lakhs invested in OYO or Swiggy in early days would be worth crores today. It\'s high risk but offers asymmetric returns impossible in public markets.'
+                example: 'Early backers of successful startups have sometimes seen large gains, but most startups fail and investors can lose their entire investment. It\'s high risk.'
             },
             'ncd-listed': { 
                 title: 'Listed NCDs', 
-                desc: 'NCDs (Non-Convertible Debentures) are essentially IOUs from companies that pay you fixed interest. Listed ones trade on stock exchanges—so you can earn 9-11% interest AND sell your holding if needed.',
-                example: 'Like a fixed deposit but issued by companies instead of banks. HDFC or Tata Motors NCDs might pay 9.5%—significantly higher than bank FDs—while your money stays liquid.'
+                desc: 'NCDs (Non-Convertible Debentures) are essentially IOUs from companies that pay you fixed interest. Listed ones trade on stock exchanges—so you earn fixed interest and may be able to sell before maturity. Rates vary by issuer, rating and tenure.',
+                example: 'Like a fixed deposit but issued by companies instead of banks. Rates can be higher than bank FDs for comparable tenures, but they carry the issuer\'s credit risk, and listed NCDs may be thinly traded.'
             },
             'ncd-unlisted': { 
                 title: 'Unlisted NCDs', 
                 desc: 'These are NCDs that don\'t trade on exchanges. You hold them until maturity for steady returns—like buying a bond and keeping it in your locker until it matures.',
-                example: 'A 3-year NBFC NCD paying 11% gives you predictable income. No daily price fluctuations—just steady interest payments every quarter.'
+                example: 'An NBFC NCD pays a fixed rate of interest, for example every quarter. Unlisted NCDs have limited liquidity and carry the issuer\'s credit risk.'
             },
             're-ncd': { 
                 title: 'Real Estate NCDs', 
-                desc: 'Real Estate NCDs are secured debentures backed by property assets. If the developer defaults, you have first claim on their properties—like having a mortgage on your name.',
-                example: 'A ₹10 lakh investment in a premium developer\'s NCD could yield 10-12% with your property as security. It\'s fixed income with real estate as the safety net.'
+                desc: 'Real Estate NCDs are secured debentures backed by property assets. The security is meant to give you a claim on those assets if the developer defaults—like a mortgage in your favour, though recovery is not guaranteed.',
+                example: 'A Real Estate NCD pays a fixed rate set by the issuer and secured against property. Returns depend on the issuer and the security terms, and security does not guarantee repayment.'
             },
             'p2p-lending': { 
                 title: 'P2P Lending', 
                 desc: 'Peer-to-peer platforms connect lenders directly to borrowers—cutting out the bank as the middleman. You earn interest directly from borrowers, assessed by credit scores.',
-                example: 'You lend ₹1 lakh to a borrower with A+ credit score earning 15%—significantly more than FD rates. The platform handles collections; you earn the spread.'
+                example: 'You lend ₹1 lakh to a borrower the platform has assessed. Interest can be higher than FD rates, but borrowers can default and returns are not guaranteed. The platform handles collections.'
             },
             'aif-debt': { 
                 title: 'AIF Debt Funds', 
                 desc: 'These are private debt funds that lend to companies banks reject. Higher risk means higher returns—like being a private money lender to businesses that can\'t get bank loans.',
-                example: 'A stressed asset fund might buy debt of a company facing temporary issues at a discount, then earn 15-18% when the company recovers. Not for the faint-hearted.'
+                example: 'A stressed asset fund might buy debt of a company facing temporary issues at a discount, then aim for higher returns if the company recovers. Outcomes are uncertain, losses are possible, and it is not for the faint-hearted.'
             },
             'bonds': { 
                 title: 'Bonds (Govt & Corporate)', 
                 desc: 'Bonds are loans you give to governments or companies in exchange for regular interest. Government bonds (G-Secs) are the safest—like keeping money under the government\'s guarantee.',
-                example: '10-year G-Sec yields around 7% with zero default risk. Corporate bonds from AAA-rated companies offer 7.5-8%—stable, predictable, and capital-protected.'
+                example: 'G-Sec yields change daily—check the current yield before investing. Government bonds carry no default risk but their prices move with interest rates if sold before maturity. Highly rated corporate bonds usually yield more than G-Secs, with some credit risk.'
             },
             'invoice-discounting': { 
                 title: 'Invoice Discounting', 
-                desc: 'Businesses sell their unpaid invoices to investors at a discount to get immediate cash. You buy a ₹1 lakh invoice for ₹95,000, receive ₹1 lakh when customer pays—earning 5% in 30-60 days.',
-                example: 'A supplier to a big retailer has ₹50 lakhs in unpaid invoices. You buy them at 92%, get paid when retailer settles in 45 days. Like arbitrage—quick, short-term returns.'
+                desc: 'Businesses sell their unpaid invoices to investors at a discount to get immediate cash. For example, you buy a ₹1 lakh invoice for ₹95,000 and receive ₹1 lakh when the customer pays—about 5.3% over the invoice period, if it is paid on time.',
+                example: 'A supplier to a big retailer has ₹50 lakhs in unpaid invoices. You buy them at a discount and are paid when the retailer settles. Returns are short-term, but delayed payment or default can cause losses.'
             },
             'life-insurance': { 
                 title: 'Life Insurance', 
                 desc: 'Life insurance is not an investment—it\'s income replacement for your family if something happens to you. Term plans are pure protection; ULIPs and endowments mix insurance with savings.',
-                example: 'A 35-year-old buying ₹1 crore term cover for ₹1,000/year ensures his family receives ₹1 crore if he passes away. The smartest financial decision most people ignore.'
+                example: 'A 35-year-old buying a ₹1 crore term cover ensures the family receives ₹1 crore if he passes away. Premiums depend on age, health, tenure and the insurer.'
             },
             'general-insurance': { 
                 title: 'General Insurance', 
                 desc: 'General insurance protects your assets—car, home, business—against damage or theft. It\'s a necessary expense that prevents one bad event from wiping out your savings.',
-                example: 'A ₹20 lakh car with comprehensive insurance costs ₹50,000/year. One accident repair without insurance could cost ₹5 lakhs. The math is simple—pay small, avoid catastrophic loss.'
+                example: 'A car with comprehensive insurance costs a yearly premium, while a single major accident repair without insurance could run into lakhs. Pay small, avoid catastrophic loss.'
             },
             'health-insurance': { 
                 title: 'Health Insurance', 
-                desc: 'Medical inflation in India runs at 15-20% annually. A ₹5 lakh health cover today might feel sufficient, but in 10 years it\'ll be inadequate. Health insurance is your shield against rising medical costs.',
-                example: 'A 3-day hospital stay in a Mumbai corporate hospital can cost ₹3-5 lakhs. With a ₹10 lakh health cover, your family won\'t have to liquidate investments to pay medical bills.'
+                desc: 'Medical costs tend to rise faster than general inflation. A ₹5 lakh health cover today might feel sufficient, but in 10 years it may be inadequate. Health insurance is your shield against rising medical costs.',
+                example: 'A multi-day hospital stay in a corporate hospital can cost several lakhs. With adequate health cover, your family is less likely to have to liquidate investments to pay medical bills.'
             },
             'travel-insurance': { 
                 title: 'Travel Insurance', 
                 desc: 'Travel insurance covers trip cancellations, lost baggage, medical emergencies abroad, and flight delays. It\'s a small expense that prevents a ruined vacation from becoming a financial disaster.',
-                example: 'Your Europe trip costs ₹3 lakhs. Flight gets cancelled, hotel is non-refundable—travel insurance reimburses everything. Costs ₹3,000 but saves ₹3 lakhs.'
+                example: 'Your Europe trip costs ₹3 lakhs. The flight gets cancelled and the hotel is non-refundable—travel insurance may reimburse eligible losses, subject to the policy terms, for a small fraction of the trip cost.'
             },
             'critical-illness': { 
                 title: 'Critical Illness Cover', 
                 desc: 'This pays a lump sum if you\'re diagnosed with serious illnesses like cancer, kidney failure, or heart disease. It\'s a financial cushion when you can\'t work and medical bills pile up.',
-                example: 'Cancer treatment can cost ₹15-25 lakhs. A ₹50 lakh critical illness cover pays you ₹50 lakhs on diagnosis—not reimbursement—so you can focus on recovery, not finances.'
+                example: 'Treatment for a serious illness can cost many lakhs. A ₹50 lakh critical illness cover pays you ₹50 lakhs on diagnosis of a covered condition—not reimbursement—so you can focus on recovery, not finances.'
             },
             'group-insurance': { 
                 title: 'Group Insurance', 
